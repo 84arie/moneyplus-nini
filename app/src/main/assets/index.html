@@ -505,6 +505,27 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 
 <section id="commit" class="page hidden"><h2 id="commitPageTitle">Komitmen</h2>
 <div class="card">
+  <div class="row" style="align-items:end">
+    <div>
+      <b id="commitRecordsTitle">Rekod Komitmen</b>
+      
+    </div>
+    <div style="max-width:155px">
+      <select id="cmFilter" onchange="setFilter(this.value)">
+        <option value="Semua">Semua</option>
+        <option value="Bill">Bil</option>
+        <option value="Subscription">Langganan</option>
+        <option value="Loan">Pinjaman</option>
+        <option value="Credit Card">Kad Kredit</option>
+        <option value="Future Expense">Belanja Akan Datang</option>
+        <option value="Savings Reserve">Simpanan Rizab</option>
+      </select>
+    </div>
+  </div>
+  <div id="cmList"></div>
+</div>
+</section>
+<div class="card">
   <div class="sectionTitle"><b id="commitAddTitle">Tambah Komitmen</b><span></span></div>
   
 
@@ -530,26 +551,6 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
   <button class="wide" id="commitSaveBtn" onclick="addCommit()">Tambah Komitmen</button>
 </div>
 
-<div class="card">
-  <div class="row" style="align-items:end">
-    <div>
-      <b id="commitRecordsTitle">Rekod Komitmen</b>
-      
-    </div>
-    <div style="max-width:155px">
-      <select id="cmFilter" onchange="setFilter(this.value)">
-        <option value="Semua">Semua</option>
-        <option value="Bill">Bil</option>
-        <option value="Subscription">Langganan</option>
-        <option value="Loan">Pinjaman</option>
-        <option value="Credit Card">Kad Kredit</option>
-        <option value="Future Expense">Belanja Akan Datang</option>
-        <option value="Savings Reserve">Simpanan Rizab</option>
-      </select>
-    </div>
-  </div>
-  <div id="cmList"></div>
-</div>
 </section>
 
 <section id="plan" class="page hidden"><h2 id="planPageTitle">Perancangan</h2>
