@@ -1,0 +1,17 @@
+{
+  "id": "/moneyplus-nini/app-nini-20261023",
+  "name": "Money+",
+  "short_name": "Money+",
+  "description": "Pengurusan kewangan peribadi Money+",
+  "start_url": "/moneyplus-nini/?app=nini1",
+  "scope": "/moneyplus-nini/",
+  "display": "standalone",
+  "background_color": "#f7f9fd",
+  "theme_color": "#f7f9fd",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": [
+    {"src":"/moneyplus-nini/icons/icon-192.png?v=nini1","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"/moneyplus-nini/icons/icon-512.png?v=nini1","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
