@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate BNPL Total Fix 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Auto-Commitment Fix 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -1512,8 +1512,31 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
  const activeBnpl=db.bnpl.map((p,i)=>({...p,i})).filter(p=>ownerMatches(p,commitOwnerFilter)&&bnplActiveInMonth(p,commitN));
  let bnplHtml='';
  if((filter==='Semua'||filter==='BNPL_AUTO')&&activeBnpl.length){
-   const bt=activeBnpl.reduce((z,p)=>z+bnplInstallment(p),0);
-   bnplHtml=`<div class="item"><span><b>🛍️ BNPL ${commitMonthLabel(commitN)}</b><br><span class="small">${activeBnpl.length} ${L('pelan aktif • auto dari BNPL','active plans • auto from BNPL')}</span><details class="bnplBreakdown"><summary>${L('Lihat pecahan','View breakdown')}</summary>${activeBnpl.map(p=>{const pd=bnplPaidThisMonth(p,commitN);return `<div class="bnplMini ${pd?'paid':''}"><span><b>${p.provider} — ${p.name}</b><br><span class="small">${rm(bnplInstallment(p))} <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span></span></span><span><button onclick="toggleBnplPaid(${p.i},'${monthKey(commitN)}')">${pd?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}</button></span></div>`}).join('')}</details></span><b>${rm(bt)}</b></div>`;
+   bnplHtml=activeBnpl.map(p=>{
+     const pd=bnplPaidThisMonth(p,commitN);
+     const due=bnplDueDateInMonth(p,commitN);
+     const dueTxt=due?due.toLocaleDateString(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short'}):'-';
+     const rem=bnplRemaining(p);
+     return `<div class="item ${pd?'paid':''}">
+       <span>
+         <b class="nm">🛍️ ${p.provider} — ${p.name}</b><br>
+         <span class="small">
+           ${L('BNPL (Auto)','BNPL (Auto)')} • ${L('Due','Due')} ${dueTxt}
+           • ${rem} ${L('bulan baki','months remaining')}
+           <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span>
+         </span>
+       </span>
+       <span style="text-align:right">
+         <b>${rm(bnplInstallment(p))}</b><br>
+         <button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="toggleBnplPaid(${p.i},'${monthKey(commitN)}')">
+           ${pd?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}
+         </button><br>
+         <button class="secondary v18TinyBtn" style="margin-top:4px" onclick="show('bnpl');setTimeout(()=>editBNPL(${p.i}),0)">
+           ${L('Edit BNPL','Edit BNPL')}
+         </button>
+       </span>
+     </div>`;
+   }).join('');
  }
  if(cmListEl)cmListEl.innerHTML=(filter==='BNPL_AUTO'?bnplHtml:(manualHtml+bnplHtml))||`<p class="small">${t('noRecords')}</p>`;
  if(document.getElementById('savingProtectedTotal')){
