@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
+<!-- Money+ AutoUpdate SaveDelete Fix 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -1465,11 +1466,9 @@ function cancelSavingEdit(){
   if(document.getElementById('savingCancelBtn'))savingCancelBtn.classList.add('hidden');
 }
 function deleteSaving(index){
-  if(confirm(L('Padam simpanan ini?','Delete this savings commitment?'))){
-    db.commit.splice(index,1);
-    save();
-    render();
-  }
+  mpConfirm(L('Padam simpanan ini?','Delete this savings commitment?'),()=>{
+    db.commit.splice(index,1);save();render();mpToast(L('Dipadam.','Deleted.'));
+  });
 }
 function render(){let n=new Date(),f=forecast(),cash=currentCash(),safe=safeSpendTodayCalc(),exp=scheduledIncomeMonth(n),act=actualIncomeMonth(n),sp=actualSpendMonth(n),un=obligationMonth(n,0);cashNow.textContent=rm(cash);if(document.getElementById('moneyBalance'))moneyBalance.textContent=rm(cash);safeToday.textContent=rm(safe.amount);safeMonth.textContent=rm(f[0].balance);expIncome.textContent=rm(exp);actIncome.textContent=rm(act);unpaid.textContent=rm(un);spent.textContent=rm(sp);nextIncomeHint.textContent=safe.next?safe.next.date.toLocaleDateString(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short'}):'—';let score=Math.max(0,Math.min(100,Math.round(60+(f[0].balance>0?20:-30)-(un>exp*.65?20:0))));health.textContent=score+'/100';try{let _hs=parseInt(health.textContent)||0;let _ring=document.getElementById('mpHealthRing'),_rs=document.getElementById('mpRingScore');if(_ring)_ring.style.setProperty('--score',Math.max(0,Math.min(100,_hs))*3.6+'deg');if(_rs)_rs.textContent=_hs}catch(e){}healthMsg.textContent=score>=75?t('healthGood'):score>=50?t('healthMid'):t('healthBad');let hasBase=forecastHasBase(), monthly=monthlyNetRows();
 let rows=monthly.map((x,i)=>{
@@ -1747,7 +1746,7 @@ function cancelBNPLEdit(){
  editingBnplIndex=-1;bnplName.value='';bnplMode.value='new';bnplProvider.value='SPayLater';if(document.getElementById('bnplOwner'))bnplOwner.value='nini';bnplModeChanged();setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));bnplCancelEditBtn.classList.add('hidden');
 }
 function toggleBnplPaid(i,k=null){let p=db.bnpl[i];k=k||monthKey(new Date());p.paidMonths=p.paidMonths||{};p.paidMonths[k]=!p.paidMonths[k];save();render()}
-function deleteBNPL(i){if(confirm(tr('deleteBnplConfirm'))){db.bnpl.splice(i,1);save();render()}}
+function deleteBNPL(i){mpConfirm(tr('deleteBnplConfirm'),()=>{db.bnpl.splice(i,1);save();render();mpToast(L('Dipadam.','Deleted.'))})}
 function nextMonthChoices(){
  const n=new Date(); return Array.from({length:12},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return {key:monthKey(d),label:new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short',year:'numeric'}).format(d)}});
 }
@@ -1816,9 +1815,14 @@ function restoreBackup(input){
   try{
    const p=JSON.parse(reader.result),d=p.data||p;
    if(!d||!Array.isArray(d.tx)||!Array.isArray(d.commit))throw new Error('invalid');
-   if(!confirm(L('Restore backup ini? Data semasa akan diganti.','Restore this backup? Current data will be replaced.')))return;
-   db=d;db.projects=db.projects||[];db.houseTransfers=db.houseTransfers||[];db.bnpl=db.bnpl||[];db.incomeSources=db.incomeSources||[];
-   save();render();alert(L('Backup berjaya dipulihkan.','Backup restored successfully.'));
+   mpConfirm(L('Restore backup ini? Data semasa akan diganti.','Restore this backup? Current data will be replaced.'),()=>{
+     db=d;
+     db.projects=db.projects||[];
+     db.houseTransfers=db.houseTransfers||[];
+     db.bnpl=db.bnpl||[];
+     db.incomeSources=db.incomeSources||[];
+     save();render();mpToast(L('Backup berjaya dipulihkan.','Backup restored successfully.'));
+   });
   }catch(e){alert(L('Fail backup tidak sah.','Invalid backup file.'))}
   input.value='';
  };
@@ -1984,10 +1988,11 @@ function deleteProjectTx(id){
  save();render();renderProjectDetail()
 }
 function deleteProject(id){
- if(!confirm(L('Padam projek ini dan semua aktiviti projek?','Delete this project and all project activity?')))return;
- db.projects=db.projects.filter(x=>x.id!==id);
- db.tx=db.tx.filter(x=>x.projectId!==id);
- save();render()
+ mpConfirm(L('Padam projek ini dan semua aktiviti projek?','Delete this project and all project activity?'),()=>{
+   db.projects=db.projects.filter(x=>x.id!==id);
+   db.tx=db.tx.filter(x=>x.projectId!==id);
+   save();render();mpToast(L('Dipadam.','Deleted.'));
+ });
 }
 function renderProjects(){
  if(!document.getElementById('projectList'))return;
@@ -2267,9 +2272,10 @@ function deleteFundEntryV24(kind,id,entryId){
   const f=fundById(kind,id);if(!f)return; f.entries=(f.entries||[]).filter(e=>e.id!==entryId); db.tx=(db.tx||[]).filter(x=>x.fundEntryId!==entryId);save();render();openFundDetail(kind,id);
 }
 function deleteFundV24(kind,id){
-  if(!confirm(L('Padam rekod ini?','Delete this record?')))return;
-  const f=fundById(kind,id); const ids=new Set((f?.entries||[]).map(e=>e.id)); db.tx=(db.tx||[]).filter(x=>!ids.has(x.fundEntryId));
-  if(kind==='fund')db.funds=db.funds.filter(x=>x.id!==id);else db.savings=db.savings.filter(x=>x.id!==id);save();render();
+  mpConfirm(L('Padam rekod ini?','Delete this record?'),()=>{
+    const f=fundById(kind,id); const ids=new Set((f?.entries||[]).map(e=>e.id)); db.tx=(db.tx||[]).filter(x=>!ids.has(x.fundEntryId));
+    if(kind==='fund')db.funds=db.funds.filter(x=>x.id!==id);else db.savings=db.savings.filter(x=>x.id!==id);save();render();mpToast(L('Dipadam.','Deleted.'));
+  });
 }
 function openFundDetail(kind,id){
   const f=fundById(kind,id);if(!f)return;const z=fundStats(f);
@@ -2279,7 +2285,7 @@ function openFundDetail(kind,id){
   fundDetailHistory.innerHTML=(f.entries||[]).slice().reverse().map(e=>{
     const source=(kind==='fund'&&e.type==='in')?(e.source==='faizal'?'Faizal':'Nini'):'';
     const meta=[source,formatFundDate(e.date),e.note].filter(Boolean).join(' • ');
-    return `<div class="item fundTxRow" data-longpress="entry" data-kind="${kind}" data-id="${id}" data-entry="${e.id}"><span style="flex:1;min-width:0"><b>${e.type==='in'?'+':'−'} ${rm(e.amount)}</b><br><span class="small">${meta}</span></span><span class="fundTxRight"><span class="pill ${e.type==='in'?'ok':'warn'}">${e.type==='in'?L('Masuk','In'):L('Keluar','Out')}</span></span><span class="fundTxActions"><button class="secondary" onclick="event.stopPropagation();openEditFundEntryV25('${kind}','${id}','${e.id}')">${L('Edit','Edit')}</button><button class="danger" onclick="event.stopPropagation();if(confirm(L('Padam transaksi ini?','Delete this transaction?')))deleteFundEntryV24('${kind}','${id}','${e.id}')">${L('Padam','Delete')}</button></span></div>`;
+    return `<div class="item fundTxRow" data-longpress="entry" data-kind="${kind}" data-id="${id}" data-entry="${e.id}"><span style="flex:1;min-width:0"><b>${e.type==='in'?'+':'−'} ${rm(e.amount)}</b><br><span class="small">${meta}</span></span><span class="fundTxRight"><span class="pill ${e.type==='in'?'ok':'warn'}">${e.type==='in'?L('Masuk','In'):L('Keluar','Out')}</span></span><span class="fundTxActions"><button class="secondary" onclick="event.stopPropagation();openEditFundEntryV25('${kind}','${id}','${e.id}')">${L('Edit','Edit')}</button><button class="danger" onclick="event.stopPropagation();mpConfirm(L('Padam transaksi ini?','Delete this transaction?'),()=>deleteFundEntryV24('${kind}','${id}','${e.id}'))">${L('Padam','Delete')}</button></span></div>`;
   }).join('')||`<p class="small">${L('Belum ada transaksi.','No transactions yet.')}</p>`;
   bindFundLongPressV25(fundDetailHistory);
   fundDetailBackdrop.classList.remove('hidden');fundDetailSheet.classList.remove('hidden');
@@ -2305,7 +2311,7 @@ function fundManageEditV25(){
 }
 function fundManageDeleteV25(){
   const kind=fundManageKind.value,id=fundManageId.value,entryId=fundManageEntryId.value;closeFundManageSheet();
-  if(entryId){if(confirm(L('Padam rekod ini?','Delete this entry?')))deleteFundEntryV24(kind,id,entryId)}else deleteFundV24(kind,id);
+  if(entryId){mpConfirm(L('Padam rekod ini?','Delete this entry?'),()=>deleteFundEntryV24(kind,id,entryId))}else deleteFundV24(kind,id);
 }
 function bindFundLongPressV25(root){
   if(!root)return;
@@ -2445,13 +2451,13 @@ function editTxV28(i){
   txCategory.value=x.category||'other';txOwner.value=ownerOf(x);txName.value=x.name||'';txAmt.value=x.amt||'';txDate.value=x.date||new Date().toISOString().slice(0,10);
   setText('txSheetTitle',L('Edit Transaksi','Edit Transaction'));setText('saveTxBtn',L('Simpan Perubahan','Save Changes'));
 }
-function deleteTxV28(i){const x=db.tx[i];if(!x||x.fundEntryId||x.projectTxId)return;if(confirm(L('Padam transaksi ini?','Delete this transaction?'))){db.tx.splice(i,1);save();render()}}
+function deleteTxV28(i){const x=db.tx[i];if(!x||x.fundEntryId||x.projectTxId)return;mpConfirm(L('Padam transaksi ini?','Delete this transaction?'),()=>{db.tx.splice(i,1);save();render();mpToast(L('Dipadam.','Deleted.'))})}
 addTxAndClose=function(){
   const a=+txAmt.value||0;if(a<=0)return alert(L('Isi jumlah transaksi.','Enter the transaction amount.'));
   const kind=txType.value,category=txCategory.value,date=txDate.value||new Date().toISOString().slice(0,10),note=txName.value.trim(),name=note||txCategoryName(kind,category),owner=txOwner.value||'nini';
   if(editingTxIndexV28>=0){const old=db.tx[editingTxIndexV28]||{};db.tx[editingTxIndexV28]={...old,type:kind,category,name,amt:a,date,owner};editingTxIndexV28=-1}
   else db.tx.push({type:kind,category,name,amt:a,date,owner});
-  save();closeTxSheet();render();
+  save();closeTxSheet();render();mpToast(L('Disimpan.','Saved.'));
 };
 const v28CloseTxBase=closeTxSheet;
 closeTxSheet=function(){editingTxIndexV28=-1;v28CloseTxBase();setText('saveTxBtn',L('Simpan Transaksi','Save Transaction'))};
@@ -2464,13 +2470,13 @@ function editTransferV28(i){
   transferFrom.value=x.from||'faizal';transferTo.value=x.to||'nini';transferAmount.value=x.amount||'';transferDate.value=x.date||new Date().toISOString().slice(0,10);transferNote.value=x.note||'';
   setText('transferSheetTitle',L('Edit Pindahan','Edit Transfer'));setText('transferSaveBtn',L('Simpan Perubahan','Save Changes'));
 }
-function deleteTransferV28(i){if(confirm(L('Padam pindahan ini?','Delete this transfer?'))){db.houseTransfers.splice(i,1);save();render()}}
+function deleteTransferV28(i){mpConfirm(L('Padam pindahan ini?','Delete this transfer?'),()=>{db.houseTransfers.splice(i,1);save();render();mpToast(L('Dipadam.','Deleted.'))})}
 addMoneyTransfer=function(){
   const from=transferFrom.value,to=transferTo.value,amount=+transferAmount.value||0,date=transferDate.value||new Date().toISOString().slice(0,10),note=transferNote.value.trim();
   if(from===to)return alert(L('Pilih pemilik yang berbeza.','Choose different owners.'));if(amount<=0)return alert(L('Masukkan jumlah pindahan.','Enter the transfer amount.'));
   const item={id:editingTransferIndexV28>=0?(db.houseTransfers[editingTransferIndexV28].id||('HT'+Date.now())):'HT'+Date.now(),from,to,amount,date,note};
   if(editingTransferIndexV28>=0)db.houseTransfers[editingTransferIndexV28]=item;else db.houseTransfers.push(item);
-  editingTransferIndexV28=-1;save();closeTransferSheet();render();
+  editingTransferIndexV28=-1;save();closeTransferSheet();render();mpToast(L('Disimpan.','Saved.'));
 };
 
 /* ---------- INCOME SOURCES ---------- */
@@ -2488,7 +2494,7 @@ function collectIncomeSourceV28(){
   if(t==='oneoff'){s.amount=+oAmount.value||0;s.date=oDate.value}
   return s;
 }
-addIncomeSource=function(){const s=collectIncomeSourceV28();if(!s)return;if(editingIncomeIndexV28>=0){db.incomeSources[editingIncomeIndexV28]=s;editingIncomeIndexV28=-1}else db.incomeSources.push(s);srcName.value='';save();render();incomeTypeChanged();setText('addIncomeBtn',L('Simpan Sumber Pendapatan','Save Income Source'))};
+addIncomeSource=function(){const s=collectIncomeSourceV28();if(!s)return;if(editingIncomeIndexV28>=0){db.incomeSources[editingIncomeIndexV28]=s;editingIncomeIndexV28=-1}else db.incomeSources.push(s);srcName.value='';save();render();incomeTypeChanged();mpToast(L('Disimpan.','Saved.'));setText('addIncomeBtn',L('Simpan Sumber Pendapatan','Save Income Source'))};
 function editIncomeV28(i){
   const s=db.incomeSources[i];if(!s)return;editingIncomeIndexV28=i;incomeSetupBackdrop.classList.remove('hidden');incomeSetupPanel.classList.remove('hidden');srcName.value=s.name||'';srcType.value=s.type||'fixed';incomeTypeChanged();
   if(s.type==='fixed'){fAmount.value=s.amount||'';fDay.value=s.day||''}
@@ -2503,7 +2509,7 @@ function editIncomeV28(i){
   if(s.type==='oneoff'){oAmount.value=s.amount||'';oDate.value=s.date||''}
   setText('addIncomeBtn',L('Simpan Perubahan','Save Changes'));
 }
-function deleteIncomeV28(i){if(confirm(L('Padam sumber pendapatan ini?','Delete this income source?'))){db.incomeSources.splice(i,1);if(editingIncomeIndexV28===i)editingIncomeIndexV28=-1;save();render()}}
+function deleteIncomeV28(i){mpConfirm(L('Padam sumber pendapatan ini?','Delete this income source?'),()=>{db.incomeSources.splice(i,1);if(editingIncomeIndexV28===i)editingIncomeIndexV28=-1;save();render();mpToast(L('Dipadam.','Deleted.'))})}
 const v28CloseIncomeBase=closeIncomeSetup;
 closeIncomeSetup=function(){editingIncomeIndexV28=-1;setText('addIncomeBtn',L('Simpan Sumber Pendapatan','Save Income Source'));v28CloseIncomeBase()};
 function renderIncomeSourcesV28(){
@@ -2523,13 +2529,13 @@ function buildCommitItemV28(oldPaid={}){
   if(freq==='selected_months'&&!selectedMonths.length){alert(L('Pilih sekurang-kurangnya satu bulan.','Choose at least one month.'));return null}
   return item;
 }
-addCommit=function(){const old=editingCommitIndexV28>=0?db.commit[editingCommitIndexV28]:null,item=buildCommitItemV28(old?.paidMonths||{});if(!item)return;if(editingCommitIndexV28>=0)db.commit[editingCommitIndexV28]=item;else db.commit.push(item);editingCommitIndexV28=-1;save();closeCommitSheet();render()};
+addCommit=function(){const old=editingCommitIndexV28>=0?db.commit[editingCommitIndexV28]:null,item=buildCommitItemV28(old?.paidMonths||{});if(!item)return;if(editingCommitIndexV28>=0)db.commit[editingCommitIndexV28]=item;else db.commit.push(item);editingCommitIndexV28=-1;save();closeCommitSheet();render();mpToast(L('Disimpan.','Saved.'))};
 function editCommitV28(i){
   const c=db.commit[i];if(!c)return;editingCommitIndexV28=i;document.getElementById('commitSheetBackdrop')?.classList.remove('hidden');document.getElementById('commitSheet')?.classList.remove('hidden');cmType.value=categoryGroup(c);if(![...cmType.options].some(o=>o.value===cmType.value))cmType.value=c.type||'Other';cmFrequency.value=commitmentFrequency(c);commitOwner.value=ownerOf(c);commitTypeChanged();
   if(cmName)cmName.value=c.name||'';if(cmAmt)cmAmt.value=c.amt||'';if(document.getElementById('cmDue'))cmDue.value=c.due||'';if(document.getElementById('cmMonths'))cmMonths.value=c.months||'';if(document.getElementById('cmStart'))cmStart.value=c.start||'';if(document.getElementById('cmDate'))cmDate.value=c.date||'';if(document.getElementById('cmOutstanding'))cmOutstanding.value=c.outstanding||'';if(document.getElementById('cmSavingCategory'))cmSavingCategory.value=c.savingCategory||'other';
   document.querySelectorAll('.cmMonthCheck').forEach(x=>x.checked=(c.selectedMonths||[]).includes(x.value));setText('commitAddTitle',L('Edit Komitmen','Edit Commitment'));setText('commitSaveBtn',L('Simpan Perubahan','Save Changes'));
 }
-function deleteCommitV28(i){if(confirm(L('Padam komitmen ini?','Delete this commitment?'))){db.commit.splice(i,1);save();render()}}
+function deleteCommitV28(i){mpConfirm(L('Padam komitmen ini?','Delete this commitment?'),()=>{db.commit.splice(i,1);save();render();mpToast(L('Dipadam.','Deleted.'))})}
 function enhanceCommitActionsV28(){
   document.querySelectorAll('#cmList .item').forEach(row=>{const paidBtn=[...row.querySelectorAll('button')].find(b=>(b.getAttribute('onclick')||'').startsWith('togglePaid('));if(!paidBtn)return;const m=(paidBtn.getAttribute('onclick')||'').match(/togglePaid\((\d+)/);if(!m)return;const idx=+m[1],right=paidBtn.parentElement;if(!right||right.querySelector('.v28CommitEdit'))return;right.insertAdjacentHTML('beforeend',`<br><button class="secondary v18TinyBtn v28CommitEdit" onclick="editCommitV28(${idx})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteCommitV28(${idx})">${L('Padam','Delete')}</button>`)});
 }
@@ -2549,6 +2555,46 @@ renderV18Money=function(){
     return `<div class="item"><div class="txLeft"><div class="txIcon">${incoming?'＋':'−'}</div><span><b>${x.name||cat}</b><br><span class="small">${cat} • ${x.date||'-'} <span class="ownerBadgeMini">${v18OwnerLabel(ownerOf(x))}</span></span></span></div><span style="text-align:right"><b class="txAmount ${incoming?'income':'spend'}">${incoming?'+':'−'}${rm(x.amt)}</b>${editable?`<br><button class="secondary v18TinyBtn" onclick="editTxV28(${o.idx})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteTxV28(${o.idx})">${L('Padam','Delete')}</button>`:''}</span></div>`;
   }).join('')||`<p class="small">${t('noTransactions')}</p>`;
 };
+
+
+/* === Money+ in-app dialogs: no Android browser popup dependency === */
+function mpEnsureOverlay(){
+  if(document.getElementById('mpToastBox')) return;
+  const toast=document.createElement('div');
+  toast.id='mpToastBox';
+  toast.style.cssText='position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:99999;max-width:88%;padding:11px 14px;border-radius:14px;background:#10294a;color:#fff;font-weight:800;font-size:13px;box-shadow:0 12px 30px rgba(16,41,74,.25);display:none;text-align:center';
+  document.body.appendChild(toast);
+
+  const back=document.createElement('div');
+  back.id='mpConfirmBack';
+  back.style.cssText='position:fixed;inset:0;z-index:99990;background:rgba(16,41,74,.35);display:none;align-items:center;justify-content:center;padding:20px';
+  back.innerHTML='<div style="width:min(360px,100%);background:#fff;border-radius:22px;padding:20px;box-shadow:0 20px 50px rgba(16,41,74,.25)"><div id="mpConfirmText" style="font-size:15px;font-weight:850;line-height:1.45;color:#10294a;margin-bottom:16px"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button id="mpConfirmNo" class="secondary" type="button"></button><button id="mpConfirmYes" type="button"></button></div></div>';
+  document.body.appendChild(back);
+}
+function mpToast(msg){
+  mpEnsureOverlay();
+  const el=document.getElementById('mpToastBox');
+  el.textContent=String(msg||'');
+  el.style.display='block';
+  clearTimeout(window.__mpToastTimer);
+  window.__mpToastTimer=setTimeout(()=>{el.style.display='none'},2200);
+}
+function mpConfirm(msg,onYes){
+  mpEnsureOverlay();
+  const back=document.getElementById('mpConfirmBack');
+  document.getElementById('mpConfirmText').textContent=String(msg||'');
+  const no=document.getElementById('mpConfirmNo');
+  const yes=document.getElementById('mpConfirmYes');
+  no.textContent=L('Batal','Cancel');
+  yes.textContent=L('Ya, teruskan','Yes, continue');
+  back.style.display='flex';
+  const close=()=>{back.style.display='none';yes.onclick=null;no.onclick=null};
+  no.onclick=close;
+  back.onclick=e=>{if(e.target===back)close()};
+  yes.onclick=()=>{close(); if(typeof onYes==='function')onYes()};
+}
+/* Make old validation alert() visible inside the app */
+window.alert=function(msg){ mpToast(msg); };
 
 /* Make post-render edit controls persistent */
 const v28PrevRender=render;
