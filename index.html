@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate BNPL Auto-Commitment Fix 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Included In Commitment Total 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -608,7 +608,7 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 </div>
 
 <div class="commitSummary">
-  <div class="metric"><div class="label" id="commitTotalLabel">TOTAL BULAN INI</div><div class="value" id="commitTotalThisMonth">RM0</div></div>
+  <div class="metric"><div class="label" id="commitTotalLabel">TOTAL BULAN INI</div><div class="value" id="commitTotalThisMonth">RM0</div><div class="small" id="commitTotalBreakdown" style="margin-top:4px"></div></div>
   <div class="metric"><div class="label" id="commitPaidLabel">DAH BAYAR</div><div class="value" id="commitPaidThisMonth">RM0</div></div>
   <div class="metric"><div class="label" id="commitUnpaidLabel">BELUM BAYAR</div><div class="value" id="commitUnpaidThisMonth">RM0</div></div>
 </div>
@@ -1288,9 +1288,17 @@ function categoryLabel(t){
  };
  const x=map[t]||map[categoryGroup({type:t})]||map.Other; return L(x[0],x[1]);
 }
+function commitmentBreakdownForMonth(d,owner='all',excludePaid=false){
+ const manual=db.commit
+   .filter(c=>ownerMatches(c,owner)&&commitAppliesInMonth(c,d)&&(!excludePaid||!paidThisMonth(c,d)))
+   .reduce((sum,c)=>sum+(+c.amt||0),0);
+ const bnpl=db.bnpl
+   .filter(p=>ownerMatches(p,owner)&&bnplActiveInMonth(p,d)&&(!excludePaid||!bnplPaidThisMonth(p,d)))
+   .reduce((sum,p)=>sum+bnplInstallment(p),0);
+ return {manual,bnpl,total:manual+bnpl};
+}
 function commitmentTotalForMonth(d,owner='all',excludePaid=false){
- const manual=db.commit.filter(c=>ownerMatches(c,owner)&&commitAppliesInMonth(c,d)&&(!excludePaid||!paidThisMonth(c,d))).reduce((s,c)=>s+(+c.amt||0),0);
- return manual+bnplOutflowMonth(d,owner,excludePaid);
+ return commitmentBreakdownForMonth(d,owner,excludePaid).total;
 }
 function commitmentPaidForMonth(d,owner='all'){
  const manual=db.commit.filter(c=>ownerMatches(c,owner)&&commitAppliesInMonth(c,d)&&paidThisMonth(c,d)).reduce((s,c)=>s+(+c.amt||0),0);
@@ -1815,13 +1823,16 @@ function ownerLabel(v){return v==='faizal'?'Faizal':v==='joint'?L('Bersama','Joi
 function frequencyLabel(c){const f=commitmentFrequency(c);if(f==='monthly')return L('Setiap Bulan','Every Month');if(f==='fixed_months')return L('Beberapa Bulan','Several Months');if(f==='selected_months')return L('Bulan Tertentu','Selected Months');return L('Sekali Sahaja','One-time')}
 function icon(t){return{'Household Bills':'🏠','Bill':'🏠','Loan':'🏦','Credit Card':'💳','Insurance':'🛡️','Education':'🎓','Subscription':'🔁','Vehicle':'🚗','Savings Reserve':'💰','Family':'👨‍👩‍👧','Zakat':'🤲','Other':'📌','Future Expense':'📆'}[t]||'•'}
 function renderCommitDashboard(n=commitViewDate){
- const total=commitmentTotalForMonth(n,commitOwnerFilter,false),paid=commitmentPaidForMonth(n,commitOwnerFilter),unpaid=Math.max(0,total-paid);
+ const breakdown=commitmentBreakdownForMonth(n,commitOwnerFilter,false);
+ const total=breakdown.total,paid=commitmentPaidForMonth(n,commitOwnerFilter),unpaid=Math.max(0,total-paid);
  setText('commitViewMonthLabel',commitMonthLabel(n));
  setText('commitRecordsTitle',L('Komitmen ','Commitments — ')+commitMonthLabel(n));
  setText('commitTotalLabel',L('TOTAL ','TOTAL ')+commitMonthShort(n).toUpperCase());
  setText('commitPaidLabel',L('DAH BAYAR','PAID'));setText('commitUnpaidLabel',L('BELUM BAYAR','UNPAID'));
  setText('commitForecastTitle',L('Komitmen 6 Bulan dari ','6-Month Commitments from ')+commitMonthShort(n));
- setText('commitTotalThisMonth',rm(total));setText('commitPaidThisMonth',rm(paid));setText('commitUnpaidThisMonth',rm(unpaid));
+ setText('commitTotalThisMonth',rm(total));
+ setText('commitTotalBreakdown',L('Komitmen ','Commitments ')+rm(breakdown.manual)+' + BNPL '+rm(breakdown.bnpl));
+ setText('commitPaidThisMonth',rm(paid));setText('commitUnpaidThisMonth',rm(unpaid));
  const ownerTxt=commitOwnerFilter==='all'?L('Semua','All'):ownerLabel(commitOwnerFilter);setText('commitForecastOwner',ownerTxt);
  const months=Array.from({length:6},(_,i)=>{let d=new Date(n.getFullYear(),n.getMonth()+i,1);return {d,total:commitmentTotalForMonth(d,commitOwnerFilter,false)}});
  const el=document.getElementById('commitForecast6');if(el)el.innerHTML=months.map(x=>`<div class="commitForecastCell"><b>${new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short'}).format(x.d)}</b><strong>${rm(x.total)}</strong></div>`).join('');
