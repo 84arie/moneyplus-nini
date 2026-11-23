@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate SaveDelete Fix 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Total Fix 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -1222,6 +1222,13 @@ function bnplInstallment(p){
   if(p.installment) return +p.installment||0;
   return p.months>0 ? (+p.totalPayable||+p.total||0)/p.months : 0;
 }
+function bnplPlanTotal(p){
+  if((p.mode||'new')==='new'){
+    const inst=+p.installment||0, months=+p.months||0;
+    if(inst>0&&months>0) return inst*months;
+  }
+  return +p.totalPayable||+p.total||+p.orderAmount||0;
+}
 function bnplRemaining(p){
   if(p.mode==='ongoing') return Math.max(0,(+p.totalInstallments||0)-(+p.paidInstallments||0));
   if(!p.start) return p.months||0;
@@ -1491,7 +1498,7 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
         <b class="txAmount ${incoming?'income':'spend'}">${incoming?'+':'−'}${rm(x.amt)}</b>
       </div>`
     }).join('')||`<p class="small">${t('noTransactions')}</p>`;incomeSources.innerHTML=db.incomeSources.map((s,i)=>`<div class="item"><span><b>💵 ${s.name}</b><br><span class="small">${incomeSummary(s)}</span></span><button class="danger" style="min-height:30px;padding:4px 8px" onclick="delIncome(${i})">×</button></div>`).join('')||`<p class="small">${t('noIncomeSources')}</p>`;bnplThisMonth.textContent=rm(bnplOutflowMonth(n));bnplCount.textContent=db.bnpl.filter(p=>bnplActiveInMonth(p,n)).length+' '+t('activePlans');bnplList.innerHTML=db.bnpl.map((p,i)=>{
- let rem=bnplRemaining(p),paidCount=p.mode==='ongoing'?(+p.paidInstallments||0):Math.max(0,(p.months||0)-rem),totalCount=p.mode==='ongoing'?(+p.totalInstallments||0):(p.months||0),progress=`${paidCount}/${totalCount} ${L('dibayar','paid')}`,due=p.mode==='ongoing'?(p.nextDue||'-'):(p.due?(L('Setiap ','Every ')+p.due+L('hb','th')):'-'),total=p.totalPayable||p.total||0;
+ let rem=bnplRemaining(p),paidCount=p.mode==='ongoing'?(+p.paidInstallments||0):Math.max(0,(p.months||0)-rem),totalCount=p.mode==='ongoing'?(+p.totalInstallments||0):(p.months||0),progress=`${paidCount}/${totalCount} ${L('dibayar','paid')}`,due=p.mode==='ongoing'?(p.nextDue||'-'):(p.due?(L('Setiap ','Every ')+p.due+L('hb','th')):'-'),total=bnplPlanTotal(p);
  return `<div class="item"><span><b>${p.provider} — ${p.name}</b><br><span class="small">${progress} • ${rm(bnplInstallment(p))}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}<br>${L('Seterusnya','Next')}: ${due} <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span></span></span><span style="text-align:right"><b>${rm(total)}</b><br><button class="secondary" style="min-height:30px;padding:4px 8px" onclick="editBNPL(${i})">${L('Edit','Edit')}</button><button class="danger" style="min-height:30px;padding:4px 8px" onclick="deleteBNPL(${i})">${L('Padam','Delete')}</button></span></div>`
 }).join('')||`<p class="small">${t('noBNPL')}</p>`;
  renderCommitDashboard(commitViewDate);
@@ -2110,7 +2117,7 @@ function renderV18BNPL(){
 
   if(document.getElementById('bnplList'))bnplList.innerHTML=filtered.map(p=>{
     const rem=bnplRemaining(p),inst=bnplInstallment(p),activeNow=bnplActiveInMonth(p,n),paid=activeNow&&bnplPaidThisMonth(p,n);
-    const total=p.totalPayable||p.total||p.orderAmount||0;
+    const total=bnplPlanTotal(p);
     return `<div class="item ${paid?'paid':''}"><span style="flex:1"><b>${p.provider} — ${p.name}</b><br><span class="small">${v18OwnerLabel(ownerOf(p))} • ${rm(inst)}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}</span><div class="v18StatusRow">${activeNow?`<span class="pill ${paid?'ok':'warn'}">${paid?'✓ '+L('Dah Bayar','Paid'):L('Belum Bayar','Unpaid')} • ${commitMonthShort(n)}</span>`:`<span class="pill">${L('Tidak aktif bulan ini','Not active this month')}</span>`}</div></span><span style="text-align:right"><b>${rm(total)}</b><br>${activeNow?`<button class="v18TinyBtn" onclick="toggleBnplPaid(${p.i},'${monthKey(n)}')">${paid?L('Undo','Undo'):L('Tanda Bayar','Mark Paid')}</button>`:''}<br><button class="secondary v18TinyBtn" onclick="editBNPL(${p.i})">Edit</button> <button class="danger v18TinyBtn" onclick="deleteBNPL(${p.i})">${L('Padam','Delete')}</button></span></div>`;
   }).join('')||`<p class="small">${t('noBNPL')}</p>`;
 }
@@ -2413,7 +2420,7 @@ addBNPL=function(){
     const start=document.getElementById('bnplStart').value;
     const due=+document.getElementById('bnplDue').value||null;
     if(total<=0||months<=0||installment<=0||!start)return alert(L('Lengkapkan harga, ansuran bulanan, bilangan bulan dan tarikh mula.','Complete price, monthly installment, number of months and start date.'));
-    item={mode:'new',provider,name,total,totalPayable:total,months,installment,start,due,owner,paidMonths:{}};
+    item={mode:'new',provider,name,total,totalPayable:(installment*months),months,installment,start,due,owner,paidMonths:{}};
   }else{
     const orderAmount=+document.getElementById('bnplOrderAmount').value||0;
     const totalPayable=+document.getElementById('bnplTotalPayable').value||0;
