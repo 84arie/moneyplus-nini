@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Money+ V13 Commitment Fix</title>
+<title>Money+ V20 Project Tracker</title>
 
 
 
@@ -204,6 +204,138 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 @media(max-width:360px){.mpHero{min-height:195px}.mpHeroValue{font-size:46px}.mpMonthVisual{grid-template-columns:100px 1fr}.mpRing{width:90px;height:90px}.mpRing:after{width:67px;height:67px}.mpStat{padding:11px}.mpHeroArt{width:55%}}
 </style>
 
+
+<style id="mpV16Commitment">
+.commitOwnerTabs{display:flex;gap:7px;overflow-x:auto;margin:6px 0 12px;padding-bottom:2px}
+.commitOwnerTabs button{white-space:nowrap;min-height:38px;padding:7px 12px;border-radius:999px;background:#fff;color:#71819b;border:1px solid #e7eaf2;box-shadow:none}
+.commitOwnerTabs button.on{background:linear-gradient(135deg,#7651e8,#9c72ff);color:#fff;border-color:transparent}
+.commitSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px}
+.commitSummary .metric{padding:12px 10px;min-width:0}.commitSummary .value{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.commitForecastGrid{display:grid;grid-template-columns:repeat(6,minmax(72px,1fr));gap:7px;overflow-x:auto;padding:2px 0 4px}
+.commitForecastCell{min-width:72px;background:#f8f7ff;border:1px solid #eee9ff;border-radius:16px;padding:10px 7px;text-align:center}
+.commitForecastCell b{display:block;font-size:10px;color:#73809a;margin-bottom:5px}.commitForecastCell strong{font-size:13px;color:#172f50}
+.commitForecastHint{font-size:10px;color:#7d89a0;margin-top:9px;line-height:1.45}
+.monthPickGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0 10px}
+.monthCheck{display:flex;align-items:center;gap:7px;background:#f8f9fd;border:1px solid #e8ecf3;border-radius:13px;padding:9px;font-size:11px;color:#53657b}
+.monthCheck input{width:17px;min-height:17px;margin:0}.ownerBadgeMini{display:inline-flex;padding:3px 7px;border-radius:999px;background:#f1edff;color:#6d4bd6;font-size:9px;font-weight:850;margin-left:4px}
+.bnplBreakdown{margin-top:8px;padding:9px;border-radius:13px;background:#fafbfe}.bnplBreakdown summary{cursor:pointer;font-size:10px;font-weight:850;color:#6c55c8}.bnplMini{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #edf0f6}.bnplMini:last-child{border-bottom:0}.bnplMini button{min-height:28px;padding:3px 7px;font-size:9px}
+
+.commitMonthNav{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;align-items:center;margin:2px 0 12px}
+.commitMonthNav button{min-height:42px;padding:6px;background:#fff;color:#7651e8;border:1px solid #e8e2fb;box-shadow:none;font-size:20px}
+.commitMonthCenter{min-height:42px;border-radius:15px;background:linear-gradient(135deg,#f4efff,#edf6ff);border:1px solid #e7e0fb;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 10px;text-align:center}
+.commitMonthCenter b{font-size:14px;color:#172f50}.commitMonthCenter span{font-size:10px;color:#7d89a0}
+.commitMonthCurrent{display:block;margin:-5px auto 12px;background:transparent!important;color:#7c45ee!important;min-height:28px!important;padding:2px 8px!important;font-size:10px!important}
+@media(max-width:360px){.commitSummary{grid-template-columns:1fr 1fr}.commitSummary .metric:first-child{grid-column:1/-1}}
+</style>
+
+<style id="v18Styles">
+.v18PageHead{display:flex;align-items:center;justify-content:space-between}
+.v18PageHead h2{margin-bottom:10px}
+.v18IconBtn{width:42px;min-height:42px;padding:0;border-radius:14px;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow)}
+.v18Quick3{grid-template-columns:repeat(3,1fr)}
+.v18Quick3 button{padding:11px 7px;min-width:0}
+.v18Quick3 button strong{font-size:12px}.v18Quick3 button span{font-size:8.5px;line-height:1.25}
+.v18OwnerTabs{margin:12px 0 10px}
+.v18MoneySummary{margin:10px 0 12px}
+.v18MoneySummary .metric{padding:12px 9px}.v18MoneySummary .value{font-size:16px}
+.v18IncomeCard{margin-top:10px}.v18SmallBtn{min-height:34px;padding:5px 11px;font-size:11px}
+#bnpl .hero{margin-bottom:10px}
+#bnplList .item{align-items:flex-start}
+.v18StatusRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.v18TinyBtn{min-height:28px!important;padding:4px 7px!important;font-size:9px!important}
+.v18TransferBadge{display:inline-flex;padding:3px 7px;border-radius:999px;background:#eef4ff;color:#47648a;font-size:9px;font-weight:800}
+@media(max-width:360px){.v18Quick3{gap:6px}.v18Quick3 button{padding:9px 4px}.v18Quick3 button strong{font-size:11px}}
+</style>
+
+
+<style id="mpV19CleanPro">
+/* V19 clean professional polish: fewer helper sentences, tighter forms */
+.quickActions button span{display:none!important}
+.quickActions button{min-height:58px!important;padding:12px 8px!important}
+.sheet .sectionNote{display:none!important}
+#balanceSheetSub{display:none!important}
+#commitViewMonthSub{font-size:9px!important}
+.commitMonthCurrent{min-height:34px!important;padding:6px 11px!important}
+.sheet label{margin-top:2px}
+.sheet input,.sheet select{margin-bottom:9px}
+</style>
+
+<style id="mpV20ProjectTracker">
+.projectOwnerRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.projectCard{padding:14px 0;border-bottom:1px solid var(--line)}
+.projectCard:last-child{border-bottom:0}
+.projectCardHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.projectCardTitle{font-size:14px;font-weight:900}
+.projectCardMeta{font-size:10px;color:var(--muted);margin-top:3px}
+.projectMiniGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.projectMini{background:#f8f9fd;border-radius:13px;padding:9px 8px}
+.projectMini span{display:block;font-size:8px;font-weight:850;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.projectMini b{display:block;font-size:12px;margin-top:3px}
+.projectProgressRow{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:9px;color:var(--muted)}
+.projectOpenBtn{min-height:30px!important;padding:4px 9px!important;font-size:10px!important}
+.projectDetailBalance{display:flex;justify-content:space-between;align-items:center;background:#f5f2ff;border-radius:15px;padding:11px 12px;margin-top:10px}
+.projectDetailBalance span{font-size:10px;color:var(--muted);font-weight:800}
+.projectDetailBalance b{font-size:17px}
+.projectActionGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.projectActionGrid button{min-height:44px}
+.projectActionGrid .fund{background:#edf8f4;color:#17745d}
+.projectActionGrid .spend{background:#fff2f2;color:#a33e3e}
+#projectTxForm{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+#projectActivityTitle{margin-top:14px;font-size:12px;font-weight:900}
+@media(max-width:360px){.projectMiniGrid{gap:5px}.projectMini{padding:8px 6px}.projectMini b{font-size:11px}}
+</style>
+
+<style id="v21ProjectGoal">
+.projectGoalStrip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.projectGoalBox{background:#f8f9fd;border:1px solid #edf0f6;border-radius:14px;padding:10px}
+.projectGoalBox span{display:block;font-size:8px;font-weight:850;color:var(--muted);text-transform:uppercase;letter-spacing:.35px}
+.projectGoalBox b{display:block;font-size:14px;margin-top:4px}
+.projectGoalStatus{margin-top:10px;padding:10px 12px;border-radius:14px;background:#f5f2ff;font-size:10px;color:#65708c;line-height:1.45}
+.projectGoalStatus strong{color:var(--ink)}
+.projectCard .bar i{transition:width .2s ease}
+.projectFundingGood{color:#20845f!important}
+.projectFundingWarn{color:#b06b1c!important}
+.projectQuickActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.projectQuickActions button{min-height:38px!important;padding:8px 9px!important;font-size:11px!important}
+.projectQuickActions .fund{background:#edf8f4;color:#17745d}
+.projectQuickActions .spend{background:#fff2f2;color:#a33e3e}
+</style>
+
+<style id="v24Styles">
+.fundTabs{display:flex;gap:7px;background:#edf1f6;padding:4px;border-radius:999px;margin:4px 0 14px}
+.fundTabs button{flex:1;background:transparent;color:#75849a;min-height:38px;border-radius:999px;box-shadow:none}
+.fundTabs button.on{background:#fff;color:#10294a;box-shadow:0 4px 12px rgba(33,47,73,.08)}
+.fundHero{background:linear-gradient(135deg,#f0ebff,#eaf6ff)!important}
+.savingHero{background:linear-gradient(135deg,#eafff7,#eef5ff)!important}
+.fundHeroValue{font-size:34px;font-weight:950;letter-spacing:-1px;margin:5px 0;color:#10294a}
+.fundCard{background:#fff;border:1px solid #edf0f6;border-radius:22px;padding:15px;margin:10px 0;box-shadow:0 10px 24px rgba(34,48,76,.05)}
+.fundCardHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.fundCardTitle{font-size:15px;font-weight:900}.fundCardMeta{font-size:9px;color:var(--muted);margin-top:3px}
+.fundMetrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.fundMini{background:#f8f9fd;border-radius:14px;padding:9px}.fundMini span{display:block;font-size:8px;font-weight:850;color:var(--muted);text-transform:uppercase}.fundMini b{display:block;font-size:12px;margin-top:3px}
+.fundActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fundActions button{min-height:38px;font-size:11px}.fundActions .in{background:#eaf8f3;color:#17745d}.fundActions .out{background:#fff0f2;color:#a33e4e}
+.fundDetailBalance{padding:14px;border-radius:17px;background:#f3f0ff;margin:10px 0}.fundDetailBalance span{font-size:9px;color:var(--muted);font-weight:800}.fundDetailBalance b{display:block;font-size:26px;margin-top:3px}
+.spendBarRow{display:grid;grid-template-columns:minmax(90px,1fr) 1.4fr auto;gap:8px;align-items:center;padding:7px 0}.spendBarLabel{font-size:11px;font-weight:750}.spendBarTrack{height:7px;background:#edf0f5;border-radius:999px;overflow:hidden}.spendBarTrack i{display:block;height:100%;background:#8b62ed;border-radius:999px}.spendBarAmt{font-size:11px;font-weight:850}
+</style>
+<meta name="moneyplus-build" content="V28 BNPL Monthly + Editable Everywhere">
+
+<style id="v27FundDetailModal">
+#fundDetailSheet{
+  top:max(14px,calc(env(safe-area-inset-top) + 10px));
+  bottom:auto;
+  width:min(458px,calc(100% - 20px));
+  max-height:calc(100dvh - 28px - env(safe-area-inset-top));
+  border-radius:24px;
+  padding:14px 14px calc(16px + env(safe-area-inset-bottom));
+  box-shadow:0 24px 60px rgba(15,37,53,.22);
+}
+#fundDetailSheet .sheetHeader{
+  position:sticky;top:-14px;z-index:3;background:#fff;
+  padding:6px 0 10px;margin-bottom:4px;
+}
+#fundDetailSheet #fundDetailHistory{padding-bottom:6px}
+.fundTxRow{align-items:center}.fundTxRight{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.fundTxActions{display:flex;gap:5px;margin-top:5px;justify-content:flex-end}
+.fundTxActions button{min-height:28px!important;padding:3px 8px!important;font-size:9px!important;border-radius:9px!important}
+</style>
 </head>
 <body>
 <main class="shell">
@@ -286,353 +418,335 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
   </div>
 </section>
 
+
 <section id="money" class="page hidden">
-<h2 id="moneyTitle">Duit</h2>
-
-<div class="moneyHero">
-  <div class="balanceLabel" id="moneyBalanceLabel">BAKI SEMASA</div>
-  <div class="balanceValue" id="moneyBalance">RM0</div>
-  
-  <button class="secondary" style="margin-top:12px;min-height:38px;padding:8px 11px" onclick="openBalanceSheet()" id="adjustBalanceBtn">Laraskan Baki</button>
-</div>
-
-<div class="quickActions">
-  <button onclick="openTxSheet('income')">
-    <strong id="moneyInAction">+ Rekod Duit Diterima</strong>
-    <span id="moneyInSub">Duit yang betul-betul dah masuk</span>
-  </button>
-  <button onclick="openTxSheet('spend')">
-    <strong id="moneyOutAction">− Rekod Perbelanjaan</strong>
-    <span id="moneyOutSub">Belanja sebenar hari ini</span>
-  </button>
-</div>
-
-
-<div class="card">
-  <div class="sectionTitle">
-    <b id="moneySavingsTitle">Simpanan</b>
-    
+  <div class="v18PageHead">
+    <h2 id="moneyTitle">Duit</h2>
+    <button class="v18IconBtn" onclick="openSettingsSheet()" aria-label="Tetapan">⚙️</button>
   </div>
-  <div class="grid2">
-    <div class="metric">
-      <div class="label" id="moneySavingsAmountLabel">Sebulan</div>
-      <div class="value" id="moneySavingsTotal">RM0</div>
-    </div>
-    <div class="metric">
-      <div class="label" id="moneySavingsCountLabel">Tabung Aktif</div>
-      <div class="value" id="moneySavingsCount">0</div>
-    </div>
+
+  <div class="moneyHero">
+    <div class="balanceLabel" id="moneyBalanceLabel">BAKI SEMASA</div>
+    <div class="balanceValue" id="moneyBalance">RM0</div>
+    <button class="secondary" style="margin-top:12px;min-height:38px;padding:8px 11px" onclick="openBalanceSheet()" id="adjustBalanceBtn">Laraskan Baki</button>
   </div>
-  <button class="secondary wide" style="margin-top:10px" onclick="openSavingsManager()" id="moneySavingsManageBtn">Urus Simpanan</button>
-</div>
 
-<div class="moneySectionHead">
-  <b id="recentTxTitle">Transaksi Terkini</b>
-</div>
-<div class="card" style="margin-top:0">
-  <div id="txList" class="cleanList"></div>
-</div>
+  <div class="quickActions v18Quick3">
+    <button onclick="openTxSheet('income')"><strong id="moneyInAction">+ Duit Masuk</strong><span></span></button>
+    <button onclick="openTxSheet('spend')"><strong id="moneyOutAction">− Belanja</strong><span></span></button>
+    <button onclick="openTransferSheet()"><strong id="moneyTransferAction">↔ Pindahan</strong><span></span></button>
+  </div>
 
-<div class="moneySectionHead">
-  <b id="incomeSetupTitle">Corak Pendapatan</b>
-  <button onclick="toggleIncomeSetup()" id="incomeSetupToggle">Urus</button>
-</div>
+  <div class="ownerTabs v18OwnerTabs" id="moneyOwnerTabs">
+    <button class="on" onclick="setMoneyOwnerFilter('all',this)">Semua</button>
+    <button onclick="setMoneyOwnerFilter('nini',this)">👩🏻‍💼 Nini</button>
+    <button onclick="setMoneyOwnerFilter('faizal',this)">👨🏻‍💼 Faizal</button>
+    <button onclick="setMoneyOwnerFilter('joint',this)">🏠 Bersama</button>
+  </div>
 
-<div id="incomeSetupPanel" class="hidden">
+  <div class="commitSummary v18MoneySummary">
+    <div class="metric"><div class="label" id="moneyMonthInLabel">DUIT MASUK</div><div class="value" id="moneyMonthIn">RM0</div></div>
+    <div class="metric"><div class="label" id="moneyMonthOutLabel">DUIT KELUAR</div><div class="value" id="moneyMonthOut">RM0</div></div>
+    <div class="metric"><div class="label" id="moneyMonthNetLabel">BERSIH</div><div class="value" id="moneyMonthNet">RM0</div></div>
+  </div>
+
   <div class="card">
-    <div class="sectionTitle"><b id="incomeAddTitle">Tambah Sumber Pendapatan</b><span id="incomeRuleHint">Untuk ramalan</span></div>
-    <input id="srcName" placeholder="Contoh: Gaji / Komisen / Perniagaan">
+    <div class="sectionTitle"><b id="spendTrackerTitle">Belanja Bulan Ini</b><span class="small" id="spendTrackerOwner"></span></div>
+    <div id="spendCategoryList"></div>
+  </div>
+
+  <div class="card v18IncomeCard">
+    <div class="sectionTitle">
+      <div><b id="incomeSetupTitle">Corak Pendapatan</b><div class="small" id="incomeNextSummary">Belum ditetapkan</div></div>
+      <button class="secondary v18SmallBtn" onclick="toggleIncomeSetup()" id="incomeSetupToggle">Urus</button>
+    </div>
+  </div>
+
+  <div class="moneySectionHead"><b id="recentTxTitle">Transaksi Terkini</b></div>
+  <div class="card" style="margin-top:0"><div id="txList" class="cleanList"></div></div>
+
+  <div id="balanceBackdrop" class="sheetBackdrop hidden" onclick="closeBalanceSheet()"></div>
+  <div id="balanceSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="balanceSheetTitle">Laraskan Baki</b><button class="sheetClose" onclick="closeBalanceSheet()">×</button></div>
+    <div class="small" id="balanceSheetSub"></div>
+    <input id="openingBalance" type="number" placeholder="RM">
+    <button class="wide" onclick="saveOpeningAndClose()" id="saveBalanceBtn">Simpan Baki</button>
+  </div>
+
+  <div id="txBackdrop" class="sheetBackdrop hidden" onclick="closeTxSheet()"></div>
+  <div id="txSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="txSheetTitle">Tambah Transaksi</b><button class="sheetClose" onclick="closeTxSheet()">×</button></div>
+    <input id="txType" type="hidden" value="spend">
+    <label id="txCategoryLabel">Kategori</label><select id="txCategory"></select>
+    <label id="txOwnerLabel">Pemilik</label>
+    <select id="txOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select>
+    <label id="txNoteLabel">Catatan</label><input id="txName" placeholder="">
+    <label id="txAmountLabel">Jumlah</label><input id="txAmt" type="number" placeholder="RM">
+    <label id="txDateLabel">Tarikh</label><input id="txDate" type="date">
+    <button class="wide" onclick="addTxAndClose()" id="saveTxBtn">Simpan Transaksi</button>
+  </div>
+
+  <div id="transferBackdrop" class="sheetBackdrop hidden" onclick="closeTransferSheet()"></div>
+  <div id="transferSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="transferSheetTitle">Rekod Pindahan</b><button class="sheetClose" onclick="closeTransferSheet()">×</button></div>
+    <div class="grid2">
+      <div><label id="transferFromLabel">Daripada</label><select id="transferFrom"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select></div>
+      <div><label id="transferToLabel">Kepada</label><select id="transferTo"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select></div>
+    </div>
+    <label id="transferAmountLabel">Jumlah</label><input id="transferAmount" type="number" placeholder="RM">
+    <label id="transferDateLabel">Tarikh</label><input id="transferDate" type="date">
+    <label id="transferNoteLabel">Catatan</label><input id="transferNote" placeholder="">
+    <div class="sectionNote" id="transferRuleNote">Pindahan bukan income baru dan tidak menambah jumlah duit keseluruhan.</div>
+    <button class="wide" onclick="addMoneyTransfer()" id="transferSaveBtn">Simpan Pindahan</button>
+  </div>
+
+  <div id="incomeSetupBackdrop" class="sheetBackdrop hidden" onclick="closeIncomeSetup()"></div>
+  <div id="incomeSetupPanel" class="sheet hidden">
+    <div class="sheetHeader"><b id="incomeAddTitle">Corak Pendapatan</b><button class="sheetClose" onclick="closeIncomeSetup()">×</button></div>
+    <label id="incomeSourceNameLabel">Nama Sumber</label><input id="srcName" placeholder="">
     <label id="incomePatternLabel">Corak Pendapatan</label>
     <select id="srcType" onchange="incomeTypeChanged()">
-      <option value="fixed">Gaji Bulanan</option>
-      <option value="multiple">Gaji 2–3 Kali Sebulan</option>
-      <option value="daily">Pendapatan Harian</option>
-      <option value="weekly">Pendapatan Mingguan</option>
-      <option value="irregular">Komisen / Tidak Tetap</option>
-      <option value="salary_advance">Advance Gaji</option><option value="oneoff">Pendapatan Sekali Sahaja</option>
+      <option value="fixed">Gaji Bulanan</option><option value="multiple">Gaji 2–3 Kali Sebulan</option>
+      <option value="daily">Pendapatan Harian</option><option value="weekly">Pendapatan Mingguan</option>
+      <option value="irregular">Komisen / Tidak Tetap</option><option value="salary_advance">Advance Gaji</option>
+      <option value="oneoff">Pendapatan Sekali Sahaja</option>
     </select>
     <div id="incomeFields"></div>
     <button class="wide" onclick="addIncomeSource()" id="addIncomeBtn">Simpan Sumber Pendapatan</button>
+    <div style="height:1px;background:var(--line);margin:16px 0"></div>
+    <div class="sectionTitle"><b id="incomeSavedTitle">Sumber Pendapatan</b></div>
+    <div id="incomeSources"></div>
+  </div>
+
+  <div id="settingsBackdrop" class="sheetBackdrop hidden" onclick="closeSettingsSheet()"></div>
+  <div id="settingsSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="settingsTitle">Tetapan & Data</b><button class="sheetClose" onclick="closeSettingsSheet()">×</button></div>
+    <div class="sectionNote">Backup sebelum tukar telefon atau reinstall aplikasi.</div>
+    <div class="grid2">
+      <button class="secondary" onclick="exportBackup()" id="backupBtn">⬇️ Backup Data</button>
+      <button class="secondary" onclick="document.getElementById('restoreFile').click()" id="restoreBtn">⬆️ Restore Data</button>
+    </div>
+    <input id="restoreFile" type="file" accept=".json,application/json" class="hidden" onchange="restoreBackup(this)">
+  </div>
+</section>
+
+
+<section id="bnpl" class="page hidden">
+  <h2 id="bnplPageTitle">BNPL</h2>
+
+  <div class="card hero">
+    <div class="small" id="bnplHeroLabel">JUMLAH BNPL BULAN INI</div>
+    <div class="big" id="bnplThisMonth">RM0</div>
+    <div class="small" id="bnplCount">0 pelan aktif</div>
+  </div>
+
+  <div class="ownerTabs v18OwnerTabs" id="bnplOwnerTabs">
+    <button class="on" onclick="setBnplOwnerFilter('all',this)">Semua</button>
+    <button onclick="setBnplOwnerFilter('nini',this)">👩🏻‍💼 Nini</button>
+    <button onclick="setBnplOwnerFilter('faizal',this)">👨🏻‍💼 Faizal</button>
+    <button onclick="setBnplOwnerFilter('joint',this)">🏠 Bersama</button>
   </div>
 
   <div class="card">
-    <div class="sectionTitle"><b id="incomeSavedTitle">Sumber Pendapatan</b><span></span></div>
-    <div id="incomeSources"></div>
-  </div>
-</div>
-
-<div id="balanceBackdrop" class="sheetBackdrop hidden" onclick="closeBalanceSheet()"></div>
-<div id="balanceSheet" class="sheet hidden">
-  <div class="sheetHeader">
-    <b id="balanceSheetTitle">Laraskan Baki</b>
-    <button class="sheetClose" onclick="closeBalanceSheet()">×</button>
-  </div>
-  <div class="small" id="balanceSheetSub">Masukkan jumlah wang yang tersedia sekarang.</div>
-  <input id="openingBalance" type="number" placeholder="RM">
-  <button class="wide" onclick="saveOpeningAndClose()" id="saveBalanceBtn">Simpan Baki</button>
-</div>
-
-<div id="txBackdrop" class="sheetBackdrop hidden" onclick="closeTxSheet()"></div>
-<div id="txSheet" class="sheet hidden">
-  <div class="sheetHeader">
-    <b id="txSheetTitle">Tambah Transaksi</b>
-    <button class="sheetClose" onclick="closeTxSheet()">×</button>
-  </div>
-  <input id="txType" type="hidden" value="spend">
-  <label id="txCategoryLabel">Kategori</label>
-  <select id="txCategory"></select>
-  <label id="txOwnerLabel">Pemilik / Owner</label>
-<select id="txOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select>
-<label id="txNoteLabel">Catatan</label>
-  <input id="txName" placeholder="Pilihan">
-  <label id="txAmountLabel">Jumlah</label>
-  <input id="txAmt" type="number" placeholder="RM">
-  <label id="txDateLabel">Tarikh</label>
-  <input id="txDate" type="date">
-  <div class="sectionNote" id="txRuleNote">Bahagian ini untuk duit sebenar yang sudah masuk atau sudah dibelanjakan. Corak gaji harian / 2–3 kali sebulan / advance ditetapkan di Corak Pendapatan.</div>
-  <button class="wide" onclick="addTxAndClose()" id="saveTxBtn">Simpan Transaksi</button>
-</div>
-
-<div class="card" id="savingsManagerCard">
-  <div class="sectionTitle">
-    <b id="savingTitle">Simpanan</b>
-    
+    <div class="sectionTitle"><b id="bnplForecastTitle">BNPL 6 Bulan</b><span class="small" id="bnplForecastOwner"></span></div>
+    <div id="bnplForecast6" class="commitForecastGrid"></div>
   </div>
 
-  <div class="grid2">
-    <div class="metric">
-      <div class="label" id="savingProtectedLabel">Komitmen Simpanan Bulanan</div>
-      <div class="value" id="savingProtectedTotal">RM0</div>
-    </div>
-    <div class="metric">
-      <div class="label" id="savingCountLabel">Tabung Aktif</div>
-      <div class="value" id="savingCount">0</div>
-    </div>
+  <button class="wide" id="openBnplBtn" onclick="openBNPLSheet()" style="margin:4px 0 12px">+ Tambah BNPL</button>
+
+  <div class="card">
+    <div class="sectionTitle"><b id="activeBnplTitle">BNPL Aktif</b><span class="small" id="bnplListMeta"></span></div>
+    <div id="bnplList"></div>
   </div>
 
-  <button class="secondary wide" style="margin-top:10px" onclick="toggleSavingForm()" id="savingAddToggle">+ Tambah Simpanan</button>
-
-  <div id="savingForm" class="hidden" style="margin-top:12px">
-    <label id="savingTypeLabel">Jenis Simpanan</label>
-    <div class="savingTypeGrid" id="savingTypeGrid">
-      <button type="button" class="savingTypeBtn" data-value="emergency" onclick="selectSavingType('emergency',this)">
-        <span class="ico">🛟</span><span class="ttl">Dana Kecemasan</span><span class="sub">Kecemasan & perkara tak dijangka</span>
-      </button>
-      <button type="button" class="savingTypeBtn" data-value="goal" onclick="selectSavingType('goal',this)">
-        <span class="ico">🎯</span><span class="ttl">Simpanan Sasaran</span><span class="sub">Target pembelian atau matlamat</span>
-      </button>
-      <button type="button" class="savingTypeBtn" data-value="education" onclick="selectSavingType('education',this)">
-        <span class="ico">🎓</span><span class="ttl">Anak & Pendidikan</span><span class="sub">Sekolah, kelas & pendidikan</span>
-      </button>
-      <button type="button" class="savingTypeBtn" data-value="travel" onclick="selectSavingType('travel',this)">
-        <span class="ico">✈️</span><span class="ttl">Percutian</span><span class="sub">Trip, cuti & balik kampung</span>
-      </button>
-      <button type="button" class="savingTypeBtn" data-value="annual" onclick="selectSavingType('annual',this)">
-        <span class="ico">📅</span><span class="ttl">Belanja Tahunan</span><span class="sub">Roadtax, insurans & yuran tahunan</span>
-      </button>
-      <button type="button" class="savingTypeBtn" data-value="other" onclick="selectSavingType('other',this)">
-        <span class="ico">💰</span><span class="ttl">Lain-lain</span><span class="sub">Simpanan lain</span>
-      </button>
-    </div>
-
-    <input id="savingType" type="hidden" value="">
-    <label id="savingNameLabel">Nama Simpanan</label>
-    <input id="savingName" placeholder="Contoh: Dana kecemasan keluarga">
-
+  <div class="card">
+    <div class="sectionTitle"><b id="bnplCanAddTitle">Boleh Ambil BNPL Lagi?</b></div>
     <div class="grid2">
-      <div>
-        <label id="savingAmountLabel">Simpanan Sebulan</label>
-        <input id="savingAmount" type="number" placeholder="RM">
-      </div>
-      <div>
-        <label id="savingDueLabel">Tarikh Simpan</label>
-        <input id="savingDue" type="number" min="1" max="31" placeholder="Contoh: 25">
-      </div>
+      <input id="simAmt" type="number" placeholder="RM">
+      <select id="simMonths">
+        <option value="1" id="optCash">Bayar terus</option>
+        <option value="3">3 bulan</option>
+        <option value="6">6 bulan</option>
+        <option value="12">12 bulan</option>
+      </select>
     </div>
-
-    
-
-    <button class="wide" onclick="addSaving()" id="savingSaveBtn">Simpan</button>
-    <button class="secondary wide hidden" style="margin-top:8px" onclick="cancelSavingEdit()" id="savingCancelBtn">Batal Suntingan</button>
+    <button class="wide" onclick="simulate()" id="affordBtn">Semak</button>
+    <div id="simResult" style="margin-top:10px"></div>
   </div>
-
-  <div id="savingList" style="margin-top:8px"></div>
-</div>
-
-<div class="card" id="householdManagerCard">
-<div class="sectionTitle"><b id="hmTitle">👥 Household Money</b></div>
-<label id="transferFromLabel">Duit Daripada</label><select id="houseFrom"><option value="faizal">👨🏻‍💼 Faizal</option><option value="nini">👩🏻‍💼 Nini</option><option value="joint">🏠 Bersama</option></select>
-<label id="transferAmountLabel">Jumlah Diterima</label><input id="houseAmount" type="number" placeholder="RM">
-<label id="transferDateLabel">Tarikh</label><input id="houseDate" type="date">
-<input id="houseNote" placeholder="Contoh: Duit komitmen">
-<button class="wide" onclick="addHouseTransfer()" id="houseSaveBtn">Rekod Duit Diterima</button>
-<div id="houseTransferList" style="margin-top:10px"></div>
-<div style="height:1px;background:#e5ebef;margin:14px 0"></div>
-<div class="sectionTitle"><b id="dataSafetyTitle">🛡️ Keselamatan Data</b></div>
-<div class="grid2">
- <button class="secondary" onclick="exportBackup()" id="backupBtn">⬇️ Backup Data</button>
- <button class="secondary" onclick="document.getElementById('restoreFile').click()" id="restoreBtn">⬆️ Restore Data</button>
-</div>
-<input id="restoreFile" type="file" accept=".json,application/json" class="hidden" onchange="restoreBackup(this)">
-
-</div>
 </section>
 
-<section id="bnpl" class="page hidden"><h2 id="bnplPageTitle">BNPL</h2>
-<div class="card hero"><div class="small">JUMLAH BNPL BULAN INI</div><div class="big" id="bnplThisMonth">RM0</div><div class="small" id="bnplCount">0 pelan aktif</div></div>
-
-<div class="card">
-  <b>Tambah BNPL</b>
-  
-  <label>Status</label>
-  <select id="bnplMode" onchange="bnplModeChanged()">
-    <option value="new">BNPL Baru</option>
-    <option value="ongoing">BNPL Sedang Berjalan</option>
-  </select>
-  <label>Penyedia</label>
-  <select id="bnplProvider">
-    <option>SPayLater</option><option>TikTok PayLater</option><option>Atome</option><option>Grab PayLater</option>
-    <option>ShopBack PayLater</option><option value="Other">Lain-lain</option>
-  </select>
-  <label>Nama Pembelian</label>
-  <input id="bnplName" placeholder="Contoh: Phone / Tudung / Barang rumah">
+<div id="bnplSheetBackdrop" class="sheetBackdrop hidden" onclick="closeBNPLSheet()"></div>
+<div id="bnplSheet" class="sheet hidden">
+  <div class="sheetHeader"><b id="bnplSheetTitle">Tambah BNPL</b><button class="sheetClose" onclick="closeBNPLSheet()">×</button></div>
+  <label id="bnplStatusLabel">Status</label>
+  <select id="bnplMode" onchange="bnplModeChanged()"><option value="new">BNPL Baru</option><option value="ongoing">BNPL Sedang Berjalan</option></select>
+  <label id="bnplProviderLabel">Penyedia</label>
+  <select id="bnplProvider"><option>SPayLater</option><option>TikTok PayLater</option><option>Atome</option><option>Grab PayLater</option><option>ShopBack PayLater</option><option value="Other">Lain-lain</option></select>
+  <label id="bnplNameLabel">Nama Pembelian</label><input id="bnplName" placeholder="">
+  <label id="bnplOwnerLabel">Pemilik</label>
+  <select id="bnplOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select>
   <div id="bnplDynamic"></div>
-  <button class="wide" id="bnplSaveBtn" onclick="addBNPL()">Tambah BNPL</button><button class="secondary wide hidden" id="bnplCancelEditBtn" onclick="cancelBNPLEdit()" style="margin-top:8px">Batal Suntingan</button>
+  <button class="wide" id="bnplSaveBtn" onclick="addBNPL()">Tambah BNPL</button>
+  <button class="secondary wide hidden" id="bnplCancelEditBtn" onclick="cancelBNPLEdit()" style="margin-top:8px">Batal Suntingan</button>
 </div>
-
-<div class="card"><div class="sectionTitle"><b>BNPL Aktif</b><span class="small"></span></div><div id="bnplList"></div></div>
-</section>
 
 <section id="commit" class="page hidden"><h2 id="commitPageTitle">Komitmen</h2>
+
+<div class="commitMonthNav">
+  <button aria-label="Bulan sebelumnya" onclick="changeCommitMonth(-1)">‹</button>
+  <div class="commitMonthCenter"><span>📅</span><div><b id="commitViewMonthLabel">—</b><br><span id="commitViewMonthSub">Bulan bayaran</span></div></div>
+  <button aria-label="Bulan seterusnya" onclick="changeCommitMonth(1)">›</button>
+</div>
+<button class="commitMonthCurrent" id="commitTodayBtn" onclick="resetCommitMonth()">Bulan Semasa</button>
+
+<div class="commitOwnerTabs" id="commitOwnerTabs">
+  <button class="on" onclick="setCommitOwnerFilter('all',this)" id="commitOwnerAll">Semua</button>
+  <button onclick="setCommitOwnerFilter('nini',this)">👩🏻‍💼 Nini</button>
+  <button onclick="setCommitOwnerFilter('faizal',this)">👨🏻‍💼 Faizal</button>
+  <button onclick="setCommitOwnerFilter('joint',this)" id="commitOwnerJoint">🏠 Bersama</button>
+</div>
+
+<div class="commitSummary">
+  <div class="metric"><div class="label" id="commitTotalLabel">TOTAL BULAN INI</div><div class="value" id="commitTotalThisMonth">RM0</div></div>
+  <div class="metric"><div class="label" id="commitPaidLabel">DAH BAYAR</div><div class="value" id="commitPaidThisMonth">RM0</div></div>
+  <div class="metric"><div class="label" id="commitUnpaidLabel">BELUM BAYAR</div><div class="value" id="commitUnpaidThisMonth">RM0</div></div>
+</div>
+
 <div class="card">
-  <div class="row" style="align-items:end">
-    <div>
-      <b id="commitRecordsTitle">Rekod Komitmen</b>
-      
-    </div>
-    <div style="max-width:155px">
-      <select id="cmFilter" onchange="setFilter(this.value)">
-        <option value="Semua">Semua</option>
-        <option value="Bill">Bil</option>
-        <option value="Subscription">Langganan</option>
-        <option value="Loan">Pinjaman</option>
+  <div class="sectionTitle"><b id="commitForecastTitle">Komitmen 6 Bulan</b><span id="commitForecastOwner" class="small"></span></div>
+  <div id="commitForecast6" class="commitForecastGrid"></div>
+  <div id="commitForecastHint" class="commitForecastHint"></div>
+</div>
+
+<button class="wide" id="openCommitBtn" onclick="openCommitSheet()" style="margin:0 0 12px">+ Tambah Komitmen</button>
+
+<div class="card">
+  <div class="sectionTitle" style="align-items:center">
+    <b id="commitRecordsTitle">Komitmen Bulan Ini</b>
+    <div style="width:155px">
+      <select id="cmFilter" onchange="setFilter(this.value)" style="margin:0;min-height:40px;padding:8px 10px;font-size:12px">
+        <option value="Semua">Semua Kategori</option>
+        <option value="Household Bills">Rumah & Bil</option>
+        <option value="Loan">Pinjaman / Financing</option>
+        <option value="Borrowed Money">Pinjam Duit</option>
         <option value="Credit Card">Kad Kredit</option>
-        <option value="Future Expense">Belanja Akan Datang</option>
-        <option value="Savings Reserve">Simpanan Rizab</option>
+        <option value="Insurance">Insurans / Takaful</option>
+        <option value="Education">Anak & Pendidikan</option>
+        <option value="Subscription">Langganan</option>
+        <option value="Vehicle">Kenderaan</option>
+        <option value="Family">Keluarga / Ibu Bapa</option>
+        <option value="Zakat">Zakat / Sumbangan Tetap</option>
+        <option value="Other">Lain-lain</option>
+        <option value="BNPL_AUTO">BNPL (Auto)</option>
       </select>
     </div>
   </div>
   <div id="cmList"></div>
 </div>
-<div class="card">
-  <div class="sectionTitle"><b id="commitAddTitle">Tambah Komitmen</b><span></span></div>
-  
+</section>
 
-  <label id="cmTypeLabel">Jenis</label>
+<div id="commitSheetBackdrop" class="sheetBackdrop hidden" onclick="closeCommitSheet()"></div>
+<div id="commitSheet" class="sheet hidden">
+  <div class="sheetHeader"><b id="commitAddTitle">Tambah Komitmen</b><button class="sheetClose" onclick="closeCommitSheet()">×</button></div>
+  <label id="cmTypeLabel">Kategori</label>
   <select id="cmType" onchange="commitTypeChanged()">
-    <option value="Bill">Bil</option>
-    <option value="Subscription">Langganan</option>
-    <option value="Loan">Pinjaman</option>
+    <option value="Household Bills">Rumah & Bil</option>
+    <option value="Loan">Pinjaman / Financing</option>
+    <option value="Borrowed Money">Pinjam Duit</option>
     <option value="Credit Card">Kad Kredit</option>
-    <option value="Future Expense">Belanja Akan Datang</option>
-    <option value="Savings Reserve">Simpanan Rizab</option>
+    <option value="Insurance">Insurans / Takaful</option>
+    <option value="Education">Anak & Pendidikan</option>
+    <option value="Subscription">Langganan</option>
+    <option value="Vehicle">Kenderaan</option>
+    <option value="Family">Keluarga / Ibu Bapa</option>
+    <option value="Zakat">Zakat / Sumbangan Tetap</option>
+    <option value="Other">Lain-lain</option>
   </select>
-
   <label id="cmFrequencyLabel">Kekerapan</label>
   <select id="cmFrequency" onchange="commitTypeChanged()">
-    <option value="recurring">Berulang</option>
+    <option value="monthly">Setiap Bulan</option>
+    <option value="fixed_months">Untuk Beberapa Bulan</option>
+    <option value="selected_months">Bulan Tertentu</option>
     <option value="onetime">Sekali Sahaja</option>
   </select>
-
-  <label id="commitOwnerLabel">Pemilik / Owner</label>
-<select id="commitOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select>
-<div id="commitFields"></div>
+  <label id="commitOwnerLabel">Pemilik</label>
+  <select id="commitOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select>
+  <div id="commitFields"></div>
   <button class="wide" id="commitSaveBtn" onclick="addCommit()">Tambah Komitmen</button>
 </div>
 
-</section>
+<section id="plan" class="page hidden"><h2 id="planPageTitle">Dana</h2>
 
-<section id="plan" class="page hidden"><h2 id="planPageTitle">Perancangan</h2>
-
-
-
-<div class="card" id="projectsCard">
-  <div class="sectionTitle">
-    <b id="projectsTitle">Projek Kewangan</b>
-    
+  <div class="fundTabs" id="fundTabs">
+    <button class="on" onclick="setFundTab('fund',this)" id="fundTabFund">Dana Bersama</button>
+    <button onclick="setFundTab('saving',this)" id="fundTabSaving">Simpanan</button>
   </div>
-  <div class="grid2">
-    <div class="metric"><div class="label" id="projectCountLabel">Projek Aktif</div><div class="value" id="projectCount">0</div></div>
-    <div class="metric"><div class="label" id="projectBudgetLabel">Jumlah Budget</div><div class="value" id="projectBudgetTotal">RM0</div></div>
-  </div>
-  <button class="secondary wide" style="margin-top:10px" onclick="toggleProjectForm()" id="projectAddToggle">+ Projek Baru</button>
 
-  <div id="projectForm" class="hidden" style="margin-top:12px">
-    <label id="projectTypeLabel">Jenis Projek</label>
-    <select id="projectType">
-      <option value="renovation">Renovasi Rumah</option>
-      <option value="holiday">Holiday / Travel</option>
-      <option value="event">Majlis / Event</option>
-      <option value="education">Sekolah / Pendidikan</option>
-      <option value="business">Bisnes</option>
-      <option value="purchase">Pembelian Besar</option>
-      <option value="other">Lain-lain</option>
-    </select>
-    <label id="projectNameLabel">Nama Projek</label>
-    <input id="projectName" placeholder="Contoh: Renovate Rumah">
-    <div class="grid2">
-      <div><label id="projectBudgetInputLabel">Budget</label><input id="projectBudget" type="number" placeholder="RM"></div>
-      <div><label id="projectStartLabel">Tarikh Mula</label><input id="projectStart" type="date"></div>
+  <div id="fundPanel">
+    <div class="card fundHero">
+      <div class="small">BAKI SEMUA DANA</div>
+      <div class="fundHeroValue" id="allFundsBalance">RM0</div>
+      <div class="small" id="fundCountLabel">0 dana</div>
     </div>
-    <label id="projectTargetLabel">Tarikh Tamat</label>
-    <input id="projectEnd" type="date">
-    <label style="display:flex;gap:10px;align-items:flex-start;margin:7px 0 12px">
-      <input id="projectAffectSafe" type="checkbox" checked style="width:20px;min-height:20px;margin:1px 0">
-      <span><b id="projectAffectTitle">Kira dalam Baki Selamat</b><br></span>
-    </label>
-    <button class="wide" onclick="addProject()" id="projectSaveBtn">Simpan Projek</button>
+    <button class="wide" onclick="openNewFundSheet('fund')" id="addFundBtn">+ Dana Baru</button>
+    <div id="fundList" style="margin-top:12px"></div>
   </div>
 
-  <div id="projectList" style="margin-top:10px"></div>
-</div>
-
-<div id="projectDetailSheet" class="overlay hidden" onclick="if(event.target===this)closeProjectDetail()">
-  <div class="sheet">
-    <div class="sheetHandle"></div>
-    <div class="sheetHead"><b id="projectDetailName">Project</b><button class="sheetClose" onclick="closeProjectDetail()">×</button></div>
-    <div id="projectDetailSummary"></div>
-    <div class="grid2" style="margin-top:10px">
-      <select id="projectTxType"><option value="out">Money Out</option><option value="in">Money In</option></select>
-      <input id="projectTxAmount" type="number" placeholder="RM">
+  <div id="savingPanel" class="hidden">
+    <div class="card fundHero savingHero">
+      <div class="small">BAKI SIMPANAN</div>
+      <div class="fundHeroValue" id="allSavingsBalance">RM0</div>
+      <div class="small" id="savingCountLabelV24">0 simpanan</div>
     </div>
-    <select id="projectTxCategory"></select>
-    <input id="projectTxName" placeholder="Contoh: Cat rumah / Hotel / Bonus">
-    <input id="projectTxDate" type="date">
-    <button class="wide" onclick="addProjectTx()" id="projectTxSave">Tambah Transaksi</button>
-    <div id="projectTxList" style="margin-top:10px"></div>
+    <button class="wide" onclick="openNewFundSheet('saving')" id="addSavingV24Btn">+ Simpanan Baru</button>
+    <div id="savingListV24" style="margin-top:12px"></div>
   </div>
-</div>
 
-<div id="planForecast" class="hidden"></div>
-<div class="card"><b id="futureExpensesTitle">Belanja Akan Datang</b><div id="futureExpenses"></div></div>
-<div class="card">
-  <div class="sectionTitle">
-    <b id="affordTitle">Boleh Beli Ke?</b>
-    
+  <div id="fundCreateBackdrop" class="sheetBackdrop hidden" onclick="closeFundCreateSheet()"></div>
+  <div id="fundCreateSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="fundCreateTitle">Dana Baru</b><button class="sheetClose" onclick="closeFundCreateSheet()">×</button></div>
+    <input id="fundCreateKind" type="hidden" value="fund"><input id="fundEditId" type="hidden" value="">
+    <label id="fundTypeLabel">Jenis</label>
+    <select id="fundType"></select>
+    <label id="fundNameLabel">Nama</label><input id="fundName" placeholder="">
+    <div id="fundOwnerWrap" class="hidden"><label id="fundOwnerLabel">Pemilik</label><select id="fundOwner"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option><option value="joint">🏠 Bersama</option></select></div>
+    <button class="wide" onclick="createFundV24()" id="fundCreateSave">Simpan</button>
   </div>
-  <div class="grid2">
-    <input id="simAmt" type="number" placeholder="Harga RM">
-    <select id="simMonths">
-      <option value="1" id="optCash">Bayar terus</option>
-      <option value="3">BNPL 3 bulan</option>
-      <option value="6">BNPL 6 bulan</option>
-      <option value="12">12 bulan</option>
-    </select>
+
+  <div id="fundActionBackdrop" class="sheetBackdrop hidden" onclick="closeFundActionSheet()"></div>
+  <div id="fundActionSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="fundActionTitle">Rekod Dana</b><button class="sheetClose" onclick="closeFundActionSheet()">×</button></div>
+    <input id="fundActionKind" type="hidden"><input id="fundActionId" type="hidden"><input id="fundActionType" type="hidden"><input id="fundActionEntryId" type="hidden" value="">
+    <div id="fundActionSourceWrap" class="hidden">
+      <label id="fundActionSourceLabel">Daripada</label>
+      <select id="fundActionSource"><option value="nini">👩🏻‍💼 Nini</option><option value="faizal">👨🏻‍💼 Faizal</option></select>
+    </div>
+    <label id="fundActionAmountLabel">Jumlah</label><input id="fundActionAmount" type="number" placeholder="RM">
+    <label id="fundActionDateLabel">Tarikh</label><input id="fundActionDate" type="date">
+    <label id="fundActionNoteLabel">Catatan</label><input id="fundActionNote" placeholder="">
+    <button class="wide" onclick="saveFundActionV24()" id="fundActionSave">Simpan</button>
   </div>
-  <button class="wide" onclick="simulate()" id="affordBtn">Semak</button>
-  <div id="simResult" style="margin-top:10px"></div>
-</div>
-<div id="debt" class="hidden"></div>
+
+  <div id="fundDetailBackdrop" class="sheetBackdrop hidden" onclick="closeFundDetailSheet()"></div>
+  <div id="fundDetailSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="fundDetailTitle">Detail</b><button class="sheetClose" onclick="closeFundDetailSheet()">×</button></div>
+    <div id="fundDetailSummary"></div>
+    <div class="sectionTitle" style="margin-top:14px"><b id="fundHistoryTitle">Sejarah</b></div>
+    <div id="fundDetailHistory"></div>
+  </div>
+
+  <div id="fundManageBackdrop" class="sheetBackdrop hidden" onclick="closeFundManageSheet()"></div>
+  <div id="fundManageSheet" class="sheet hidden">
+    <div class="sheetHeader"><b id="fundManageTitle">Urus</b><button class="sheetClose" onclick="closeFundManageSheet()">×</button></div>
+    <input id="fundManageKind" type="hidden"><input id="fundManageId" type="hidden"><input id="fundManageEntryId" type="hidden">
+    <button class="wide" id="fundManageEditBtn" onclick="fundManageEditV25()">Edit</button>
+    <button class="danger wide" style="margin-top:8px" id="fundManageDeleteBtn" onclick="fundManageDeleteV25()">Padam</button>
+  </div>
+
+  <!-- legacy render targets retained to protect old data engine -->
+  <div id="planForecast" class="hidden"></div>
+  <div id="futureExpenses" class="hidden"></div>
+  <div id="debt" class="hidden"></div>
 </section>
 
 <nav class="nav">
@@ -640,7 +754,7 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
   <button onclick="go('money',this)">💸<br><span id="navMoney">Duit</span></button>
   <button onclick="go('bnpl',this)">🛍️<br><span id="navBnpl">BNPL</span></button>
   <button onclick="go('commit',this)">✓<br><span id="navCommit">Komitmen</span></button>
-  <button onclick="go('plan',this)">🔮<br><span id="navPlan">Pelan</span></button>
+  <button onclick="go('plan',this)">💰<br><span id="navPlan">Dana</span></button>
 </nav>
 </section>
 </main>
@@ -648,11 +762,27 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 <script>
 const KEY='bakiSelamatV6FullTest';
 let lang=localStorage.getItem('bsLangV6')||'bm';
-let db=JSON.parse(localStorage.getItem(KEY)||'null')||{openingBalance:0,tx:[],incomeSources:[],bnpl:[],commit:[],projects:[]};
+if(!['bm','en'].includes(lang))lang='bm';
+let db;
+try{db=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){db=null}
+db=db||{openingBalance:0,tx:[],incomeSources:[],bnpl:[],commit:[],projects:[]};
+db.tx=db.tx||[];
+db.incomeSources=db.incomeSources||[];
+db.bnpl=db.bnpl||[];
+db.bnpl.forEach(p=>{p.paidMonths=p.paidMonths||{}});
+db.commit=db.commit||[];
 db.projects=db.projects||[];
 db.houseTransfers=db.houseTransfers||[];
 let filter='Semua';
 const save=()=>localStorage.setItem(KEY,JSON.stringify(db));
+// V21 migration: project fund entries are allocations, not new income.
+{
+ const fundIds=new Set((db.projects||[]).flatMap(p=>(p.entries||[]).filter(e=>e.type==='in').map(e=>e.id)).filter(Boolean));
+ const before=(db.tx||[]).length;
+ db.tx=(db.tx||[]).filter(x=>!(x.projectTxId&&fundIds.has(x.projectTxId)&&x.type==='income'));
+ if((db.tx||[]).length!==before) save();
+}
+
 const rm=v=>'RM '+Number(v||0).toLocaleString('en-MY',{maximumFractionDigits:2});
 const monthKey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
 const fmtMonth=d=>new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'long',year:'numeric'}).format(d);
@@ -668,7 +798,7 @@ const SURFACE={
   month:'Bulan Ini', expected:'Jangkaan', actual:'Sebenar', unpaid:'Belum Bayar', spent:'Dibelanjakan',
   outlook:'6 Bulan Akan Datang', forecast:'', afford:'Boleh Beli Ke?', quick:'', check:'Semak',
   money:'Duit', commit:'Komitmen', plan:'Perancangan',
-  nav:['Utama','Duit','BNPL','Komitmen','Pelan'],
+  nav:['Utama','Duit','BNPL','Komitmen','Rancang'],
   cash:'Bayar terus',
   activePlans:'pelan aktif', noTransactions:'Belum ada transaksi.', noIncomeSources:'Belum ada sumber income.',
   noBNPL:'Belum ada BNPL.', noRecords:'Tiada rekod.', noFuture:'Tiada belanja akan datang.', noDebt:'Tiada hutang direkodkan.',
@@ -719,11 +849,11 @@ const UI={
   forecastNote:'Masukkan baki & income untuk forecast penuh.',
   due:'Tarikh', dueShort:'Due', monthShort:'bln', month:'bulan', outstanding:'Baki tertunggak',
   edit:'Edit', delete:'Padam', save:'Simpan', cancel:'Batal', manage:'Urus',
-  sourcePlaceholder:'Contoh: Gaji / Komisen',
+  sourcePlaceholder:'',
   txNotePlaceholder:'Pilihan',
-  savingNamePlaceholder:'Contoh: Dana kecemasan keluarga',
-  savingDuePlaceholder:'Contoh: 25',
-  bnplNamePlaceholder:'Contoh: Phone / Tudung / Barang rumah',
+  savingNamePlaceholder:'',
+  savingDuePlaceholder:'',
+  bnplNamePlaceholder:'',
   chooseDateOneTime:'Pilih tarikh komitmen.',
   fillNameAmount:'Isi nama & jumlah.',
   deleteBnplConfirm:'Padam BNPL ini?',
@@ -753,11 +883,11 @@ const UI={
   forecastNote:'Add balance & income for full forecast.',
   due:'Due', dueShort:'Due', monthShort:'mo', month:'month', outstanding:'Outstanding',
   edit:'Edit', delete:'Delete', save:'Save', cancel:'Cancel', manage:'Manage',
-  sourcePlaceholder:'e.g. Salary / Commission',
+  sourcePlaceholder:'',
   txNotePlaceholder:'Optional',
-  savingNamePlaceholder:'e.g. Family emergency fund',
-  savingDuePlaceholder:'e.g. 25',
-  bnplNamePlaceholder:'e.g. Phone / Clothes / Household items',
+  savingNamePlaceholder:'',
+  savingDuePlaceholder:'',
+  bnplNamePlaceholder:'',
   chooseDateOneTime:'Choose commitment date.',
   fillNameAmount:'Enter a name and amount.',
   deleteBnplConfirm:'Delete this BNPL plan?',
@@ -795,42 +925,42 @@ function localizeStaticUI(){
  setOptionText('bnplMode','new',tr('bnplNew'));
  setOptionText('bnplMode','ongoing',tr('bnplOngoing'));
  setOptionText('bnplProvider','Other',tr('other'));
- setPlaceholder('bnplName',tr('bnplNamePlaceholder'));
+ setPlaceholder('bnplName','');
 
  const activeTitle=document.querySelector('#bnpl .card:last-of-type .sectionTitle b');
  if(activeTitle)activeTitle.textContent=tr('activeBnpl');
 
  setPlaceholder('simAmt',tr('price'));
- setPlaceholder('srcName',tr('sourcePlaceholder'));
- setPlaceholder('txName',tr('txNotePlaceholder'));
- setPlaceholder('savingName',tr('savingNamePlaceholder'));
- setPlaceholder('savingDue',tr('savingDuePlaceholder'));
+ setPlaceholder('srcName','');
+ setPlaceholder('txName','');
+ setPlaceholder('savingName','');
+ setPlaceholder('savingDue','');
 
 
  setText('incomeSetupToggle',tr('manage'));
  setText('moneySavingsManageBtn',lang==='bm'?'Urus Simpanan':'Manage Savings');
- setText('projectsTitle',L('Projek Kewangan','Projects')); setText('projectCountLabel',L('Projek Aktif','Active Projects'));
- setText('projectBudgetLabel',L('Jumlah Budget','Total Budget'));
+ setText('projectsTitle',L('Projek','Projects')); setText('projectCountLabel',L('Projek Aktif','Active Projects'));
+ setText('projectBudgetLabel',L('Jumlah Bajet','Total Budget'));
  setText('projectAddToggle',L('+ Projek Baru','+ New Project'));
  setText('projectTypeLabel',L('Jenis Projek','Project Type'));
  setText('projectNameLabel',L('Nama Projek','Project Name'));
- setText('projectBudgetInputLabel',L('Budget','Budget'));
- setText('projectStartLabel',L('Tarikh Mula','Start Date'));
- setText('projectTargetLabel',L('Tarikh Tamat','End Date'));
- setText('projectAffectTitle',L('Kira dalam Baki Selamat','Count in Safe Balance')); setText('projectSaveBtn',L('Simpan Projek','Save Project'));
- setText('projectTxSave',L('Tambah Transaksi','Add Transaction'));
- setText('planIntro',L('Projek • Belanja akan datang • Semak kemampuan','Projects • Future expenses • Affordability'));
+ setText('projectBudgetInputLabel',L('Bajet','Budget'));
+ setText('projectTargetLabel',L('Tarikh Sasaran','Target Date'));
+ setText('projectOwnerLabel',L('Pemilik','Owner')); setText('projectSaveBtn',L('Simpan Projek','Save Project'));
+ setText('projectAddFundBtn',L('+ Masukkan Dana','+ Allocate Funds')); setText('projectAddSpendBtn',L('− Rekod Belanja','− Record Spending')); setText('projectActivityTitle',L('Aktiviti Projek','Project Activity'));
+ setText('projectTxAmountLabel',L('Jumlah','Amount')); setText('projectTxCategoryLabel',L('Kategori','Category')); setText('projectTxNameLabel',L('Catatan','Note')); setText('projectTxDateLabel',L('Tarikh','Date'));
+ setText('planIntro','');
  setText('futureExpensesTitle',L('Belanja Akan Datang','Future Expenses')); setText('ownerAllBtn',L('Semua','All'));setText('ownerJointBtn',L('🏠 Bersama','🏠 Joint'));
- setText('houseManageBtn',L('Urus Household','Manage Household')); setText('transferFromLabel',L('Duit Daripada','Money From'));setText('transferAmountLabel',L('Jumlah Diterima','Amount Received'));setText('transferDateLabel',L('Tarikh','Date'));setText('houseSaveBtn',L('Rekod Duit Diterima','Record Money Received'));setText('commitOwnerLabel',L('Pemilik / Owner','Owner'));setText('txOwnerLabel',L('Pemilik / Owner','Owner'));
- setPlaceholder('projectName',L('Contoh: Renovate Rumah','e.g. Home Renovation'));
- setPlaceholder('projectTxName',L('Contoh: Cat rumah / Hotel / Bonus','e.g. Paint / Hotel / Bonus'));
+ setText('houseManageBtn',L('Urus Household','Manage Household')); setText('transferFromLabel',L('Duit Daripada','Money From'));setText('transferAmountLabel',L('Jumlah Diterima','Amount Received'));setText('transferDateLabel',L('Tarikh','Date'));setText('houseSaveBtn',L('Rekod Duit Diterima','Record Money Received'));setText('commitOwnerLabel',L('Pemilik','Owner'));setText('txOwnerLabel',L('Pemilik','Owner'));
+ setPlaceholder('projectName','');
+ setPlaceholder('projectTxName','');
  if(document.getElementById('projectType')){
    const vals=['renovation','holiday','event','education','business','purchase','other'];
    [...projectType.options].forEach((o,i)=>{if(vals[i])o.textContent=projectTypeName(vals[i])});
  }
- if(document.getElementById('projectTxType')){
-   projectTxType.options[0].textContent=L('Money Out','Money Out');
-   projectTxType.options[1].textContent=L('Money In','Money In');
+ if(document.getElementById('projectTxType') && projectTxType.tagName==='SELECT' && projectTxType.options.length>=2){
+   projectTxType.options[0].textContent=L('Duit Keluar','Money Out');
+   projectTxType.options[1].textContent=L('Duit Masuk','Money In');
  }
 }
 
@@ -861,9 +991,9 @@ function applySurfaceLanguage(){
  setText('moneyBalanceSub',lang==='bm'?'':'Money currently available.');
  setText('adjustBalanceBtn',lang==='bm'?'Laraskan Baki':'Adjust Balance');
  setText('moneyInAction',lang==='bm'?'+ Rekod Duit Diterima':'+ Record Money Received');
- setText('moneyInSub',lang==='bm'?'Duit yang betul-betul dah masuk':'Money that has actually been received');
+ setText('moneyInSub','');
  setText('moneyOutAction',lang==='bm'?'− Rekod Perbelanjaan':'− Record Spending');
- setText('moneyOutSub',lang==='bm'?'Belanja sebenar hari ini':'Actual spending');
+ setText('moneyOutSub','');
  setText('recentTxTitle',lang==='bm'?'Transaksi Terkini':'Recent Transactions');
  setText('addTxMini',lang==='bm'?'+ Tambah':'+ Add');
  setText('incomeSetupTitle',lang==='bm'?'Corak Pendapatan':'Income Pattern');
@@ -872,7 +1002,7 @@ function applySurfaceLanguage(){
  setText('addIncomeBtn',lang==='bm'?'Simpan Sumber Pendapatan':'Save Income Source');
  setText('incomeSavedTitle',lang==='bm'?'Sumber Pendapatan':'Income Sources');
  setText('balanceSheetTitle',lang==='bm'?'Laraskan Baki':'Adjust Balance');
- setText('balanceSheetSub',lang==='bm'?'Masukkan jumlah wang yang tersedia sekarang.':'Enter the amount of money currently available.');
+ setText('balanceSheetSub',lang==='bm'?'':'Enter the amount of money currently available.');
  setText('saveBalanceBtn',lang==='bm'?'Simpan Baki':'Save Balance');
  setText('txSheetTitle',lang==='bm'?'Tambah Transaksi':'Add Transaction');
  setText('saveTxBtn',lang==='bm'?'Simpan Transaksi':'Save Transaction');
@@ -882,18 +1012,26 @@ function applySurfaceLanguage(){
  setText('txDateLabel',L('Tarikh','Date'));
  setText('txRuleNote',L('Bahagian ini untuk duit sebenar yang sudah masuk atau sudah dibelanjakan. Corak gaji harian / 2–3 kali sebulan / advance ditetapkan di Corak Pendapatan.','This section records money actually received or spent. Daily income / 2–3 paydays / advance settings are managed under Income Pattern.'));
  setText('commitAddTitle',L('Tambah Komitmen','Add Commitment'));
+ setText('openCommitBtn',L('+ Tambah Komitmen','+ Add Commitment'));
  setText('commitAddSub',L('','Choose a type and frequency.'));
- setText('cmTypeLabel',L('Jenis','Type'));
+ setText('cmTypeLabel',L('Kategori','Category'));
  setText('cmFrequencyLabel',L('Kekerapan','Frequency'));
  setText('commitSaveBtn',L('Tambah Komitmen','Add Commitment'));
- setText('commitRecordsTitle',L('Rekod Komitmen','Commitment Records'));
+ setText('commitRecordsTitle',L('Komitmen Bulan Ini','This Month Commitments'));
+ setText('commitTotalLabel',L('TOTAL BULAN INI','THIS MONTH TOTAL'));
+ setText('commitPaidLabel',L('DAH BAYAR','PAID'));
+ setText('commitUnpaidLabel',L('BELUM BAYAR','UNPAID'));
+ setText('commitForecastTitle',L('Komitmen 6 Bulan','6-Month Commitments'));
+ setText('commitOwnerAll',L('Semua','All'));
+ setText('commitOwnerJoint',L('🏠 Bersama','🏠 Joint'));
+ setText('bnplOwnerLabel',L('Pemilik','Owner'));
  setText('commitRecordsSub',L('','Mark this month’s payment here.'));
  if(document.getElementById('bnplSaveBtn') && window.editingBnplIndex<0)setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));
  setText('bnplCancelEditBtn',L('Batal Suntingan','Cancel Editing'));
  localizeCommitSelects();
  localizeIncomeTypeSelect();
  setText('incomePatternLabel',lang==='bm'?'Corak Pendapatan':'Income Pattern');
- setText('incomeRuleHint',lang==='bm'?'Untuk ramalan':'For forecasting');
+ setText('incomeRuleHint','');
  if(document.getElementById('commitFields'))commitTypeChanged();
  if(document.getElementById('bnplDynamic'))bnplModeChanged();
  if(document.getElementById('txType'))populateTxCategories(document.getElementById('txType').value||'spend');
@@ -913,6 +1051,8 @@ function applySurfaceLanguage(){
 
 
  setText('commitPageTitle',t('commit'));
+ setText('commitViewMonthSub',L('Bulan bayaran','Payment month'));
+ setText('commitTodayBtn',L('Bulan Semasa','Current Month'));
  setText('planPageTitle',t('plan'));
  setText('savingTitle',L('Simpanan','Savings'));
  setText('savingMeta',L('','Added to commitments'));
@@ -931,7 +1071,7 @@ function applySurfaceLanguage(){
  setText('moneySavingsManageBtn',L('Urus Simpanan','Manage Savings'));
  const cashOpt=document.getElementById('optCash'); if(cashOpt)cashOpt.textContent=t('cash');
  const txSel=document.getElementById('txType');
- if(txSel){
+ if(txSel && txSel.tagName==='SELECT' && txSel.options.length>=2){
    txSel.options[0].textContent=lang==='bm'?'Wang Masuk':'Money In';
    txSel.options[1].textContent=lang==='bm'?'Perbelanjaan':'Spending';
  }
@@ -1004,25 +1144,36 @@ function txCategoryName(kind,value){
 }
 function localizeCommitSelects(){
   const typeMap={
-    'Bill':['Bil','Bill'],
-    'Subscription':['Langganan','Subscription'],
-    'Loan':['Pinjaman','Loan'],
+    'Household Bills':['Rumah & Bil','Home & Bills'],
+    'Bill':['Rumah & Bil','Home & Bills'],
+    'Loan':['Pinjaman / Financing','Loan / Financing'],
     'Credit Card':['Kad Kredit','Credit Card'],
-    'Future Expense':['Belanja Akan Datang','Future Expense'],
-    'Savings Reserve':['Simpanan Rizab','Savings Reserve']
+    'Insurance':['Insurans / Takaful','Insurance / Takaful'],
+    'Education':['Anak & Pendidikan','Children & Education'],
+    'Subscription':['Langganan','Subscription'],
+    'Vehicle':['Kenderaan','Vehicle'],
+    'Savings Reserve':['Simpanan Bulanan','Monthly Savings'],
+    'Family':['Keluarga / Ibu Bapa','Family / Parents'],
+    'Zakat':['Zakat / Sumbangan Tetap','Zakat / Regular Giving'],
+    'Other':['Lain-lain','Other'],
+    'BNPL_AUTO':['BNPL (Auto)','BNPL (Auto)']
   };
   [document.getElementById('cmType'),document.getElementById('cmFilter')].forEach(sel=>{
     if(!sel)return;
     [...sel.options].forEach(o=>{
-      if(o.value==='Semua')o.textContent=L('Semua','All');
+      if(o.value==='Semua')o.textContent=L('Semua Kategori','All Categories');
       else if(typeMap[o.value])o.textContent=L(typeMap[o.value][0],typeMap[o.value][1]);
     });
   });
   const freq=document.getElementById('cmFrequency');
   if(freq){
-    freq.querySelector('[value="recurring"]').textContent=L('Berulang','Recurring');
-    freq.querySelector('[value="onetime"]').textContent=L('Sekali Sahaja','One-time');
+    const fm={monthly:['Setiap Bulan','Every Month'],fixed_months:['Untuk Beberapa Bulan','For Several Months'],selected_months:['Bulan Tertentu','Selected Months'],onetime:['Sekali Sahaja','One-time']};
+    [...freq.options].forEach(o=>{if(fm[o.value])o.textContent=L(fm[o.value][0],fm[o.value][1])});
   }
+  const bo=document.getElementById('bnplOwner');
+  if(bo){bo.options[2].textContent=L('🏠 Bersama','🏠 Joint')}
+  const co=document.getElementById('commitOwner');
+  if(co){co.options[2].textContent=L('🏠 Bersama','🏠 Joint')}
 }
 function localizeIncomeTypeSelect(){
   const sel=document.getElementById('srcType'); if(!sel)return;
@@ -1039,8 +1190,29 @@ function localizeIncomeTypeSelect(){
 }
 
 function setLang(l){lang=l;document.documentElement.lang=(l==='bm'?'ms':'en');localStorage.setItem('bsLangV6',l);bmBtn.classList.toggle('on',l==='bm');enBtn.classList.toggle('on',l==='en');applySurfaceLanguage();render();}
+let commitViewDate=new Date();
+commitViewDate=new Date(commitViewDate.getFullYear(),commitViewDate.getMonth(),1);
+function commitMonthLabel(d=commitViewDate){return new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'long',year:'numeric'}).format(d)}
+function commitMonthShort(d=commitViewDate){return new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short',year:'numeric'}).format(d)}
+function changeCommitMonth(delta){commitViewDate=new Date(commitViewDate.getFullYear(),commitViewDate.getMonth()+delta,1);render()}
+function resetCommitMonth(){const n=new Date();commitViewDate=new Date(n.getFullYear(),n.getMonth(),1);render()}
 function paidThisMonth(c,d=new Date()){return !!(c.paidMonths&&c.paidMonths[monthKey(d)])}
-function currentCash(){return (+db.openingBalance||0)+db.tx.reduce((s,x)=>s+(x.type==='income'?x.amt:-x.amt),0)-db.commit.reduce((s,c)=>s+(paidThisMonth(c)?c.amt:0),0)}
+function ownerOf(x){return x?.owner||'nini'}
+function ownerMatches(x,owner){return owner==='all'||ownerOf(x)===owner}
+function bnplPaidThisMonth(p,d=new Date()){return !!(p.paidMonths&&p.paidMonths[monthKey(d)])}
+function currentCash(){
+ const paidCommit=db.commit.reduce((s,c)=>s+(paidThisMonth(c)?(+c.amt||0):0),0);
+ const paidBnpl=db.bnpl.reduce((s,p)=>s+(bnplPaidThisMonth(p)?bnplInstallment(p):0),0);
+ return (+db.openingBalance||0)+db.tx.reduce((s,x)=>s+(x.type==='income'?x.amt:-x.amt),0)-paidCommit-paidBnpl
+}
+function projectReservedTotal(){
+ return (db.projects||[]).reduce((sum,p)=>{
+  const z=projectTotals(p);
+  return sum+Math.max(0,z.projectBalance);
+ },0);
+}
+function projectFreeCash(){return Math.max(0,currentCash()-projectReservedTotal())}
+
 function actualIncomeMonth(d){return db.tx.filter(x=>x.type==='income'&&monthKey(new Date(x.date+'T00:00:00'))===monthKey(d)).reduce((s,x)=>s+x.amt,0)}
 function actualSpendMonth(d){return db.tx.filter(x=>x.type==='spend'&&monthKey(new Date(x.date+'T00:00:00'))===monthKey(d)).reduce((s,x)=>s+x.amt,0)}
 function scheduledIncomeMonth(d){let total=0;db.incomeSources.forEach(s=>{if(s.type==='fixed')total+=+s.amount||0;if(s.type==='multiple')total+=(s.payments||[]).reduce((z,p)=>z+(+p.amount||0),0);if(s.type==='daily')total+=(+s.avg||0)*(+s.workDays||0);if(s.type==='weekly')total+=(+s.amount||0)*4.33;if(s.type==='irregular')(s.expected||[]).forEach(e=>{if(e.date&&monthKey(new Date(e.date+'T00:00:00'))===monthKey(d))total+=+e.amount||0});if(s.type==='salary_advance'){ /* timing shift only */ }
@@ -1067,69 +1239,83 @@ function bnplActiveInMonth(p,d){
   let s=new Date(p.start+'T00:00:00'),diff=(d.getFullYear()-s.getFullYear())*12+(d.getMonth()-s.getMonth());
   return diff>=0&&diff<p.months
 }
-function obligationMonth(d,offset){
- let base=db.commit.reduce((s,c)=>{
-   let freq=c.frequency || (c.type==='Future Expense' ? 'onetime' : 'recurring');
-
-   if(freq==='onetime'){
-     if(!c.date) return s;
-     let one=new Date(c.date+'T00:00:00');
-     if(monthKey(one)!==monthKey(d)) return s;
-     if(offset===0 && paidThisMonth(c,d)) return s;
-     return s+c.amt;
-   }
-
-   if(c.type==='Savings Reserve'){
-     if(offset===0 && paidThisMonth(c,d)) return s;
-     return s+c.amt;
-   }
-
-   if(c.start){
-     let st=new Date(c.start+'T00:00:00');
-     if(d < new Date(st.getFullYear(),st.getMonth(),1)) return s;
-   }
-
-   if(c.months){
-     let st=c.start?new Date(c.start+'T00:00:00'):new Date();
-     let diff=(d.getFullYear()-st.getFullYear())*12+(d.getMonth()-st.getMonth());
-     if(diff<0 || diff>=c.months) return s;
-   }
-
-   if(offset===0 && paidThisMonth(c,d)) return s;
-   return s+c.amt;
- },0);
-
- return base+bnplOutflowMonth(d)
+function bnplOutflowMonth(d,owner='all',excludePaid=false){
+  return db.bnpl.filter(p=>bnplActiveInMonth(p,d)&&ownerMatches(p,owner)&&(!excludePaid||!bnplPaidThisMonth(p,d))).reduce((s,p)=>s+bnplInstallment(p),0);
 }
-function forecast(){let arr=[],base=currentCash(),n=new Date();for(let i=0;i<6;i++){let d=new Date(n.getFullYear(),n.getMonth()+i,1),income=scheduledIncomeMonth(d),out=obligationMonth(d,i),end;if(i===0){let actual=actualIncomeMonth(d),remaining=Math.max(0,income-actual);end=base+remaining-out}else end=base+income-out;arr.push({date:d,income,out,balance:end});base=end}return arr}
+function commitmentFrequency(c){
+  if(c.frequency==='recurring')return c.months?'fixed_months':'monthly';
+  return c.frequency || (c.type==='Future Expense'?'onetime':'monthly');
+}
+function commitAppliesInMonth(c,d){
+  const freq=commitmentFrequency(c), key=monthKey(d);
+  if(freq==='onetime'){return !!c.date && monthKey(new Date(c.date+'T00:00:00'))===key}
+  if(freq==='selected_months'){return Array.isArray(c.selectedMonths)&&c.selectedMonths.includes(key)}
+  if(freq==='fixed_months'){
+    if(!(+c.months>0))return false;
+    const st=c.start?new Date(c.start+'T00:00:00'):new Date(new Date().getFullYear(),new Date().getMonth(),1);
+    const diff=(d.getFullYear()-st.getFullYear())*12+(d.getMonth()-st.getMonth());
+    return diff>=0&&diff<(+c.months||0);
+  }
+  if(c.start){
+    const st=new Date(c.start+'T00:00:00');
+    if(new Date(d.getFullYear(),d.getMonth(),1)<new Date(st.getFullYear(),st.getMonth(),1))return false;
+  }
+  return true;
+}
+function categoryGroup(c){
+  const t=c.type||'Other';
+  if(t==='Bill')return 'Household Bills';
+  if(t==='Future Expense')return 'Other';
+  return ['Household Bills','Loan','Credit Card','Insurance','Education','Subscription','Vehicle','Savings Reserve','Family','Zakat','Other'].includes(t)?t:'Other';
+}
+function categoryLabel(t){
+ const map={
+  'Household Bills':['Rumah & Bil','Home & Bills'],'Bill':['Rumah & Bil','Home & Bills'],
+  'Loan':['Pinjaman / Financing','Loan / Financing'],'Credit Card':['Kad Kredit','Credit Card'],
+  'Insurance':['Insurans / Takaful','Insurance / Takaful'],'Education':['Anak & Pendidikan','Children & Education'],
+  'Subscription':['Langganan','Subscription'],'Vehicle':['Kenderaan','Vehicle'],
+  'Savings Reserve':['Simpanan Bulanan','Monthly Savings'],'Family':['Keluarga / Ibu Bapa','Family / Parents'],
+  'Zakat':['Zakat / Sumbangan Tetap','Zakat / Regular Giving'],'Other':['Lain-lain','Other'],
+  'Future Expense':['Belanja Akan Datang','Future Expense']
+ };
+ const x=map[t]||map[categoryGroup({type:t})]||map.Other; return L(x[0],x[1]);
+}
+function commitmentTotalForMonth(d,owner='all',excludePaid=false){
+ const manual=db.commit.filter(c=>ownerMatches(c,owner)&&commitAppliesInMonth(c,d)&&(!excludePaid||!paidThisMonth(c,d))).reduce((s,c)=>s+(+c.amt||0),0);
+ return manual+bnplOutflowMonth(d,owner,excludePaid);
+}
+function commitmentPaidForMonth(d,owner='all'){
+ const manual=db.commit.filter(c=>ownerMatches(c,owner)&&commitAppliesInMonth(c,d)&&paidThisMonth(c,d)).reduce((s,c)=>s+(+c.amt||0),0);
+ const bnpl=db.bnpl.filter(p=>ownerMatches(p,owner)&&bnplActiveInMonth(p,d)&&bnplPaidThisMonth(p,d)).reduce((s,p)=>s+bnplInstallment(p),0);
+ return manual+bnpl;
+}
+function obligationMonth(d,offset){return commitmentTotalForMonth(d,'all',offset===0)}
+function forecast(){let arr=[],base=currentCash()-projectReservedTotal(),n=new Date();for(let i=0;i<6;i++){let d=new Date(n.getFullYear(),n.getMonth()+i,1),income=scheduledIncomeMonth(d),out=obligationMonth(d,i),end;if(i===0){let actual=actualIncomeMonth(d),remaining=Math.max(0,income-actual);end=base+remaining-out}else end=base+income-out;arr.push({date:d,income,out,balance:end});base=end}return arr}
 function nextIncomeEvent(){let n=new Date(),ev=[];db.incomeSources.forEach(s=>{if(s.type==='fixed'&&s.day){let d=new Date(n.getFullYear(),n.getMonth(),s.day);if(d<n)d=new Date(n.getFullYear(),n.getMonth()+1,s.day);ev.push({date:d,amount:s.amount})}if(s.type==='multiple')(s.payments||[]).forEach(p=>{let d=new Date(n.getFullYear(),n.getMonth(),p.day);if(d<n)d=new Date(n.getFullYear(),n.getMonth()+1,p.day);ev.push({date:d,amount:p.amount})});if(s.type==='daily'){let d=new Date(n);d.setDate(d.getDate()+1);ev.push({date:d,amount:s.avg})}if(s.type==='weekly'){for(let i=0;i<8;i++){let d=new Date(n);d.setDate(n.getDate()+i);if(d.getDay()==+s.weekday){ev.push({date:d,amount:s.amount});break}}}if(s.type==='irregular')(s.expected||[]).forEach(e=>{let d=new Date(e.date+'T00:00:00');if(d>=n)ev.push({date:d,amount:e.amount})});if(s.type==='oneoff'&&s.date){let d=new Date(s.date+'T00:00:00');if(d>=n)ev.push({date:d,amount:s.amount})}});ev.sort((a,b)=>a.date-b.date);return ev[0]||null}
-function safeSpendTodayCalc(){let n=new Date(),nxt=nextIncomeEvent(),until=nxt?nxt.date:new Date(n.getFullYear(),n.getMonth()+1,0),days=Math.max(1,Math.ceil((until-n)/86400000)),ob=bnplOutflowMonth(n);db.commit.forEach(c=>{
-   if(paidThisMonth(c,n))return;
-
-   let freq=c.frequency || (c.type==='Future Expense'?'onetime':'recurring');
-
-   if(c.type==='Savings Reserve'){
-     let due=new Date(n.getFullYear(),n.getMonth(),Math.min(c.due||31,new Date(n.getFullYear(),n.getMonth()+1,0).getDate()));
-     if(due>=n&&due<=until)ob+=c.amt;
-     return;
-   }
-
-   if(freq==='onetime'){
-     if(c.date){
-       let d=new Date(c.date+'T00:00:00');
-       if(d>=n&&d<=until)ob+=c.amt;
-     }
-     return;
-   }
-
-   let due=new Date(
-     n.getFullYear(),
-     n.getMonth(),
-     Math.min(c.due||31,new Date(n.getFullYear(),n.getMonth()+1,0).getDate())
-   );
-   if(due>=n&&due<=until)ob+=c.amt
+function commitDueDateInMonth(c,d){
+ const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+ const day=Math.min(+c.due||last,last);
+ return new Date(d.getFullYear(),d.getMonth(),day);
+}
+function bnplDueDateInMonth(p,d){
+ const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+ if(p.mode==='ongoing'&&p.nextDue){const nd=new Date(p.nextDue+'T00:00:00');return new Date(d.getFullYear(),d.getMonth(),Math.min(nd.getDate(),last))}
+ return new Date(d.getFullYear(),d.getMonth(),Math.min(+p.due||last,last));
+}
+function safeSpendTodayCalc(){
+ let n=new Date(),nxt=nextIncomeEvent(),until=nxt?nxt.date:new Date(n.getFullYear(),n.getMonth()+1,0),days=Math.max(1,Math.ceil((until-n)/86400000)),ob=0;
+ db.commit.forEach(c=>{
+   if(!commitAppliesInMonth(c,n)||paidThisMonth(c,n))return;
+   const freq=commitmentFrequency(c);
+   let due=freq==='onetime'&&c.date?new Date(c.date+'T00:00:00'):commitDueDateInMonth(c,n);
+   if(due>=n&&due<=until)ob+=(+c.amt||0);
  });
- return{amount:Math.max(0,(currentCash()-ob)/days),next:nxt}}
+ db.bnpl.forEach(p=>{
+   if(!bnplActiveInMonth(p,n)||bnplPaidThisMonth(p,n))return;
+   const due=bnplDueDateInMonth(p,n); if(due>=n&&due<=until)ob+=bnplInstallment(p);
+ });
+ return{amount:Math.max(0,(currentCash()-projectReservedTotal()-ob)/days),next:nxt}
+}
 
 function forecastHasBase(){
   const hasOpening=(+db.openingBalance||0)!==0;
@@ -1306,34 +1492,24 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
         <b class="txAmount ${incoming?'income':'spend'}">${incoming?'+':'−'}${rm(x.amt)}</b>
       </div>`
     }).join('')||`<p class="small">${t('noTransactions')}</p>`;incomeSources.innerHTML=db.incomeSources.map((s,i)=>`<div class="item"><span><b>💵 ${s.name}</b><br><span class="small">${incomeSummary(s)}</span></span><button class="danger" style="min-height:30px;padding:4px 8px" onclick="delIncome(${i})">×</button></div>`).join('')||`<p class="small">${t('noIncomeSources')}</p>`;bnplThisMonth.textContent=rm(bnplOutflowMonth(n));bnplCount.textContent=db.bnpl.filter(p=>bnplActiveInMonth(p,n)).length+' '+t('activePlans');bnplList.innerHTML=db.bnpl.map((p,i)=>{
- let rem=bnplRemaining(p),
-     paidCount=p.mode==='ongoing'?(+p.paidInstallments||0):Math.max(0,(p.months||0)-rem),
-     totalCount=p.mode==='ongoing'?(+p.totalInstallments||0):(p.months||0),
-     progress=`${paidCount}/${totalCount} ${L('dibayar','paid')}`,
-     due=p.mode==='ongoing'?(p.nextDue||'-'):(p.due?(L('Setiap ','Every ')+p.due+L('hb','th')):'-'),
-     total=p.totalPayable||p.total||0;
- return `<div class="item">
-   <span><b>${p.provider} — ${p.name}</b><br><span class="small">${progress} • ${rm(bnplInstallment(p))}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}<br>${L('Seterusnya','Next')}: ${due}</span></span>
-   <span style="text-align:right"><b>${rm(total)}</b><br>
-     <button class="secondary" style="min-height:30px;padding:4px 8px" onclick="editBNPL(${i})">${L('Edit','Edit')}</button>
-     <button class="danger" style="min-height:30px;padding:4px 8px" onclick="deleteBNPL(${i})">${L('Padam','Delete')}</button>
-   </span>
- </div>`
-}).join('')||`<p class="small">${t('noBNPL')}</p>`;cmFilter.value=filter;let list=db.commit.map((c,i)=>({...c,i})).filter(c=>filter==='Semua'||c.type===filter);cmList.innerHTML=list.map(c=>{
- let paid=paidThisMonth(c,n),
-     freq=c.frequency || (c.type==='Future Expense'?'onetime':'recurring'),
-     freqLabel=freq==='recurring'?t('recurring'):t('oneTime');
- return `<div class="item ${paid?'paid':''}">
-   <span>
-     <b class="nm">${icon(c.type)} ${c.name}</b><br>
-     <span class="small">${c.type==='Savings Reserve'?(L('Simpanan','Savings')+' · '+savingTypeName(c.savingCategory||'other')):(({Bill:L('Bil','Bill'),Subscription:L('Langganan','Subscription'),Loan:L('Pinjaman','Loan'),'Credit Card':L('Kad Kredit','Credit Card'),'Future Expense':L('Belanja Akan Datang','Future Expense')})[c.type]||c.type)} • ${freqLabel}${c.due?' • '+tr('dueShort')+' '+c.due+(lang==='bm'?'hb':''):''}${c.date?' • '+c.date:''}${c.months?' • '+c.months+' '+tr('monthShort'):''}</span>
-   </span>
-   <span style="text-align:right">
-     <b>${rm(c.amt)}</b><br>
-     <button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="togglePaid(${c.i})">${paid?('✓ '+L('Dah Bayar Bulan Ini','Paid This Month')):L('Tanda Dah Bayar','Mark Paid')}</button>
-   </span>
- </div>`
-}).join('')||`<p class="small">${t('noRecords')}</p>`;
+ let rem=bnplRemaining(p),paidCount=p.mode==='ongoing'?(+p.paidInstallments||0):Math.max(0,(p.months||0)-rem),totalCount=p.mode==='ongoing'?(+p.totalInstallments||0):(p.months||0),progress=`${paidCount}/${totalCount} ${L('dibayar','paid')}`,due=p.mode==='ongoing'?(p.nextDue||'-'):(p.due?(L('Setiap ','Every ')+p.due+L('hb','th')):'-'),total=p.totalPayable||p.total||0;
+ return `<div class="item"><span><b>${p.provider} — ${p.name}</b><br><span class="small">${progress} • ${rm(bnplInstallment(p))}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}<br>${L('Seterusnya','Next')}: ${due} <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span></span></span><span style="text-align:right"><b>${rm(total)}</b><br><button class="secondary" style="min-height:30px;padding:4px 8px" onclick="editBNPL(${i})">${L('Edit','Edit')}</button><button class="danger" style="min-height:30px;padding:4px 8px" onclick="deleteBNPL(${i})">${L('Padam','Delete')}</button></span></div>`
+}).join('')||`<p class="small">${t('noBNPL')}</p>`;
+ renderCommitDashboard(commitViewDate);
+ const commitN=commitViewDate;
+ const cmFilterEl=document.getElementById('cmFilter'),cmListEl=document.getElementById('cmList');if(cmFilterEl)cmFilterEl.value=filter;
+ let list=db.commit.map((c,i)=>({...c,i})).filter(c=>ownerMatches(c,commitOwnerFilter)&&commitAppliesInMonth(c,commitN)&&filter!=='BNPL_AUTO'&&(filter==='Semua'||categoryGroup(c)===filter));
+ let manualHtml=list.map(c=>{
+   let paid=paidThisMonth(c,commitN);
+   return `<div class="item ${paid?'paid':''}"><span><b class="nm">${icon(c.type)} ${c.name}</b><br><span class="small">${categoryLabel(c.type)} • ${frequencyLabel(c)} <span class="ownerBadgeMini">${ownerLabel(ownerOf(c))}</span>${c.due?' • '+tr('dueShort')+' '+c.due+(lang==='bm'?'hb':''):''}${c.date?' • '+c.date:''}</span></span><span style="text-align:right"><b>${rm(c.amt)}</b><br><button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="togglePaid(${c.i},'${monthKey(commitN)}')">${paid?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}</button></span></div>`
+ }).join('');
+ const activeBnpl=db.bnpl.map((p,i)=>({...p,i})).filter(p=>ownerMatches(p,commitOwnerFilter)&&bnplActiveInMonth(p,commitN));
+ let bnplHtml='';
+ if((filter==='Semua'||filter==='BNPL_AUTO')&&activeBnpl.length){
+   const bt=activeBnpl.reduce((z,p)=>z+bnplInstallment(p),0);
+   bnplHtml=`<div class="item"><span><b>🛍️ BNPL ${commitMonthLabel(commitN)}</b><br><span class="small">${activeBnpl.length} ${L('pelan aktif • auto dari BNPL','active plans • auto from BNPL')}</span><details class="bnplBreakdown"><summary>${L('Lihat pecahan','View breakdown')}</summary>${activeBnpl.map(p=>{const pd=bnplPaidThisMonth(p,commitN);return `<div class="bnplMini ${pd?'paid':''}"><span><b>${p.provider} — ${p.name}</b><br><span class="small">${rm(bnplInstallment(p))} <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span></span></span><span><button onclick="toggleBnplPaid(${p.i},'${monthKey(commitN)}')">${pd?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}</button></span></div>`}).join('')}</details></span><b>${rm(bt)}</b></div>`;
+ }
+ if(cmListEl)cmListEl.innerHTML=(filter==='BNPL_AUTO'?bnplHtml:(manualHtml+bnplHtml))||`<p class="small">${t('noRecords')}</p>`;
  if(document.getElementById('savingProtectedTotal')){
    const savings=db.commit.map((c,i)=>({...c,i})).filter(c=>c.type==='Savings Reserve');
    const totalSavings=savings.reduce((s,c)=>s+(+c.amt||0),0);
@@ -1358,7 +1534,7 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
  }
 renderHousehold();
 renderProjects();
- futureExpenses.innerHTML=db.commit.filter(c=>(c.frequency==='onetime'||c.type==='Future Expense')&&c.date).sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(c=>`<div class="item"><span><b>${c.name}</b><br><span class="small">${({Bill:tr('commitmentTypeBill'),Subscription:tr('commitmentTypeSubscription'),Loan:tr('commitmentTypeLoan'),'Credit Card':tr('commitmentTypeCard'),'Future Expense':tr('commitmentTypeFuture'),'Savings Reserve':tr('commitmentTypeSavings')})[c.type]||c.type} • ${c.date||'-'}</span></span><b>${rm(c.amt)}</b></div>`).join('')||`<p class="small">${t('noFuture')}</p>`;debt.innerHTML=[...db.commit.filter(c=>['Loan','Credit Card'].includes(c.type)).map(c=>({name:c.name,type:c.type,amt:c.amt,outstanding:c.outstanding})),...db.bnpl.map(p=>({name:p.name,type:'BNPL',amt:bnplInstallment(p),outstanding:bnplInstallment(p)*bnplRemaining(p)}))].map(c=>`<div class="item"><span><b>${c.name}</b><br><span class="small">${c.type}${c.outstanding?' • '+tr('outstanding')+' '+rm(c.outstanding):''}</span></span><b>${rm(c.amt)}/${lang==='bm'?'bln':'mo'}</b></div>`).join('')||`<p class="small">${t('noDebt')}</p>`}
+ futureExpenses.innerHTML=db.commit.filter(c=>(c.frequency==='onetime'||c.type==='Future Expense')&&c.date).sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(c=>`<div class="item"><span><b>${c.name}</b><br><span class="small">${categoryLabel(c.type)} • ${c.date||'-'}</span></span><b>${rm(c.amt)}</b></div>`).join('')||`<p class="small">${t('noFuture')}</p>`;debt.innerHTML=[...db.commit.filter(c=>['Loan','Credit Card'].includes(c.type)).map(c=>({name:c.name,type:c.type,amt:c.amt,outstanding:c.outstanding})),...db.bnpl.map(p=>({name:p.name,type:'BNPL',amt:bnplInstallment(p),outstanding:bnplInstallment(p)*bnplRemaining(p)}))].map(c=>`<div class="item"><span><b>${c.name}</b><br><span class="small">${c.type}${c.outstanding?' • '+tr('outstanding')+' '+rm(c.outstanding):''}</span></span><b>${rm(c.amt)}/${lang==='bm'?'bln':'mo'}</b></div>`).join('')||`<p class="small">${t('noDebt')}</p>`}
 function saveOpening(){db.openingBalance=+openingBalance.value||0;save();render()}
 function addTx(){
  let a=+txAmt.value,d=txDate.value||new Date().toISOString().slice(0,10),
@@ -1376,22 +1552,22 @@ function incomeTypeChanged(){
    h=`<div class="sectionNote">${L('Untuk gaji yang masuk sekali setiap bulan.','For income received once every month.')}</div>
       <div class="grid2">
         <div><label>${L('Jumlah','Amount')}</label><input id="fAmount" type="number" placeholder="RM"></div>
-        <div><label>${L('Tarikh Masuk','Pay Day')}</label><input id="fDay" type="number" min="1" max="31" placeholder="25"></div>
+        <div><label>${L('Tarikh Masuk','Pay Day')}</label><input id="fDay" type="number" min="1" max="31" placeholder=""></div>
       </div>`;
  }
 
  if(t==='multiple'){
    h=`<div class="sectionNote">${L('Sesuai untuk gaji yang masuk 2–3 kali sebulan. Setiap tarikh boleh jumlah berbeza.','For income received 2–3 times a month. Each payday can have a different amount.')}</div>
       <div class="grid2">
-        <div><label>${L('Tarikh 1','Payday 1')}</label><input id="mDay1" type="number" min="1" max="31" placeholder="20"></div>
+        <div><label>${L('Tarikh 1','Payday 1')}</label><input id="mDay1" type="number" min="1" max="31" placeholder=""></div>
         <div><label>${L('Jumlah 1','Amount 1')}</label><input id="mAmt1" type="number" placeholder="RM"></div>
       </div>
       <div class="grid2">
-        <div><label>${L('Tarikh 2','Payday 2')}</label><input id="mDay2" type="number" min="1" max="31" placeholder="25"></div>
+        <div><label>${L('Tarikh 2','Payday 2')}</label><input id="mDay2" type="number" min="1" max="31" placeholder=""></div>
         <div><label>${L('Jumlah 2','Amount 2')}</label><input id="mAmt2" type="number" placeholder="RM"></div>
       </div>
       <div class="grid2">
-        <div><label>${L('Tarikh 3','Payday 3')}</label><input id="mDay3" type="number" min="1" max="31" placeholder="${L('Pilihan','Optional')}"></div>
+        <div><label>${L('Tarikh 3','Payday 3')}</label><input id="mDay3" type="number" min="1" max="31" placeholder=""></div>
         <div><label>${L('Jumlah 3','Amount 3')}</label><input id="mAmt3" type="number" placeholder="RM"></div>
       </div>
 
@@ -1408,7 +1584,7 @@ function incomeTypeChanged(){
    h=`<div class="sectionNote">${L('Contoh: rider, pemandu, trader atau bisnes harian. Masukkan anggaran pendapatan bersih sehari.','For riders, drivers, traders or daily businesses. Enter average net income per day.')}</div>
       <div class="grid2">
         <div><label>${L('Purata Bersih / Hari','Average Net / Day')}</label><input id="dAvg" type="number" placeholder="RM"></div>
-        <div><label>${L('Hari Bekerja / Bulan','Working Days / Month')}</label><input id="dWork" type="number" min="1" max="31" placeholder="26"></div>
+        <div><label>${L('Hari Bekerja / Bulan','Working Days / Month')}</label><input id="dWork" type="number" min="1" max="31" placeholder=""></div>
       </div>`;
  }
 
@@ -1439,11 +1615,11 @@ function incomeTypeChanged(){
    h=`<div class="sectionNote">${L('Advance gaji bukan pendapatan tambahan. Ia hanya mengalihkan sebahagian gaji ke tarikh lebih awal dan mesti ditolak daripada bayaran gaji seterusnya.','Salary advance is not extra income. It only moves part of your salary to an earlier date and must be deducted from the next salary payment.')}</div>
       <div class="grid2">
         <div><label>${L('Jumlah Advance','Advance Amount')}</label><input id="saAmount" type="number" placeholder="RM"></div>
-        <div><label>${L('Tarikh Advance','Advance Day')}</label><input id="saDay" type="number" min="1" max="31" placeholder="1"></div>
+        <div><label>${L('Tarikh Advance','Advance Day')}</label><input id="saDay" type="number" min="1" max="31" placeholder=""></div>
       </div>
       <div class="grid2">
-        <div><label>${L('Ditolak Pada Tarikh Gaji','Deduct From Payday')}</label><input id="saDeductDay" type="number" min="1" max="31" placeholder="20"></div>
-        <div><label>${L('Catatan','Note')}</label><input id="saNote" placeholder="${L('Contoh: Advance syarikat','e.g. Company advance')}"></div>
+        <div><label>${L('Ditolak Pada Tarikh Gaji','Deduct From Payday')}</label><input id="saDeductDay" type="number" min="1" max="31" placeholder=""></div>
+        <div><label>${L('Catatan','Note')}</label><input id="saNote" placeholder=""></div>
       </div>`;
  }
 
@@ -1464,7 +1640,7 @@ function advanceFieldsChanged(){
  if(!wrap||!enabled)return;
  if(enabled.value==='yes'){
    wrap.innerHTML=`<div class="grid2">
-      <div><label>${L('Tarikh Advance','Advance Day')}</label><input id="advDay" type="number" min="1" max="31" placeholder="1"></div>
+      <div><label>${L('Tarikh Advance','Advance Day')}</label><input id="advDay" type="number" min="1" max="31" placeholder=""></div>
       <div><label>${L('Had Advance','Advance Limit')}</label><input id="advMax" type="number" placeholder="RM"></div>
     </div>`;
  }else{
@@ -1524,24 +1700,24 @@ function bnplModeChanged(){
  let m=bnplMode.value;
  if(m==='new'){
    bnplDynamic.innerHTML=`
-    <div class="grid2"><div><label>${tr('totalPrice')}</label><input id="bnplTotal" type="number" placeholder="RM"></div><div><label>${tr('months')}</label><input id="bnplMonths" type="number" min="1" placeholder="${L('cth 6','e.g. 6')}"></div></div>
-    <div class="grid2"><div><label>${tr('startDate')}</label><input id="bnplStart" type="date"></div><div><label>${tr('monthlyDueDay')}</label><input id="bnplDue" type="number" min="1" max="31" placeholder="${L('cth 21','e.g. 21')}"></div></div>`;
+    <div class="grid2"><div><label>${tr('totalPrice')}</label><input id="bnplTotal" type="number" placeholder="RM"></div><div><label>${tr('months')}</label><input id="bnplMonths" type="number" min="1" placeholder=""></div></div>
+    <div class="grid2"><div><label>${tr('startDate')}</label><input id="bnplStart" type="date"></div><div><label>${tr('monthlyDueDay')}</label><input id="bnplDue" type="number" min="1" max="31" placeholder=""></div></div>`;
  }else{
    bnplDynamic.innerHTML=`
     <div class="grid2"><div><label>Order amount</label><input id="bnplOrderAmount" type="number" placeholder="RM"></div><div><label>Total payable</label><input id="bnplTotalPayable" type="number" placeholder="RM"></div></div>
-    <div class="grid2"><div><label>Total installment</label><input id="bnplTotalInstallments" type="number" min="1" placeholder="cth 6"></div><div><label>Dah bayar</label><input id="bnplPaidInstallments" type="number" min="0" placeholder="cth 4"></div></div>
+    <div class="grid2"><div><label>Total installment</label><input id="bnplTotalInstallments" type="number" min="1" placeholder=""></div><div><label>Dah bayar</label><input id="bnplPaidInstallments" type="number" min="0" placeholder=""></div></div>
     <div class="grid2"><div><label>Installment / bulan</label><input id="bnplInstallment" type="number" placeholder="RM"></div><div><label>Next due date</label><input id="bnplNextDue" type="date"></div></div>
     <div class="sectionNote">Contoh screenshot Nini: Pay in 6, 4/6 paid → isi Total installment 6, Dah bayar 4, Installment RM23.74, Next due 21/09/2026. App akan forecast baki 2 bayaran sahaja.</div>`;
  }
 }
 function addBNPL(){
- let provider=bnplProvider.value,name=bnplName.value.trim(),mode=bnplMode.value;
+ let provider=bnplProvider.value,name=bnplName.value.trim(),mode=bnplMode.value,owner=(document.getElementById('bnplOwner')?.value||'nini');
  if(!name)return alert(L('Isi nama pembelian.','Enter the purchase name.'));
  let item;
  if(mode==='new'){
    let total=+document.getElementById('bnplTotal').value,months=+document.getElementById('bnplMonths').value,start=document.getElementById('bnplStart').value,due=+document.getElementById('bnplDue').value||null;
    if(total<=0||months<=0||!start)return alert(L('Isi jumlah, bilangan bulan dan tarikh mula.','Enter the amount, number of months and start date.'));
-   item={mode:'new',provider,name,total,totalPayable:total,months,start,due};
+   item={mode:'new',provider,name,total,totalPayable:total,months,start,due,owner,paidMonths:{}};
  }else{
    let orderAmount=+document.getElementById('bnplOrderAmount').value||0,
        totalPayable=+document.getElementById('bnplTotalPayable').value||0,
@@ -1551,166 +1727,77 @@ function addBNPL(){
        nextDue=document.getElementById('bnplNextDue').value;
    if(totalInstallments<=0||paidInstallments<0||paidInstallments>=totalInstallments||installment<=0||!nextDue)
      return alert(L('Lengkapkan maklumat ansuran dan tarikh bayaran seterusnya.','Complete the installment details and next due date.'));
-   item={mode:'ongoing',provider,name,orderAmount,totalPayable,totalInstallments,paidInstallments,installment,nextDue};
+   item={mode:'ongoing',provider,name,orderAmount,totalPayable,totalInstallments,paidInstallments,installment,nextDue,owner,paidMonths:{}};
  }
- if(editingBnplIndex>=0)db.bnpl[editingBnplIndex]=item;
+ if(editingBnplIndex>=0){item.paidMonths=db.bnpl[editingBnplIndex].paidMonths||{};db.bnpl[editingBnplIndex]=item}
  else db.bnpl.push(item);
- save();
- cancelBNPLEdit();
- render()
+ save(); cancelBNPLEdit(); render()
 }
 function editBNPL(i){
- editingBnplIndex=i;
- const p=db.bnpl[i];
- bnplMode.value=p.mode||'new';
- bnplProvider.value=p.provider||'SPayLater';
- bnplName.value=p.name||'';
+ editingBnplIndex=i; const p=db.bnpl[i];
+ bnplMode.value=p.mode||'new'; bnplProvider.value=p.provider||'SPayLater'; bnplName.value=p.name||'';
+ if(document.getElementById('bnplOwner'))bnplOwner.value=ownerOf(p);
  bnplModeChanged();
  if(p.mode==='ongoing'){
-   bnplOrderAmount.value=p.orderAmount||'';
-   bnplTotalPayable.value=p.totalPayable||'';
-   bnplTotalInstallments.value=p.totalInstallments||'';
-   bnplPaidInstallments.value=p.paidInstallments||0;
-   bnplInstallment.value=p.installment||'';
-   bnplNextDue.value=p.nextDue||'';
- }else{
-   bnplTotal.value=p.total||p.totalPayable||'';
-   bnplMonths.value=p.months||'';
-   bnplStart.value=p.start||'';
-   bnplDue.value=p.due||'';
- }
- setText('bnplSaveBtn',L('Simpan Perubahan','Save Changes'));
- bnplCancelEditBtn.classList.remove('hidden');
- bnplName.scrollIntoView({behavior:'smooth',block:'center'});
+   bnplOrderAmount.value=p.orderAmount||'';bnplTotalPayable.value=p.totalPayable||'';bnplTotalInstallments.value=p.totalInstallments||'';bnplPaidInstallments.value=p.paidInstallments||0;bnplInstallment.value=p.installment||'';bnplNextDue.value=p.nextDue||'';
+ }else{bnplTotal.value=p.total||p.totalPayable||'';bnplMonths.value=p.months||'';bnplStart.value=p.start||'';bnplDue.value=p.due||''}
+ setText('bnplSaveBtn',L('Simpan Perubahan','Save Changes'));bnplCancelEditBtn.classList.remove('hidden');bnplName.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function cancelBNPLEdit(){
- editingBnplIndex=-1;
- bnplName.value='';
- bnplMode.value='new';
- bnplProvider.value='SPayLater';
- bnplModeChanged();
- setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));
- bnplCancelEditBtn.classList.add('hidden');
+ editingBnplIndex=-1;bnplName.value='';bnplMode.value='new';bnplProvider.value='SPayLater';if(document.getElementById('bnplOwner'))bnplOwner.value='nini';bnplModeChanged();setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));bnplCancelEditBtn.classList.add('hidden');
 }
+function toggleBnplPaid(i,k=null){let p=db.bnpl[i];k=k||monthKey(new Date());p.paidMonths=p.paidMonths||{};p.paidMonths[k]=!p.paidMonths[k];save();render()}
 function deleteBNPL(i){if(confirm(tr('deleteBnplConfirm'))){db.bnpl.splice(i,1);save();render()}}
+function nextMonthChoices(){
+ const n=new Date(); return Array.from({length:12},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return {key:monthKey(d),label:new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short',year:'numeric'}).format(d)}});
+}
+function commitNamePlaceholder(t){return '';}
 function commitTypeChanged(){
- let t=cmType.value, freq=cmFrequency.value, h='';
-
- if(t==='Future Expense' && freq!=='onetime'){
-   cmFrequency.value='onetime'; freq='onetime';
- }
-
- const amountPh=L('Jumlah RM','Amount RM');
- const datePh=L('Tarikh','Date');
-
- if(t==='Bill'){
-   h=`<label>${L('Nama Bil','Bill Name')}</label><input id="cmName" placeholder="${L('Contoh: Elektrik / Internet','e.g. Electricity / Internet')}">
-      <div class="grid2">
-        <div><label>${L('Jumlah','Amount')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
-        ${freq==='recurring'
-          ? `<div><label>${L('Tarikh Bayaran','Due Day')}</label><input id="cmDue" type="number" min="1" max="31" placeholder="${L('Contoh: 15','e.g. 15')}"></div>`
-          : `<div><label>${L('Tarikh','Date')}</label><input id="cmDate" type="date"></div>`}
-      </div>
-      ${freq==='recurring'
-        ? `<div class="grid2"><div><label>${L('Tarikh Mula','Start Date')}</label><input id="cmStart" type="date"></div><div><label>${L('Tempoh Baki','Remaining Months')}</label><input id="cmMonths" type="number" min="1" placeholder="${L('Pilihan','Optional')}"></div></div>`
-        : ''}`;
- }
-
- if(t==='Subscription'){
-   h=`<label>${L('Nama Langganan','Subscription Name')}</label><input id="cmName" placeholder="Netflix / iCloud / ChatGPT">
-      <div class="grid2">
-        <div><label>${L('Jumlah','Amount')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
-        ${freq==='recurring'
-          ? `<div><label>${L('Tarikh Caj','Billing Day')}</label><input id="cmDue" type="number" min="1" max="31"></div>`
-          : `<div><label>${L('Tarikh','Date')}</label><input id="cmDate" type="date"></div>`}
-      </div>`;
- }
-
- if(t==='Loan'){
-   h=`<label>${L('Nama Pinjaman','Loan Name')}</label><input id="cmName" placeholder="${L('Kereta / Rumah / Pinjaman Peribadi','Car / Home / Personal Loan')}">
-      <div class="grid2">
-        <div><label>${L('Ansuran','Installment')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
-        ${freq==='recurring'
-          ? `<div><label>${L('Tarikh Bayaran','Due Day')}</label><input id="cmDue" type="number" min="1" max="31"></div>`
-          : `<div><label>${L('Tarikh','Date')}</label><input id="cmDate" type="date"></div>`}
-      </div>
-      <div class="grid2">
-        ${freq==='recurring'?`<div><label>${L('Baki Bulan','Months Left')}</label><input id="cmMonths" type="number" min="1"></div>`:''}
-        <div><label>${L('Baki Hutang','Outstanding')}</label><input id="cmOutstanding" type="number" placeholder="RM"></div>
-      </div>`;
- }
-
- if(t==='Credit Card'){
-   h=`<label>${L('Nama Kad','Card Name')}</label><input id="cmName" placeholder="${L('Contoh: Maybank Visa','e.g. Maybank Visa')}">
-      <div class="grid2">
-        <div><label>${L('Bayaran Bulan Ini','Payment This Month')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
-        ${freq==='recurring'
-          ? `<div><label>${L('Tarikh Bayaran','Due Day')}</label><input id="cmDue" type="number" min="1" max="31"></div>`
-          : `<div><label>${L('Tarikh','Date')}</label><input id="cmDate" type="date"></div>`}
-      </div>
-      <label>${L('Baki Tertunggak','Outstanding Balance')}</label><input id="cmOutstanding" type="number" placeholder="RM">`;
- }
-
- if(t==='Future Expense'){
-   h=`<label>${L('Nama Belanja','Expense Name')}</label><input id="cmName" placeholder="${L('Roadtax / Yuran sekolah / Servis kereta','Road tax / School fees / Car service')}">
-      <div class="grid2">
-        <div><label>${L('Jumlah','Amount')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
-        <div><label>${L('Tarikh','Date')}</label><input id="cmDate" type="date"></div>
-      </div>`;
- }
-
- if(t==='Savings Reserve'){
-   h=`<label>${L('Jenis Simpanan','Reserve Type')}</label>
-      <select id="cmSavingCategory">
-        <option value="">${L('Pilih jenis simpanan','Select reserve type')}</option>
-        <option value="emergency">${L('Dana Kecemasan','Emergency Fund')}</option>
-        <option value="goal">${L('Simpanan Sasaran','Goal Savings')}</option>
-        <option value="education">${L('Anak & Pendidikan','Children & Education')}</option>
-        <option value="travel">${L('Percutian','Travel')}</option>
-        <option value="annual">${L('Belanja Tahunan','Annual Expenses')}</option>
-        <option value="other">${L('Lain-lain','Other')}</option>
-      </select>
-      <label>${L('Nama Simpanan','Reserve Name')}</label><input id="cmName" placeholder="${L('Dana kecemasan / Simpanan','Emergency fund / Savings')}">
-      <label>${L('Jumlah Simpanan','Savings Amount')}</label><input id="cmAmt" type="number" placeholder="RM">
-      ${freq==='onetime'?`<label>${L('Tarikh','Date')}</label><input id="cmDate" type="date">`:''}`;
- }
-
- commitFields.innerHTML=h
- if(t==='Savings Reserve'){const hidden=document.getElementById('cmSavingCategory'); if(hidden) hidden.value='';}
+ const t=cmType.value,freq=cmFrequency.value;
+ let h=`<label>${L('Nama Komitmen','Commitment Name')}</label><input id="cmName" placeholder="${commitNamePlaceholder(t)}">
+ <div class="grid2"><div><label>${L('Jumlah','Amount')}</label><input id="cmAmt" type="number" placeholder="RM"></div>
+ ${freq==='onetime'?`<div><label>${L('Tarikh Bayaran','Payment Date')}</label><input id="cmDate" type="date"></div>`:`<div><label>${L('Tarikh Bayaran','Due Day')}</label><input id="cmDue" type="number" min="1" max="31" placeholder=""></div>`}</div>`;
+ if(freq==='monthly')h+=`<label>${L('Tarikh Mula (pilihan)','Start Date (optional)')}</label><input id="cmStart" type="date">`;
+ if(freq==='fixed_months')h+=`<div class="grid2"><div><label>${L('Tarikh Mula','Start Date')}</label><input id="cmStart" type="date"></div><div><label>${L('Berapa Bulan','Number of Months')}</label><input id="cmMonths" type="number" min="1" placeholder=""></div></div>`;
+ if(freq==='selected_months')h+=`<label>${L('Pilih Bulan','Choose Months')}</label><div class="monthPickGrid">${nextMonthChoices().map(x=>`<label class="monthCheck"><input type="checkbox" class="cmMonthCheck" value="${x.key}"><span>${x.label}</span></label>`).join('')}</div>`;
+ if(t==='Loan'||t==='Credit Card')h+=`<label>${L('Baki Tertunggak (pilihan)','Outstanding Balance (optional)')}</label><input id="cmOutstanding" type="number" placeholder="RM">`;
+ if(t==='Savings Reserve')h+=`<label>${L('Jenis Simpanan','Savings Type')}</label><select id="cmSavingCategory"><option value="emergency">${L('Dana Kecemasan','Emergency Fund')}</option><option value="goal">${L('Simpanan Sasaran','Goal Savings')}</option><option value="education">${L('Anak & Pendidikan','Children & Education')}</option><option value="travel">${L('Percutian','Travel')}</option><option value="annual">${L('Belanja Tahunan','Annual Expenses')}</option><option value="other">${L('Lain-lain','Other')}</option></select>`;
+ commitFields.innerHTML=h;
 }
+function openCommitSheet(){
+ document.getElementById('commitSheetBackdrop')?.classList.remove('hidden');document.getElementById('commitSheet')?.classList.remove('hidden');commitTypeChanged();
+}
+function closeCommitSheet(){document.getElementById('commitSheetBackdrop')?.classList.add('hidden');document.getElementById('commitSheet')?.classList.add('hidden')}
 function addCommit(){
- let t=cmType.value, freq=cmFrequency.value,
-     n=(document.getElementById('cmName')?.value||'').trim(),
-     a=+(document.getElementById('cmAmt')?.value||0);
+ let t=cmType.value,freq=cmFrequency.value,n=(document.getElementById('cmName')?.value||'').trim(),a=+(document.getElementById('cmAmt')?.value||0);
  if(!n||a<=0)return alert(tr('fillNameAmount'));
-
- let item={
-   type:t,
-   frequency:freq,
-   name:n,
-   amt:a,
-   due:+(document.getElementById('cmDue')?.value||0)||null,
-   months:+(document.getElementById('cmMonths')?.value||0)||null,
-   start:document.getElementById('cmStart')?.value||null,
-   date:document.getElementById('cmDate')?.value||null,
-   outstanding:+(document.getElementById('cmOutstanding')?.value||0)||null,
-   savingCategory:(document.getElementById('cmSavingCategory')?.value||''),
-   owner:(document.getElementById('commitOwner')?.value||'nini'),
-   paidMonths:{}
- };
-
- if(freq==='onetime' && !item.date && t!=='Savings Reserve'){
-   return alert(tr('chooseDateOneTime'));
- }
-
- db.commit.push(item);
- save();
- commitTypeChanged();
- render()
+ let selectedMonths=[...document.querySelectorAll('.cmMonthCheck:checked')].map(x=>x.value);
+ let item={type:t,frequency:freq,name:n,amt:a,due:+(document.getElementById('cmDue')?.value||0)||null,months:+(document.getElementById('cmMonths')?.value||0)||null,start:document.getElementById('cmStart')?.value||null,date:document.getElementById('cmDate')?.value||null,selectedMonths,outstanding:+(document.getElementById('cmOutstanding')?.value||0)||null,savingCategory:(document.getElementById('cmSavingCategory')?.value||''),owner:(document.getElementById('commitOwner')?.value||'nini'),paidMonths:{}};
+ if(freq==='onetime'&&!item.date)return alert(L('Pilih tarikh bayaran.','Choose the payment date.'));
+ if(freq==='fixed_months'&&(!item.start||!item.months))return alert(L('Isi tarikh mula dan berapa bulan.','Enter the start date and number of months.'));
+ if(freq==='selected_months'&&!selectedMonths.length)return alert(L('Pilih sekurang-kurangnya satu bulan.','Choose at least one month.'));
+ db.commit.push(item);save();cmType.value='Household Bills';cmFrequency.value='monthly';commitOwner.value='nini';commitTypeChanged();closeCommitSheet();render();
 }
-function togglePaid(i){let c=db.commit[i],k=monthKey(new Date());c.paidMonths=c.paidMonths||{};c.paidMonths[k]=!c.paidMonths[k];save();render()}
+function togglePaid(i,k=null){let c=db.commit[i];k=k||monthKey(new Date());c.paidMonths=c.paidMonths||{};c.paidMonths[k]=!c.paidMonths[k];save();render()}
+let commitOwnerFilter='all';
+function setCommitOwnerFilter(v,btn){commitOwnerFilter=v;document.querySelectorAll('#commitOwnerTabs button').forEach(x=>x.classList.remove('on'));if(btn)btn.classList.add('on');render()}
 function setFilter(x){filter=x;render()}
-function icon(t){return{'Bill':'🧾','Subscription':'🔁','Loan':'🏦','Credit Card':'💳','Future Expense':'📆','Savings Reserve':'💰'}[t]||'•'}
+function ownerLabel(v){return v==='faizal'?'Faizal':v==='joint'?L('Bersama','Joint'):'Nini'}
+function frequencyLabel(c){const f=commitmentFrequency(c);if(f==='monthly')return L('Setiap Bulan','Every Month');if(f==='fixed_months')return L('Beberapa Bulan','Several Months');if(f==='selected_months')return L('Bulan Tertentu','Selected Months');return L('Sekali Sahaja','One-time')}
+function icon(t){return{'Household Bills':'🏠','Bill':'🏠','Loan':'🏦','Credit Card':'💳','Insurance':'🛡️','Education':'🎓','Subscription':'🔁','Vehicle':'🚗','Savings Reserve':'💰','Family':'👨‍👩‍👧','Zakat':'🤲','Other':'📌','Future Expense':'📆'}[t]||'•'}
+function renderCommitDashboard(n=commitViewDate){
+ const total=commitmentTotalForMonth(n,commitOwnerFilter,false),paid=commitmentPaidForMonth(n,commitOwnerFilter),unpaid=Math.max(0,total-paid);
+ setText('commitViewMonthLabel',commitMonthLabel(n));
+ setText('commitRecordsTitle',L('Komitmen ','Commitments — ')+commitMonthLabel(n));
+ setText('commitTotalLabel',L('TOTAL ','TOTAL ')+commitMonthShort(n).toUpperCase());
+ setText('commitPaidLabel',L('DAH BAYAR','PAID'));setText('commitUnpaidLabel',L('BELUM BAYAR','UNPAID'));
+ setText('commitForecastTitle',L('Komitmen 6 Bulan dari ','6-Month Commitments from ')+commitMonthShort(n));
+ setText('commitTotalThisMonth',rm(total));setText('commitPaidThisMonth',rm(paid));setText('commitUnpaidThisMonth',rm(unpaid));
+ const ownerTxt=commitOwnerFilter==='all'?L('Semua','All'):ownerLabel(commitOwnerFilter);setText('commitForecastOwner',ownerTxt);
+ const months=Array.from({length:6},(_,i)=>{let d=new Date(n.getFullYear(),n.getMonth()+i,1);return {d,total:commitmentTotalForMonth(d,commitOwnerFilter,false)}});
+ const el=document.getElementById('commitForecast6');if(el)el.innerHTML=months.map(x=>`<div class="commitForecastCell"><b>${new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short'}).format(x.d)}</b><strong>${rm(x.total)}</strong></div>`).join('');
+ if(months.length){const high=months.reduce((a,b)=>b.total>a.total?b:a),low=months.reduce((a,b)=>b.total<a.total?b:a);setText('commitForecastHint',L(`Tertinggi ${commitMonthShort(high.d)} • ${rm(high.total)}   |   Terendah ${commitMonthShort(low.d)} • ${rm(low.total)}`,`Highest ${commitMonthShort(high.d)} • ${rm(high.total)}   |   Lowest ${commitMonthShort(low.d)} • ${rm(low.total)}`))}
+}
 function simulate(){let amt=+simAmt.value,m=+simMonths.value;if(!amt)return;let inst=amt/m,f=forecast(),after=f.map((x,i)=>x.balance-(i<m?inst:0)),lowest=Math.min(...after);simResult.innerHTML=lowest>=500?`<span class="pill ok">✅ ${t('affordable')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('terendah','lowest')} ${rm(lowest)}</p>`:lowest>=0?`<span class="pill warn">⚠️ ${t('tight')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('terendah','lowest')} ${rm(lowest)}</p>`:`<span class="pill bad">❌ ${t('notRecommended')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('terendah','lowest')} ${rm(lowest)}</p>`}
 
 
@@ -1746,9 +1833,8 @@ function deleteHouseTransfer(id){db.houseTransfers=db.houseTransfers.filter(x=>x
 function householdStats(owner){
  let now=new Date(),mk=monthKey(now);
  let transfers=db.houseTransfers.filter(x=>(owner==='all'||x.from===owner)&&String(x.date||'').slice(0,7)===mk).reduce((s,x)=>s+(+x.amount||0),0);
- let cs=db.commit.filter(c=>(owner==='all'||(c.owner||'nini')===owner)&&c.frequency!=='onetime');
- let due=cs.reduce((s,c)=>s+(+c.amt||0),0);
- let paid=cs.filter(c=>paidThisMonth(c)).reduce((s,c)=>s+(+c.amt||0),0);
+ let due=commitmentTotalForMonth(now,owner,false);
+ let paid=commitmentPaidForMonth(now,owner);
  return{transfers,due,paid,unpaid:Math.max(0,due-paid),held:transfers-paid}
 }
 function renderHousehold(){if(!document.getElementById('householdSummary'))return;let s=householdStats(ownerFilter);householdSummary.innerHTML=`<div class="houseGrid"><div class="houseStat"><div class="hsLabel">${L('Duit Diterima','Money Received')}</div><div class="hsValue">${rm(s.transfers)}</div></div><div class="houseStat"><div class="hsLabel">${L('Komitmen','Commitments')}</div><div class="hsValue">${rm(s.due)}</div></div><div class="houseStat"><div class="hsLabel">✓ ${L('Sudah Dibayar','Paid')}</div><div class="hsValue">${rm(s.paid)}</div></div><div class="houseStat"><div class="hsLabel">${L('Baki Dipegang','Money Held')}</div><div class="hsValue">${rm(s.held)}</div></div></div><div class="small" style="margin-top:8px"><b>${L('Belum Bayar','Unpaid')}</b> ${rm(s.unpaid)}</div>`;if(document.getElementById('houseTransferList'))houseTransferList.innerHTML=db.houseTransfers.slice().reverse().map(x=>`<div class="item"><span><b>${x.from==='faizal'?'👨🏻‍💼 Faizal':x.from==='joint'?'🏠 '+L('Bersama','Joint'):'👩🏻‍💼 Nini'} • ${rm(x.amount)}</b><br><span class="small">${x.date}${x.note?' • '+x.note:''}</span></span><button class="danger" style="min-height:28px;padding:3px 8px" onclick="deleteHouseTransfer('${x.id}')">×</button></div>`).join('')||`<p class="small">${L('Belum ada rekod.','No records yet.')}</p>`}
@@ -1756,7 +1842,7 @@ function renderHousehold(){if(!document.getElementById('householdSummary'))retur
 let activeProjectId=null;
 const PROJECT_TYPES={
  renovation:{bm:'Renovasi Rumah',en:'Home Renovation',icon:'🏠'},
- holiday:{bm:'Holiday / Travel',en:'Holiday / Travel',icon:'✈️'},
+ holiday:{bm:'Percutian',en:'Holiday / Travel',icon:'✈️'},
  event:{bm:'Majlis / Event',en:'Event',icon:'🎉'},
  education:{bm:'Sekolah / Pendidikan',en:'School / Education',icon:'🎓'},
  business:{bm:'Bisnes',en:'Business',icon:'💼'},
@@ -1787,53 +1873,109 @@ function projectCategories(type){
 }
 function toggleProjectForm(){projectForm.classList.toggle('hidden')}
 function addProject(){
- const name=projectName.value.trim(),budget=+projectBudget.value||0;
- if(!name||budget<=0)return alert(L('Isi nama projek dan budget.','Enter project name and budget.'));
+ const name=projectName.value.trim(),budget=+projectBudget.value||0,target=projectEnd.value||'';
+ if(!name||budget<=0)return alert(L('Isi nama projek dan bajet.','Enter project name and budget.'));
+ if(!target)return alert(L('Pilih tarikh sasaran.','Choose a target date.'));
+ const id='P'+Date.now();
  db.projects.push({
-   id:'P'+Date.now(),type:projectType.value,name,budget,
-   start:projectStart.value||'',end:projectEnd.value||'',
-   affectSafe:projectAffectSafe.checked,entries:[],created:new Date().toISOString()
+   id,type:projectType.value,name,budget,
+   start:new Date().toISOString().slice(0,10),end:target,owner:(document.getElementById('projectOwner')?.value||'nini'),
+   entries:[],created:new Date().toISOString()
  });
- projectName.value='';projectBudget.value='';projectStart.value='';projectEnd.value='';projectAffectSafe.checked=true;
- projectForm.classList.add('hidden');save();render()
+ projectName.value='';projectBudget.value='';projectEnd.value='';if(document.getElementById('projectOwner'))projectOwner.value='nini';
+ projectForm.classList.add('hidden');save();render();setTimeout(()=>openProject(id),30)
 }
 function projectTotals(p){
  const ins=(p.entries||[]).filter(x=>x.type==='in').reduce((s,x)=>s+(+x.amount||0),0);
  const outs=(p.entries||[]).filter(x=>x.type==='out').reduce((s,x)=>s+(+x.amount||0),0);
- return {ins,outs,budgetRemaining:(+p.budget||0)-outs,projectBalance:ins-outs}
+ const budget=+p.budget||0;
+ const covered=Math.max(ins,outs);
+ return {
+  ins,outs,covered,
+  budgetRemaining:Math.max(0,budget-outs),
+  projectBalance:ins-outs,
+  stillNeed:Math.max(0,budget-covered)
+ };
+}
+function projectFundCategories(){return [L('Dana Projek','Project Funds')]}
+function projectOwnerText(p){return v18OwnerLabel(p.owner||'nini')}
+function projectMonthsLeft(p){
+ if(!p.end)return 0;
+ const now=new Date(), end=new Date(p.end+'T00:00:00');
+ const a=new Date(now.getFullYear(),now.getMonth(),1),b=new Date(end.getFullYear(),end.getMonth(),1);
+ return Math.max(0,(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth())+1);
+}
+function projectMonthlyNeed(p){
+ const z=projectTotals(p),months=projectMonthsLeft(p);
+ return months>0?z.stillNeed/months:z.stillNeed;
+}
+function projectTargetText(p){
+ if(!p.end)return '—';
+ return new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short',year:'numeric'}).format(new Date(p.end+'T00:00:00'));
 }
 function openProject(id){
  activeProjectId=id;const p=db.projects.find(x=>x.id===id);if(!p)return;
  projectDetailSheet.classList.remove('hidden');
  projectTxDate.value=new Date().toISOString().slice(0,10);
+ document.getElementById('projectTxForm')?.classList.add('hidden');
  renderProjectDetail()
 }
-function closeProjectDetail(){projectDetailSheet.classList.add('hidden');activeProjectId=null}
+function openProjectAction(id,type){
+ openProject(id);
+ openProjectTxForm(type);
+}
+function closeProjectDetail(){projectDetailSheet.classList.add('hidden');activeProjectId=null;document.getElementById('projectTxForm')?.classList.add('hidden')}
+function openProjectTxForm(type){
+ const p=db.projects.find(x=>x.id===activeProjectId);if(!p)return;
+ projectTxType.value=type;
+ projectTxAmount.value='';projectTxName.value='';projectTxDate.value=new Date().toISOString().slice(0,10);
+ const catLabel=document.getElementById('projectTxCategoryLabel'),cat=document.getElementById('projectTxCategory');
+ if(type==='in'){
+   cat.innerHTML=`<option>${L('Dana Projek','Project Funds')}</option>`;
+   catLabel.classList.add('hidden');cat.classList.add('hidden');
+   setText('projectTxSave',L('Masukkan Dana','Allocate Funds'));
+ }else{
+   cat.innerHTML=projectCategories(p.type).map(x=>`<option>${x}</option>`).join('');
+   catLabel.classList.remove('hidden');cat.classList.remove('hidden');
+   setText('projectTxSave',L('Simpan Belanja','Save Spending'));
+ }
+ projectTxForm.classList.remove('hidden');
+ setTimeout(()=>projectTxAmount?.focus(),20);
+}
 function renderProjectDetail(){
  const p=db.projects.find(x=>x.id===activeProjectId);if(!p)return;
- const z=projectTotals(p),used=p.budget?Math.min(100,Math.round(z.outs/p.budget*100)):0;
+ const z=projectTotals(p),budget=+p.budget||0,progress=budget?Math.max(0,Math.min(100,Math.round(z.covered/budget*100))):0;
+ const months=projectMonthsLeft(p),needMonth=projectMonthlyNeed(p);
+ const goalDone=z.stillNeed<=0;
+ const targetLine=goalDone
+   ?`<strong class="projectFundingGood">${L('Dana cukup untuk sasaran','Goal fully funded')}</strong>`
+   :months>0
+     ?`${L('Perlu','Need')} <strong>${rm(needMonth)}/${L('bulan','month')}</strong> • ${months} ${L('bulan lagi','months left')}`
+     :`<strong class="projectFundingWarn">${L('Tarikh sasaran telah tiba','Target date reached')}</strong>`;
  projectDetailName.textContent=(PROJECT_TYPES[p.type]?.icon||'📁')+' '+p.name;
- projectDetailSummary.innerHTML=`<div class="grid2">
-   <div class="metric"><div class="label">${L('BUDGET','BUDGET')}</div><div class="value">${rm(p.budget)}</div></div>
-   <div class="metric"><div class="label">${L('BELANJA','SPENT')}</div><div class="value">${rm(z.outs)}</div></div>
-   <div class="metric"><div class="label">${L('MONEY IN','MONEY IN')}</div><div class="value">${rm(z.ins)}</div></div>
-   <div class="metric"><div class="label">${L('BAKI BUDGET','BUDGET LEFT')}</div><div class="value">${rm(z.budgetRemaining)}</div></div>
+ projectDetailSummary.innerHTML=`<div class="projectCardMeta">${projectTypeName(p.type)} • ${projectOwnerText(p)} • ${L('Sasaran','Target')} ${projectTargetText(p)}</div>
+ <div class="projectGoalStrip">
+   <div class="projectGoalBox"><span>${L('BAJET','BUDGET')}</span><b>${rm(budget)}</b></div>
+   <div class="projectGoalBox"><span>${L('DANA DISEDIAKAN','FUNDS ALLOCATED')}</span><b>${rm(z.ins)}</b></div>
+   <div class="projectGoalBox"><span>${L('DAH BELANJA','SPENT')}</span><b>${rm(z.outs)}</b></div>
+   <div class="projectGoalBox"><span>${L('BAKI BAJET','BUDGET LEFT')}</span><b>${rm(z.budgetRemaining)}</b></div>
  </div>
- <div style="margin-top:10px"><div class="small">${L('Budget digunakan','Budget used')} • ${used}%</div><div class="bar"><i style="width:${used}%"></i></div></div>
-`;
- projectTxCategory.innerHTML=projectCategories(p.type).map(x=>`<option>${x}</option>`).join('');
- projectTxList.innerHTML=(p.entries||[]).slice().reverse().map(e=>`<div class="item"><span><b>${e.type==='in'?'＋':'−'} ${e.name}</b><br><span class="small">${e.category} • ${e.date}</span></span><span style="text-align:right"><b>${e.type==='in'?'+':'−'}${rm(e.amount)}</b><br><button class="danger" style="min-height:28px;padding:3px 7px" onclick="deleteProjectTx('${e.id}')">${L('Padam','Delete')}</button></span></div>`).join('')||`<p class="small">${L('Belum ada transaksi projek.','No project transactions yet.')}</p>`;
+ <div class="projectDetailBalance"><span>${L('DANA TERSEDIA','AVAILABLE FUNDS')}</span><b>${rm(z.projectBalance)}</b></div>
+ <div class="projectGoalStatus"><span>${L('MASIH PERLU','STILL NEEDED')}: <strong>${rm(z.stillNeed)}</strong></span><br>${targetLine}</div>
+ <div class="projectProgressRow"><span>${L('Progress sasaran','Goal progress')}</span><b>${progress}%</b></div><div class="bar"><i style="width:${progress}%"></i></div>`;
+ projectTxList.innerHTML=(p.entries||[]).slice().reverse().map(e=>`<div class="item"><span><b>${e.type==='in'?'＋':'−'} ${e.type==='in'?L('Dana Projek','Project Funds'):(e.name||e.category)}</b><br><span class="small">${e.date}${e.type==='out'&&e.category?' • '+e.category:''}${e.name&&e.type==='in'?' • '+e.name:''}</span></span><span style="text-align:right"><b>${e.type==='in'?'+':'−'}${rm(e.amount)}</b><br><button class="danger" style="min-height:28px;padding:3px 7px" onclick="deleteProjectTx('${e.id}')">${L('Padam','Delete')}</button></span></div>`).join('')||`<p class="small">${L('Belum ada aktiviti.','No activity yet.')}</p>`;
 }
 function addProjectTx(){
  const p=db.projects.find(x=>x.id===activeProjectId);if(!p)return;
- const amount=+projectTxAmount.value||0,name=projectTxName.value.trim(),type=projectTxType.value,date=projectTxDate.value||new Date().toISOString().slice(0,10);
- if(!name||amount<=0)return alert(L('Isi nama dan jumlah transaksi.','Enter transaction name and amount.'));
- const id='PT'+Date.now(),entry={id,type,amount,name,category:projectTxCategory.value,date};
+ const amount=+projectTxAmount.value||0,type=projectTxType.value,date=projectTxDate.value||new Date().toISOString().slice(0,10);
+ const category=type==='in'?L('Dana Projek','Project Funds'):projectTxCategory.value;
+ const note=projectTxName.value.trim(),name=note||category;
+ if(amount<=0)return alert(L('Masukkan jumlah.','Enter the amount.'));
+  const id='PT'+Date.now(),entry={id,type,amount,name,category,date};
  p.entries=p.entries||[];p.entries.push(entry);
- if(p.affectSafe){
-   db.tx.push({type:type==='in'?'income':'spend',name:p.name+' — '+name,amt:amount,category:'Other',date,projectId:p.id,projectTxId:id});
- }
- projectTxName.value='';projectTxAmount.value='';save();render();renderProjectDetail()
+ // Allocation is only a reserve; it is NOT new income. Actual project spending syncs to Money.
+ if(type==='out')db.tx.push({type:'spend',name:p.name+' — '+name,amt:amount,category:'other',date,owner:p.owner||'nini',projectId:p.id,projectTxId:id});
+ projectTxName.value='';projectTxAmount.value='';projectTxForm.classList.add('hidden');save();render();renderProjectDetail()
 }
 function deleteProjectTx(id){
  const p=db.projects.find(x=>x.id===activeProjectId);if(!p)return;
@@ -1842,7 +1984,7 @@ function deleteProjectTx(id){
  save();render();renderProjectDetail()
 }
 function deleteProject(id){
- if(!confirm(L('Padam projek ini dan semua transaksi projek?','Delete this project and all project transactions?')))return;
+ if(!confirm(L('Padam projek ini dan semua aktiviti projek?','Delete this project and all project activity?')))return;
  db.projects=db.projects.filter(x=>x.id!==id);
  db.tx=db.tx.filter(x=>x.projectId!==id);
  save();render()
@@ -1852,13 +1994,568 @@ function renderProjects(){
  projectCount.textContent=db.projects.length;
  projectBudgetTotal.textContent=rm(db.projects.reduce((s,p)=>s+(+p.budget||0),0));
  projectList.innerHTML=db.projects.map(p=>{
-   const z=projectTotals(p),used=p.budget?Math.min(100,Math.round(z.outs/p.budget*100)):0;
-   return `<div class="item"><span style="flex:1"><b>${PROJECT_TYPES[p.type]?.icon||'📁'} ${p.name}</b><br><span class="small">${projectTypeName(p.type)} • ${L('Budget','Budget')} ${rm(p.budget)} • ${L('Belanja','Spent')} ${rm(z.outs)}</span><div class="bar" style="margin-top:7px"><i style="width:${used}%"></i></div></span><span style="text-align:right"><b>${used}%</b><br><button class="secondary" style="min-height:28px;padding:3px 7px" onclick="openProject('${p.id}')">${L('Buka','Open')}</button> <button class="danger" style="min-height:28px;padding:3px 7px" onclick="deleteProject('${p.id}')">×</button></span></div>`
- }).join('')||`<p class="small">${L('Belum ada projek. Contoh: Renovate Rumah, Holiday Korea.','No projects yet. Example: Home Renovation, Korea Holiday.')}</p>`;
+   const z=projectTotals(p),budget=+p.budget||0,progress=budget?Math.max(0,Math.min(100,Math.round(z.covered/budget*100))):0;
+   const months=projectMonthsLeft(p),needMonth=projectMonthlyNeed(p),done=z.stillNeed<=0;
+   const nextLine=done?L('Dana cukup','Funded'):(months>0?`${L('Perlu','Need')} ${rm(needMonth)}/${L('bulan','month')}`:L('Sasaran tiba','Target reached'));
+   return `<div class="projectCard"><div class="projectCardHead"><span><div class="projectCardTitle">${PROJECT_TYPES[p.type]?.icon||'📁'} ${p.name}</div><div class="projectCardMeta">${projectTypeName(p.type)} • ${projectOwnerText(p)} • ${projectTargetText(p)}</div></span><span style="text-align:right"><button class="secondary projectOpenBtn" onclick="openProject('${p.id}')">${L('Detail','Details')}</button> <button class="danger projectOpenBtn" onclick="deleteProject('${p.id}')">×</button></span></div>
+   <div class="projectMiniGrid"><div class="projectMini"><span>${L('BAJET','BUDGET')}</span><b>${rm(budget)}</b></div><div class="projectMini"><span>${L('DANA','FUNDED')}</span><b>${rm(z.ins)}</b></div><div class="projectMini"><span>${L('MASIH PERLU','STILL NEEDED')}</span><b>${rm(z.stillNeed)}</b></div></div>
+   <div class="projectProgressRow"><span>${nextLine} • ${L('Dana tersedia','Available')} ${rm(z.projectBalance)}</span><b>${progress}%</b></div><div class="bar"><i style="width:${progress}%"></i></div>
+   <div class="projectQuickActions"><button class="fund" onclick="openProjectAction('${p.id}','in')">+ ${L('Masukkan Dana','Allocate Funds')}</button><button class="spend" onclick="openProjectAction('${p.id}','out')">− ${L('Rekod Belanja','Record Spending')}</button></div></div>`
+ }).join('')||`<p class="small">${L('Belum ada projek.','No projects yet.')}</p>`;
 }
 
 function go(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
 txDate.value=new Date().toISOString().slice(0,10);if(document.getElementById('houseDate'))houseDate.value=new Date().toISOString().slice(0,10);incomeTypeChanged();commitTypeChanged();bnplModeChanged();setLang(lang);
+</script>
+
+<script id="v18Overrides">
+/* Money+ V18 UI overrides: preserve V17 data/calculation engine */
+let moneyOwnerFilter='all';
+let bnplOwnerFilter='all';
+
+function v18OwnerLabel(v){return v==='faizal'?'Faizal':v==='joint'?L('Bersama','Joint'):'Nini'}
+function v18OwnerMatch(x,f){return f==='all'||ownerOf(x)===f}
+
+function setMoneyOwnerFilter(v,btn){
+  moneyOwnerFilter=v;
+  document.querySelectorAll('#moneyOwnerTabs button').forEach(x=>x.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderV18Money();
+}
+function setBnplOwnerFilter(v,btn){
+  bnplOwnerFilter=v;
+  document.querySelectorAll('#bnplOwnerTabs button').forEach(x=>x.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderV18BNPL();
+}
+
+function openTransferSheet(){
+  transferFrom.value='faizal'; transferTo.value='nini'; transferAmount.value=''; transferNote.value='';
+  transferDate.value=new Date().toISOString().slice(0,10);
+  transferBackdrop.classList.remove('hidden'); transferSheet.classList.remove('hidden');
+}
+function closeTransferSheet(){transferBackdrop.classList.add('hidden');transferSheet.classList.add('hidden')}
+function addMoneyTransfer(){
+  const from=transferFrom.value,to=transferTo.value,amount=+transferAmount.value||0,date=transferDate.value||new Date().toISOString().slice(0,10),note=transferNote.value.trim();
+  if(from===to)return alert(L('Pilih pemilik yang berbeza.','Choose different owners.'));
+  if(amount<=0)return alert(L('Masukkan jumlah pindahan.','Enter the transfer amount.'));
+  db.houseTransfers=db.houseTransfers||[];
+  db.houseTransfers.push({id:'HT'+Date.now(),from,to,amount,date,note});
+  save();closeTransferSheet();render();
+}
+function openSettingsSheet(){settingsBackdrop.classList.remove('hidden');settingsSheet.classList.remove('hidden')}
+function closeSettingsSheet(){settingsBackdrop.classList.add('hidden');settingsSheet.classList.add('hidden')}
+
+function closeIncomeSetup(){incomeSetupBackdrop.classList.add('hidden');incomeSetupPanel.classList.add('hidden')}
+toggleIncomeSetup=function(){
+  incomeSetupBackdrop.classList.remove('hidden');incomeSetupPanel.classList.remove('hidden');
+};
+
+function openBNPLSheet(reset=true){
+  if(reset){editingBnplIndex=-1;bnplMode.value='new';bnplProvider.value='SPayLater';bnplName.value='';bnplOwner.value='nini';bnplModeChanged();setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));bnplCancelEditBtn.classList.add('hidden')}
+  bnplSheetBackdrop.classList.remove('hidden');bnplSheet.classList.remove('hidden');
+  setText('bnplSheetTitle',editingBnplIndex>=0?L('Edit BNPL','Edit BNPL'):L('Tambah BNPL','Add BNPL'));
+}
+function closeBNPLSheet(){bnplSheetBackdrop.classList.add('hidden');bnplSheet.classList.add('hidden')}
+const v17EditBNPL=editBNPL;
+editBNPL=function(i){openBNPLSheet(false);v17EditBNPL(i);setText('bnplSheetTitle',L('Edit BNPL','Edit BNPL'))}
+cancelBNPLEdit=function(){
+  editingBnplIndex=-1;bnplName.value='';bnplMode.value='new';bnplProvider.value='SPayLater';if(document.getElementById('bnplOwner'))bnplOwner.value='nini';
+  bnplModeChanged();setText('bnplSaveBtn',L('Tambah BNPL','Add BNPL'));bnplCancelEditBtn.classList.add('hidden');closeBNPLSheet();
+}
+
+function renderV18Money(){
+  const now=new Date(),mk=monthKey(now);
+  const txs=(db.tx||[]).filter(x=>String(x.date||'').slice(0,7)===mk&&v18OwnerMatch(x,moneyOwnerFilter));
+  const moneyIn=txs.filter(x=>x.type==='income').reduce((z,x)=>z+(+x.amt||0),0);
+  const moneyOut=txs.filter(x=>x.type==='spend').reduce((z,x)=>z+(+x.amt||0),0);
+  setText('moneyMonthIn',rm(moneyIn));setText('moneyMonthOut',rm(moneyOut));setText('moneyMonthNet',rm(moneyIn-moneyOut));
+  setText('moneyMonthInLabel',L('DUIT MASUK','MONEY IN'));setText('moneyMonthOutLabel',L('DUIT KELUAR','MONEY OUT'));setText('moneyMonthNetLabel',L('BERSIH','NET'));
+  setText('moneyTransferAction',L('↔ Pindahan','↔ Transfer'));
+  setText('settingsTitle',L('Tetapan & Data','Settings & Data'));
+
+  const next=nextIncomeEvent();
+  setText('incomeNextSummary',next?`${L('Seterusnya','Next')}: ${next.date.toLocaleDateString(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short'})} • ${rm(next.amount)}`:L('Belum ada jadual pendapatan.','No income schedule yet.'));
+
+  const regular=(db.tx||[]).map((x,i)=>({kind:'tx',date:x.date||'',seq:i,data:x}))
+    .filter(o=>moneyOwnerFilter==='all'||ownerOf(o.data)===moneyOwnerFilter);
+  const transfers=(db.houseTransfers||[]).map((x,i)=>({kind:'transfer',date:x.date||'',seq:100000+i,data:x}))
+    .filter(o=>moneyOwnerFilter==='all'||o.data.from===moneyOwnerFilter||(o.data.to||'nini')===moneyOwnerFilter);
+  const rows=[...regular,...transfers].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||b.seq-a.seq).slice(0,12);
+
+  if(document.getElementById('txList'))txList.innerHTML=rows.map(o=>{
+    if(o.kind==='transfer'){
+      const x=o.data,to=x.to||'nini';
+      return `<div class="item"><div class="txLeft"><div class="txIcon">↔</div><span><b>${L('Pindahan','Transfer')} • ${v18OwnerLabel(x.from)} → ${v18OwnerLabel(to)}</b><br><span class="small">${x.date||'-'}${x.note?' • '+x.note:''}</span></span></div><b>${rm(x.amount)}</b></div>`;
+    }
+    const x=o.data,incoming=x.type==='income',cat=x.category?txCategoryName(x.type,x.category):(incoming?L('Wang Masuk','Money In'):L('Perbelanjaan','Spending'));
+    return `<div class="item"><div class="txLeft"><div class="txIcon">${incoming?'＋':'−'}</div><span><b>${x.name||cat}</b><br><span class="small">${cat} • ${x.date||'-'} <span class="ownerBadgeMini">${v18OwnerLabel(ownerOf(x))}</span></span></span></div><b class="txAmount ${incoming?'income':'spend'}">${incoming?'+':'−'}${rm(x.amt)}</b></div>`;
+  }).join('')||`<p class="small">${t('noTransactions')}</p>`;
+}
+
+function renderV18BNPL(){
+  const n=new Date();
+  const filtered=(db.bnpl||[]).map((p,i)=>({...p,i})).filter(p=>v18OwnerMatch(p,bnplOwnerFilter));
+  const active=filtered.filter(p=>bnplActiveInMonth(p,n));
+  setText('bnplThisMonth',rm(active.reduce((z,p)=>z+bnplInstallment(p),0)));
+  setText('bnplCount',active.length+' '+t('activePlans'));
+  setText('bnplHeroLabel',L('JUMLAH BNPL BULAN INI','TOTAL BNPL THIS MONTH'));
+  setText('activeBnplTitle',L('BNPL Aktif','Active BNPL'));
+  setText('bnplListMeta',bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter));
+
+  if(document.getElementById('bnplList'))bnplList.innerHTML=filtered.map(p=>{
+    const rem=bnplRemaining(p),inst=bnplInstallment(p),activeNow=bnplActiveInMonth(p,n),paid=activeNow&&bnplPaidThisMonth(p,n);
+    const total=p.totalPayable||p.total||p.orderAmount||0;
+    return `<div class="item ${paid?'paid':''}"><span style="flex:1"><b>${p.provider} — ${p.name}</b><br><span class="small">${v18OwnerLabel(ownerOf(p))} • ${rm(inst)}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}</span><div class="v18StatusRow">${activeNow?`<span class="pill ${paid?'ok':'warn'}">${paid?'✓ '+L('Dah Bayar','Paid'):L('Belum Bayar','Unpaid')} • ${commitMonthShort(n)}</span>`:`<span class="pill">${L('Tidak aktif bulan ini','Not active this month')}</span>`}</div></span><span style="text-align:right"><b>${rm(total)}</b><br>${activeNow?`<button class="v18TinyBtn" onclick="toggleBnplPaid(${p.i},'${monthKey(n)}')">${paid?L('Undo','Undo'):L('Tanda Bayar','Mark Paid')}</button>`:''}<br><button class="secondary v18TinyBtn" onclick="editBNPL(${p.i})">Edit</button> <button class="danger v18TinyBtn" onclick="deleteBNPL(${p.i})">${L('Padam','Delete')}</button></span></div>`;
+  }).join('')||`<p class="small">${t('noBNPL')}</p>`;
+}
+
+function renderV18Labels(){
+  setText('planPageTitle',L('Rancang','Plan'));
+  setText('moneyTitle',L('Duit','Money'));
+  setText('recentTxTitle',L('Transaksi Terkini','Recent Transactions'));
+  setText('incomeSetupTitle',L('Corak Pendapatan','Income Pattern'));
+  setText('incomeSetupToggle',L('Urus','Manage'));
+  setText('openBnplBtn',L('+ Tambah BNPL','+ Add BNPL'));
+  const navLabels=lang==='bm'?['Utama','Duit','BNPL','Komitmen','Rancang']:['Home','Money','BNPL','Commitments','Plan'];
+  const navIcons=['🏠','💸','🛍️','✓','🔮'];
+  document.querySelectorAll('.nav button').forEach((b,i)=>{if(navLabels[i])b.innerHTML=navIcons[i]+'<br>'+navLabels[i]});
+}
+
+const v17Render=render;
+render=function(){
+  v17Render();
+  renderV18Money();
+  renderV18BNPL();
+  renderV18Labels();
+};
+
+/* initialize V18 fields */
+if(document.getElementById('transferDate'))transferDate.value=new Date().toISOString().slice(0,10);
+render();
+</script>
+
+
+<script id="v20ProjectLabels">
+const v20RenderV18Labels=renderV18Labels;
+renderV18Labels=function(){
+  v20RenderV18Labels();
+  setText('projectsTitle',L('Projek','Projects'));
+  setText('projectOwnerLabel',L('Pemilik','Owner'));
+  setText('projectAddFundBtn',L('+ Tambah Dana','+ Add Funds'));
+  setText('projectAddSpendBtn',L('− Rekod Belanja','− Record Spending'));
+  setText('projectActivityTitle',L('Aktiviti Projek','Project Activity'));
+};
+render();
+</script>
+\n<script id="v24Core">
+/* Money+ V24 — aligned to Nini's real workflow */
+function ensureV24DB(){
+  db.funds=db.funds||[]; db.savings=db.savings||[];
+  db.funds.forEach(x=>x.entries=x.entries||[]); db.savings.forEach(x=>x.entries=x.entries||[]);
+}
+ensureV24DB();
+let fundActiveTab='fund';
+
+function fundCollection(kind){ensureV24DB();return kind==='saving'?db.savings:db.funds}
+function fundById(kind,id){return fundCollection(kind).find(x=>x.id===id)}
+function fundStats(x){
+  const incoming=(x.entries||[]).filter(e=>e.type==='in').reduce((s,e)=>s+(+e.amount||0),0);
+  const outgoing=(x.entries||[]).filter(e=>e.type==='out').reduce((s,e)=>s+(+e.amount||0),0);
+  return{incoming,outgoing,balance:incoming-outgoing};
+}
+function v24ReservedTotal(){
+  ensureV24DB();
+  return [...db.funds,...db.savings].reduce((s,x)=>s+Math.max(0,fundStats(x).balance),0);
+}
+// Replace legacy Project reserve with actual Fund + Savings reserve. Legacy projects remain in backup only.
+projectReservedTotal=function(){return v24ReservedTotal()};
+projectFreeCash=function(){return Math.max(0,currentCash()-v24ReservedTotal())};
+
+function setFundTab(kind,btn){
+  fundActiveTab=kind;
+  document.querySelectorAll('#fundTabs button').forEach(b=>b.classList.remove('on')); if(btn)btn.classList.add('on');
+  document.getElementById('fundPanel')?.classList.toggle('hidden',kind!=='fund');
+  document.getElementById('savingPanel')?.classList.toggle('hidden',kind!=='saving');
+}
+function fundTypeOptions(kind){
+  return kind==='fund'
+    ? [['custom',L('Custom','Custom')]]
+    : [['personal','Simpanan'],['emergency','Dana Kecemasan'],['education','Pendidikan'],['travel','Travel'],['other','Lain-lain']];
+}
+function fundTypeName(kind,type){
+  if(kind==='fund')return L('Dana Bersama','Joint Fund');
+  const x=fundTypeOptions(kind).find(a=>a[0]===type);return x?x[1]:type;
+}
+function fundIcon(kind,type){if(kind==='fund')return '💼';if(kind==='saving')return type==='emergency'?'🛟':type==='education'?'🎓':type==='travel'?'✈️':'💰';return '💼'}
+function formatFundDate(v){
+  if(!v)return '';
+  const d=new Date(v+'T00:00:00');
+  return new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short',year:'numeric'}).format(d);
+}
+function openNewFundSheet(kind){
+  fundCreateKind.value=kind; fundEditId.value=''; fundName.value='';
+  fundType.innerHTML=fundTypeOptions(kind).map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('');
+  const isFund=kind==='fund';
+  fundTypeLabel.classList.toggle('hidden',isFund);fundType.classList.toggle('hidden',isFund);
+  if(isFund)fundType.value='custom';
+  fundOwnerWrap.classList.toggle('hidden',isFund); if(!isFund)fundOwner.value='nini';
+  setText('fundCreateTitle',isFund?L('Dana Baru','New Fund'):L('Simpanan Baru','New Savings'));
+  setText('fundTypeLabel',L('Jenis Simpanan','Savings Type'));
+  setText('fundNameLabel',isFund?L('Nama Dana','Fund Name'):L('Nama Simpanan','Savings Name'));
+  setText('fundCreateSave',L('Simpan','Save'));
+  fundCreateBackdrop.classList.remove('hidden');fundCreateSheet.classList.remove('hidden');setTimeout(()=>fundName.focus(),20);
+}
+function openEditFundV25(kind,id){
+  const f=fundById(kind,id);if(!f)return;
+  const isFund=kind==='fund';
+  fundCreateKind.value=kind;fundEditId.value=id;fundType.innerHTML=fundTypeOptions(kind).map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('');
+  fundTypeLabel.classList.toggle('hidden',isFund);fundType.classList.toggle('hidden',isFund);
+  fundType.value=isFund?'custom':([...fundType.options].some(o=>o.value===f.type)?f.type:'other');
+  fundName.value=f.name||'';fundOwnerWrap.classList.toggle('hidden',isFund);if(!isFund)fundOwner.value=f.owner||'nini';
+  setText('fundCreateTitle',isFund?L('Edit Dana','Edit Fund'):L('Edit Simpanan','Edit Savings'));
+  setText('fundTypeLabel',L('Jenis Simpanan','Savings Type'));
+  setText('fundNameLabel',isFund?L('Nama Dana','Fund Name'):L('Nama Simpanan','Savings Name'));
+  setText('fundCreateSave',L('Simpan Perubahan','Save Changes'));
+  fundCreateBackdrop.classList.remove('hidden');fundCreateSheet.classList.remove('hidden');setTimeout(()=>fundName.focus(),20);
+}
+function closeFundCreateSheet(){fundCreateBackdrop.classList.add('hidden');fundCreateSheet.classList.add('hidden');fundEditId.value=''}
+function createFundV24(){
+  const kind=fundCreateKind.value,name=fundName.value.trim(); if(!name)return alert(L('Masukkan nama.','Enter a name.'));
+  const type=kind==='fund'?'custom':fundType.value;
+  if(fundEditId.value){
+    const f=fundById(kind,fundEditId.value);if(!f)return;f.name=name;f.type=type;f.owner=kind==='fund'?'joint':fundOwner.value;
+  }else{
+    const item={id:(kind==='fund'?'F':'S')+Date.now(),name,type,owner:kind==='fund'?'joint':fundOwner.value,entries:[],created:new Date().toISOString()};fundCollection(kind).push(item);
+  }
+  save();closeFundCreateSheet();render();
+}
+function openFundAction(kind,id,type){
+  const f=fundById(kind,id);if(!f)return;
+  fundActionKind.value=kind;fundActionId.value=id;fundActionType.value=type;fundActionEntryId.value='';fundActionAmount.value='';fundActionNote.value='';fundActionDate.value=new Date().toISOString().slice(0,10);
+  const showSource=kind==='fund'&&type==='in';fundActionSourceWrap.classList.toggle('hidden',!showSource);if(showSource)fundActionSource.value='nini';
+  setText('fundActionSourceLabel',L('Daripada','From'));
+  const inTxt=kind==='fund'?L('Dana Masuk','Fund In'):L('Simpanan Masuk','Savings In');
+  const outTxt=kind==='fund'?L('Dana Keluar','Fund Out'):L('Simpanan Keluar','Savings Out');
+  setText('fundActionTitle',(type==='in'?inTxt:outTxt)+' • '+f.name); setText('fundActionSave',type==='in'?L('Simpan Masuk','Save In'):L('Simpan Keluar','Save Out'));
+  fundActionBackdrop.classList.remove('hidden');fundActionSheet.classList.remove('hidden');setTimeout(()=>fundActionAmount.focus(),20);
+}
+function openEditFundEntryV25(kind,id,entryId){
+  const f=fundById(kind,id),e=f?.entries?.find(x=>x.id===entryId);if(!f||!e)return;
+  fundActionKind.value=kind;fundActionId.value=id;fundActionType.value=e.type;fundActionEntryId.value=entryId;fundActionAmount.value=e.amount||'';fundActionNote.value=e.note||'';fundActionDate.value=e.date||new Date().toISOString().slice(0,10);
+  const showSource=kind==='fund'&&e.type==='in';fundActionSourceWrap.classList.toggle('hidden',!showSource);if(showSource)fundActionSource.value=e.source||'nini';
+  setText('fundActionSourceLabel',L('Daripada','From'));setText('fundActionTitle',L('Edit Rekod','Edit Entry')+' • '+f.name);setText('fundActionSave',L('Simpan Perubahan','Save Changes'));
+  fundActionBackdrop.classList.remove('hidden');fundActionSheet.classList.remove('hidden');setTimeout(()=>fundActionAmount.focus(),20);
+}
+function closeFundActionSheet(){fundActionBackdrop.classList.add('hidden');fundActionSheet.classList.add('hidden');fundActionEntryId.value='';fundActionSourceWrap.classList.add('hidden')}
+function saveFundActionV24(){
+  const kind=fundActionKind.value,id=fundActionId.value,type=fundActionType.value,amount=+fundActionAmount.value||0,date=fundActionDate.value||new Date().toISOString().slice(0,10),note=fundActionNote.value.trim();
+  const source=(kind==='fund'&&type==='in')?fundActionSource.value:null;
+  const f=fundById(kind,id); if(!f||amount<=0)return alert(L('Masukkan jumlah.','Enter amount.'));
+  f.entries=f.entries||[];
+  if(fundActionEntryId.value){
+    const e=f.entries.find(x=>x.id===fundActionEntryId.value);if(!e)return;e.type=type;e.amount=amount;e.date=date;e.note=note;e.source=source;
+    db.tx=(db.tx||[]).filter(x=>x.fundEntryId!==e.id);
+    if(type==='out')db.tx.push({type:'spend',name:f.name+(note?' — '+note:''),amt:amount,category:'other',date,owner:f.owner||'joint',fundId:f.id,fundEntryId:e.id});
+  }else{
+    const entryId='FE'+Date.now(); f.entries.push({id:entryId,type,amount,date,note,source});
+    if(type==='out')db.tx.push({type:'spend',name:f.name+(note?' — '+note:''),amt:amount,category:'other',date,owner:f.owner||'joint',fundId:f.id,fundEntryId:entryId});
+  }
+  save();closeFundActionSheet();render();
+}
+function deleteFundEntryV24(kind,id,entryId){
+  const f=fundById(kind,id);if(!f)return; f.entries=(f.entries||[]).filter(e=>e.id!==entryId); db.tx=(db.tx||[]).filter(x=>x.fundEntryId!==entryId);save();render();openFundDetail(kind,id);
+}
+function deleteFundV24(kind,id){
+  if(!confirm(L('Padam rekod ini?','Delete this record?')))return;
+  const f=fundById(kind,id); const ids=new Set((f?.entries||[]).map(e=>e.id)); db.tx=(db.tx||[]).filter(x=>!ids.has(x.fundEntryId));
+  if(kind==='fund')db.funds=db.funds.filter(x=>x.id!==id);else db.savings=db.savings.filter(x=>x.id!==id);save();render();
+}
+function openFundDetail(kind,id){
+  const f=fundById(kind,id);if(!f)return;const z=fundStats(f);
+  setText('fundDetailTitle',f.name+' • '+L('Transaksi','Transactions'));
+  setText('fundHistoryTitle',L('Transaksi Masuk / Keluar','Money In / Out'));
+  fundDetailSummary.innerHTML=`<div class="fundDetailBalance"><span>${L('BAKI','BALANCE')}</span><b>${rm(z.balance)}</b></div><div class="fundMetrics"><div class="fundMini"><span>${L('MASUK','IN')}</span><b>${rm(z.incoming)}</b></div><div class="fundMini"><span>${L('KELUAR','OUT')}</span><b>${rm(z.outgoing)}</b></div><div class="fundMini"><span>${L('TRANSAKSI','TRANSACTIONS')}</span><b>${(f.entries||[]).length}</b></div></div>`;
+  fundDetailHistory.innerHTML=(f.entries||[]).slice().reverse().map(e=>{
+    const source=(kind==='fund'&&e.type==='in')?(e.source==='faizal'?'Faizal':'Nini'):'';
+    const meta=[source,formatFundDate(e.date),e.note].filter(Boolean).join(' • ');
+    return `<div class="item fundTxRow" data-longpress="entry" data-kind="${kind}" data-id="${id}" data-entry="${e.id}"><span style="flex:1;min-width:0"><b>${e.type==='in'?'+':'−'} ${rm(e.amount)}</b><br><span class="small">${meta}</span></span><span class="fundTxRight"><span class="pill ${e.type==='in'?'ok':'warn'}">${e.type==='in'?L('Masuk','In'):L('Keluar','Out')}</span></span><span class="fundTxActions"><button class="secondary" onclick="event.stopPropagation();openEditFundEntryV25('${kind}','${id}','${e.id}')">${L('Edit','Edit')}</button><button class="danger" onclick="event.stopPropagation();if(confirm(L('Padam transaksi ini?','Delete this transaction?')))deleteFundEntryV24('${kind}','${id}','${e.id}')">${L('Padam','Delete')}</button></span></div>`;
+  }).join('')||`<p class="small">${L('Belum ada transaksi.','No transactions yet.')}</p>`;
+  bindFundLongPressV25(fundDetailHistory);
+  fundDetailBackdrop.classList.remove('hidden');fundDetailSheet.classList.remove('hidden');
+}
+function closeFundDetailSheet(){fundDetailBackdrop.classList.add('hidden');fundDetailSheet.classList.add('hidden')}
+function renderFundCards(kind){
+  const list=fundCollection(kind),target=document.getElementById(kind==='fund'?'fundList':'savingListV24'); if(!target)return;
+  target.innerHTML=list.map(f=>{const z=fundStats(f);const meta=kind==='fund'?L('Dana Bersama','Joint Fund'):fundTypeName(kind,f.type)+' • '+v18OwnerLabel(f.owner||'nini');return `<div class="fundCard" data-longpress="fund" data-kind="${kind}" data-id="${f.id}"><div class="fundCardHead"><span><div class="fundCardTitle">${fundIcon(kind,f.type)} ${f.name}</div><div class="fundCardMeta">${meta}</div></span><span><button class="secondary v18TinyBtn" onclick="openFundDetail('${kind}','${f.id}')">${L('Transaksi','Transactions')}</button></span></div><div class="fundMetrics"><div class="fundMini"><span>${L('MASUK','IN')}</span><b>${rm(z.incoming)}</b></div><div class="fundMini"><span>${L('KELUAR','OUT')}</span><b>${rm(z.outgoing)}</b></div><div class="fundMini"><span>${L('BAKI','BALANCE')}</span><b>${rm(z.balance)}</b></div></div><div class="fundActions"><button class="in" onclick="openFundAction('${kind}','${f.id}','in')">+ ${L('Masuk','In')}</button><button class="out" onclick="openFundAction('${kind}','${f.id}','out')">− ${L('Keluar','Out')}</button></div></div>`}).join('')||`<p class="small">${kind==='fund'?L('Belum ada dana.','No funds yet.'):L('Belum ada simpanan.','No savings yet.')}</p>`;
+  bindFundLongPressV25(target);
+}
+let fundLongPressTimerV25=null;
+function openFundManageV25(kind,id,entryId=''){
+  fundManageKind.value=kind;fundManageId.value=id;fundManageEntryId.value=entryId||'';
+  const f=fundById(kind,id);if(!f)return;
+  setText('fundManageTitle',entryId?L('Urus Rekod','Manage Entry'):f.name);
+  setText('fundManageEditBtn',L('Edit','Edit'));setText('fundManageDeleteBtn',L('Padam','Delete'));
+  fundManageBackdrop.classList.remove('hidden');fundManageSheet.classList.remove('hidden');
+}
+function closeFundManageSheet(){fundManageBackdrop.classList.add('hidden');fundManageSheet.classList.add('hidden')}
+function fundManageEditV25(){
+  const kind=fundManageKind.value,id=fundManageId.value,entryId=fundManageEntryId.value;closeFundManageSheet();
+  if(entryId)openEditFundEntryV25(kind,id,entryId);else openEditFundV25(kind,id);
+}
+function fundManageDeleteV25(){
+  const kind=fundManageKind.value,id=fundManageId.value,entryId=fundManageEntryId.value;closeFundManageSheet();
+  if(entryId){if(confirm(L('Padam rekod ini?','Delete this entry?')))deleteFundEntryV24(kind,id,entryId)}else deleteFundV24(kind,id);
+}
+function bindFundLongPressV25(root){
+  if(!root)return;
+  root.querySelectorAll('[data-longpress]').forEach(el=>{
+    if(el.dataset.lpBound==='1')return;el.dataset.lpBound='1';
+    const start=(ev)=>{if(ev.target.closest('button,input,select'))return;clearTimeout(fundLongPressTimerV25);fundLongPressTimerV25=setTimeout(()=>{el.dataset.lpTriggered='1';openFundManageV25(el.dataset.kind,el.dataset.id,el.dataset.entry||'')},550)};
+    const cancel=()=>{clearTimeout(fundLongPressTimerV25)};
+    el.addEventListener('pointerdown',start);el.addEventListener('pointerup',cancel);el.addEventListener('pointercancel',cancel);el.addEventListener('pointerleave',cancel);
+    el.addEventListener('contextmenu',ev=>{ev.preventDefault();openFundManageV25(el.dataset.kind,el.dataset.id,el.dataset.entry||'')});
+  });
+}
+function renderFundsV24(){
+  ensureV24DB();const fb=db.funds.reduce((s,x)=>s+fundStats(x).balance,0),sb=db.savings.reduce((s,x)=>s+fundStats(x).balance,0);
+  setText('allFundsBalance',rm(fb));setText('allSavingsBalance',rm(sb));setText('fundCountLabel',db.funds.length+' '+L('dana','funds'));setText('savingCountLabelV24',db.savings.length+' '+L('simpanan','savings'));
+  renderFundCards('fund');renderFundCards('saving');setFundTab(fundActiveTab,document.querySelector(`#fundTabs button[onclick*="'${fundActiveTab}'"]`));
+}
+
+function renderSpendTrackerV24(){
+  const el=document.getElementById('spendCategoryList');if(!el)return;const mk=monthKey(new Date());
+  const tx=(db.tx||[]).filter(x=>x.type==='spend'&&String(x.date||'').slice(0,7)===mk&&(moneyOwnerFilter==='all'||ownerOf(x)===moneyOwnerFilter));
+  const sums={};tx.forEach(x=>{const k=x.category||'other';sums[k]=(sums[k]||0)+(+x.amt||0)});
+  const arr=Object.entries(sums).sort((a,b)=>b[1]-a[1]),max=arr[0]?.[1]||1;
+  setText('spendTrackerOwner',moneyOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(moneyOwnerFilter));
+  el.innerHTML=arr.map(([k,v])=>`<div class="spendBarRow"><span class="spendBarLabel">${txCategoryName('spend',k)}</span><span class="spendBarTrack"><i style="width:${Math.max(5,v/max*100)}%"></i></span><span class="spendBarAmt">${rm(v)}</span></div>`).join('')||`<p class="small">${L('Belum ada belanja bulan ini.','No spending this month.')}</p>`;
+}
+
+function bnplTotalForMonthV24(d,owner='all'){return (db.bnpl||[]).filter(p=>(owner==='all'||ownerOf(p)===owner)&&bnplActiveInMonth(p,d)).reduce((s,p)=>s+bnplInstallment(p),0)}
+function renderBNPLForecastV24(){
+  const n=new Date(),months=Array.from({length:6},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return{d,total:bnplTotalForMonthV24(d,bnplOwnerFilter)}});
+  const el=document.getElementById('bnplForecast6');if(el)el.innerHTML=months.map(x=>`<div class="commitForecastCell"><b>${new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short'}).format(x.d)}</b><strong>${rm(x.total)}</strong></div>`).join('');
+  setText('bnplForecastOwner',bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter));
+}
+
+// Better affordability simulation: new instalments accumulate across future months.
+simulate=function(){
+  const amt=+simAmt.value||0,m=+simMonths.value||1;if(amt<=0)return;const inst=amt/m,f=forecast();
+  const after=f.map((x,i)=>x.balance-inst*Math.min(i+1,m)); const lowest=Math.min(...after);
+  simResult.innerHTML=lowest>=500?`<span class="pill ok">✅ ${t('affordable')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('baki terendah','lowest balance')} ${rm(lowest)}</p>`:lowest>=0?`<span class="pill warn">⚠️ ${t('tight')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('baki terendah','lowest balance')} ${rm(lowest)}</p>`:`<span class="pill bad">❌ ${t('notRecommended')}</span><p>${rm(inst)}/${L('bulan','month')} • ${L('baki terendah','lowest balance')} ${rm(lowest)}</p>`;
+};
+
+// Extend commitment category support for borrowed money.
+const v24CategoryGroup=categoryGroup;categoryGroup=function(c){if(c?.type==='Borrowed Money')return 'Borrowed Money';return v24CategoryGroup(c)};
+const v24CategoryLabel=categoryLabel;categoryLabel=function(t){if(t==='Borrowed Money')return L('Pinjam Duit','Borrowed Money');return v24CategoryLabel(t)};
+const v24Icon=icon;icon=function(t){if(t==='Borrowed Money')return '🤝';return v24Icon(t)};
+const v24CommitTypeChanged=commitTypeChanged;commitTypeChanged=function(){v24CommitTypeChanged();if(cmType?.value==='Borrowed Money'){const x=document.getElementById('cmOutstanding');if(!x){commitFields.insertAdjacentHTML('beforeend',`<label>${L('Jumlah Pinjaman','Borrowed Amount')}</label><input id="cmOutstanding" type="number" placeholder="RM">`)}}};
+
+// Override labels/navigation.
+const v24RenderLabels=renderV18Labels;renderV18Labels=function(){
+  v24RenderLabels(); setText('planPageTitle',L('Dana','Funds')); setText('navPlan',L('Dana','Funds'));
+  setText('fundTabFund',L('Dana Bersama','Joint Funds'));setText('fundTabSaving',L('Simpanan','Savings'));
+  setText('addFundBtn',L('+ Dana Baru','+ New Fund'));setText('addSavingV24Btn',L('+ Simpanan Baru','+ New Savings'));
+  setText('spendTrackerTitle',L('Belanja Bulan Ini','This Month Spending'));setText('bnplForecastTitle',L('BNPL 6 Bulan','6-Month BNPL'));setText('bnplCanAddTitle',L('Boleh Ambil BNPL Lagi?','Can I Add More BNPL?'));
+  const labels=lang==='bm'?['Utama','Duit','BNPL','Komitmen','Dana']:['Home','Money','BNPL','Commitments','Funds'];const icons=['🏠','💸','🛍️','✓','💰'];document.querySelectorAll('.nav button').forEach((b,i)=>{if(labels[i])b.innerHTML=icons[i]+'<br><span>'+labels[i]+'</span>'});
+};
+
+const v24Render=render;render=function(){ensureV24DB();v24Render();renderFundsV24();renderSpendTrackerV24();renderBNPLForecastV24();};
+const v24SetMoneyOwnerFilter=setMoneyOwnerFilter;setMoneyOwnerFilter=function(v,btn){v24SetMoneyOwnerFilter(v,btn);renderSpendTrackerV24()};
+const v24SetBnplOwnerFilter=setBnplOwnerFilter;setBnplOwnerFilter=function(v,btn){v24SetBnplOwnerFilter(v,btn);renderBNPLForecastV24()};
+
+render();
+</script>\n
+<script id="v28EditableEverywhere">
+/* Money+ V28 — explicit monthly BNPL + edit/delete everywhere user-keyed */
+let editingTxIndexV28=-1;
+let editingTransferIndexV28=-1;
+let editingIncomeIndexV28=-1;
+let editingCommitIndexV28=-1;
+
+/* ---------- BNPL ---------- */
+bnplModeChanged=function(){
+  const m=bnplMode.value;
+  if(m==='new'){
+    bnplDynamic.innerHTML=`
+      <div class="grid2">
+        <div><label>${L('Jumlah Harga','Total Price')}</label><input id="bnplTotal" type="number" placeholder="RM"></div>
+        <div><label>${L('Bilangan Bulan','Number of Months')}</label><input id="bnplMonths" type="number" min="1" placeholder=""></div>
+      </div>
+      <div class="grid2">
+        <div><label>${L('Ansuran / Bulan','Installment / Month')}</label><input id="bnplInstallmentNew" type="number" placeholder="RM"></div>
+        <div><label>${L('Due Day Bulanan','Monthly Due Day')}</label><input id="bnplDue" type="number" min="1" max="31" placeholder=""></div>
+      </div>
+      <label>${L('Tarikh Mula','Start Date')}</label><input id="bnplStart" type="date">`;
+  }else{
+    bnplDynamic.innerHTML=`
+      <div class="grid2"><div><label>${L('Jumlah Pesanan','Order Amount')}</label><input id="bnplOrderAmount" type="number" placeholder="RM"></div><div><label>${L('Jumlah Perlu Dibayar','Total Payable')}</label><input id="bnplTotalPayable" type="number" placeholder="RM"></div></div>
+      <div class="grid2"><div><label>${L('Jumlah Ansuran','Total Installments')}</label><input id="bnplTotalInstallments" type="number" min="1" placeholder=""></div><div><label>${L('Dah Bayar','Paid Installments')}</label><input id="bnplPaidInstallments" type="number" min="0" placeholder=""></div></div>
+      <div class="grid2"><div><label>${L('Ansuran / Bulan','Installment / Month')}</label><input id="bnplInstallment" type="number" placeholder="RM"></div><div><label>${L('Bayaran Seterusnya','Next Due Date')}</label><input id="bnplNextDue" type="date"></div></div>`;
+  }
+};
+
+addBNPL=function(){
+  const provider=bnplProvider.value,name=bnplName.value.trim(),mode=bnplMode.value,owner=(document.getElementById('bnplOwner')?.value||'nini');
+  if(!name)return alert(L('Isi nama pembelian.','Enter the purchase name.'));
+  let item;
+  if(mode==='new'){
+    const total=+document.getElementById('bnplTotal').value||0;
+    const months=+document.getElementById('bnplMonths').value||0;
+    const installment=+document.getElementById('bnplInstallmentNew').value||0;
+    const start=document.getElementById('bnplStart').value;
+    const due=+document.getElementById('bnplDue').value||null;
+    if(total<=0||months<=0||installment<=0||!start)return alert(L('Lengkapkan harga, ansuran bulanan, bilangan bulan dan tarikh mula.','Complete price, monthly installment, number of months and start date.'));
+    item={mode:'new',provider,name,total,totalPayable:total,months,installment,start,due,owner,paidMonths:{}};
+  }else{
+    const orderAmount=+document.getElementById('bnplOrderAmount').value||0;
+    const totalPayable=+document.getElementById('bnplTotalPayable').value||0;
+    const totalInstallments=+document.getElementById('bnplTotalInstallments').value||0;
+    const paidInstallments=+document.getElementById('bnplPaidInstallments').value||0;
+    const installment=+document.getElementById('bnplInstallment').value||0;
+    const nextDue=document.getElementById('bnplNextDue').value;
+    if(totalInstallments<=0||paidInstallments<0||paidInstallments>=totalInstallments||installment<=0||!nextDue)return alert(L('Lengkapkan maklumat ansuran dan tarikh bayaran seterusnya.','Complete the installment details and next due date.'));
+    item={mode:'ongoing',provider,name,orderAmount,totalPayable,totalInstallments,paidInstallments,installment,nextDue,owner,paidMonths:{}};
+  }
+  if(editingBnplIndex>=0){item.paidMonths=db.bnpl[editingBnplIndex].paidMonths||{};db.bnpl[editingBnplIndex]=item}
+  else db.bnpl.push(item);
+  save();cancelBNPLEdit();render();
+};
+
+editBNPL=function(i){
+  const p=db.bnpl[i];if(!p)return;
+  editingBnplIndex=i;
+  openBNPLSheet(false);
+  bnplMode.value=p.mode||'new';bnplProvider.value=p.provider||'SPayLater';bnplName.value=p.name||'';bnplOwner.value=ownerOf(p);bnplModeChanged();
+  if(p.mode==='ongoing'){
+    bnplOrderAmount.value=p.orderAmount||'';bnplTotalPayable.value=p.totalPayable||'';bnplTotalInstallments.value=p.totalInstallments||'';bnplPaidInstallments.value=p.paidInstallments||0;bnplInstallment.value=p.installment||'';bnplNextDue.value=p.nextDue||'';
+  }else{
+    bnplTotal.value=p.total||p.totalPayable||'';bnplMonths.value=p.months||'';bnplInstallmentNew.value=p.installment||bnplInstallment(p)||'';bnplStart.value=p.start||'';bnplDue.value=p.due||'';
+  }
+  setText('bnplSaveBtn',L('Simpan Perubahan','Save Changes'));bnplCancelEditBtn.classList.remove('hidden');setText('bnplSheetTitle',L('Edit BNPL','Edit BNPL'));
+};
+
+/* ---------- MONEY TRANSACTIONS ---------- */
+const v28OpenTxBase=openTxSheet;
+openTxSheet=function(kind){editingTxIndexV28=-1;v28OpenTxBase(kind);setText('saveTxBtn',L('Simpan','Save'))};
+function editTxV28(i){
+  const x=db.tx[i];if(!x||x.fundEntryId||x.projectTxId)return;
+  editingTxIndexV28=i;v28OpenTxBase(x.type||'spend');
+  txCategory.value=x.category||'other';txOwner.value=ownerOf(x);txName.value=x.name||'';txAmt.value=x.amt||'';txDate.value=x.date||new Date().toISOString().slice(0,10);
+  setText('txSheetTitle',L('Edit Transaksi','Edit Transaction'));setText('saveTxBtn',L('Simpan Perubahan','Save Changes'));
+}
+function deleteTxV28(i){const x=db.tx[i];if(!x||x.fundEntryId||x.projectTxId)return;if(confirm(L('Padam transaksi ini?','Delete this transaction?'))){db.tx.splice(i,1);save();render()}}
+addTxAndClose=function(){
+  const a=+txAmt.value||0;if(a<=0)return alert(L('Isi jumlah transaksi.','Enter the transaction amount.'));
+  const kind=txType.value,category=txCategory.value,date=txDate.value||new Date().toISOString().slice(0,10),note=txName.value.trim(),name=note||txCategoryName(kind,category),owner=txOwner.value||'nini';
+  if(editingTxIndexV28>=0){const old=db.tx[editingTxIndexV28]||{};db.tx[editingTxIndexV28]={...old,type:kind,category,name,amt:a,date,owner};editingTxIndexV28=-1}
+  else db.tx.push({type:kind,category,name,amt:a,date,owner});
+  save();closeTxSheet();render();
+};
+const v28CloseTxBase=closeTxSheet;
+closeTxSheet=function(){editingTxIndexV28=-1;v28CloseTxBase();setText('saveTxBtn',L('Simpan Transaksi','Save Transaction'))};
+
+/* ---------- TRANSFERS ---------- */
+const v28OpenTransferBase=openTransferSheet;
+openTransferSheet=function(){editingTransferIndexV28=-1;v28OpenTransferBase();setText('transferSaveBtn',L('Simpan Pindahan','Save Transfer'))};
+function editTransferV28(i){
+  const x=(db.houseTransfers||[])[i];if(!x)return;editingTransferIndexV28=i;v28OpenTransferBase();
+  transferFrom.value=x.from||'faizal';transferTo.value=x.to||'nini';transferAmount.value=x.amount||'';transferDate.value=x.date||new Date().toISOString().slice(0,10);transferNote.value=x.note||'';
+  setText('transferSheetTitle',L('Edit Pindahan','Edit Transfer'));setText('transferSaveBtn',L('Simpan Perubahan','Save Changes'));
+}
+function deleteTransferV28(i){if(confirm(L('Padam pindahan ini?','Delete this transfer?'))){db.houseTransfers.splice(i,1);save();render()}}
+addMoneyTransfer=function(){
+  const from=transferFrom.value,to=transferTo.value,amount=+transferAmount.value||0,date=transferDate.value||new Date().toISOString().slice(0,10),note=transferNote.value.trim();
+  if(from===to)return alert(L('Pilih pemilik yang berbeza.','Choose different owners.'));if(amount<=0)return alert(L('Masukkan jumlah pindahan.','Enter the transfer amount.'));
+  const item={id:editingTransferIndexV28>=0?(db.houseTransfers[editingTransferIndexV28].id||('HT'+Date.now())):'HT'+Date.now(),from,to,amount,date,note};
+  if(editingTransferIndexV28>=0)db.houseTransfers[editingTransferIndexV28]=item;else db.houseTransfers.push(item);
+  editingTransferIndexV28=-1;save();closeTransferSheet();render();
+};
+
+/* ---------- INCOME SOURCES ---------- */
+function collectIncomeSourceV28(){
+  const name=srcName.value.trim(),t=srcType.value;if(!name){alert(L('Isi nama sumber pendapatan.','Enter an income source name.'));return null}const s={name,type:t};
+  if(t==='fixed'){s.amount=+fAmount.value||0;s.day=+fDay.value||null}
+  if(t==='multiple'){
+    s.payments=[{day:+mDay1.value||0,amount:+mAmt1.value||0},{day:+mDay2.value||0,amount:+mAmt2.value||0},{day:+mDay3.value||0,amount:+mAmt3.value||0}].filter(x=>x.day&&x.amount);
+    s.advanceEnabled=document.getElementById('advanceEnabled')?.value==='yes';s.advanceDay=+(document.getElementById('advDay')?.value||0)||null;s.advanceMax=+(document.getElementById('advMax')?.value||0)||0;
+  }
+  if(t==='daily'){s.avg=+dAvg.value||0;s.workDays=+dWork.value||0}
+  if(t==='weekly'){s.amount=+wAmount.value||0;s.weekday=+wDay.value}
+  if(t==='irregular'){s.expected=[{amount:+irrAmount.value||0,date:irrDate.value}]}
+  if(t==='salary_advance'){s.amount=+saAmount.value||0;s.day=+saDay.value||null;s.deductDay=+saDeductDay.value||null;s.note=saNote.value.trim()}
+  if(t==='oneoff'){s.amount=+oAmount.value||0;s.date=oDate.value}
+  return s;
+}
+addIncomeSource=function(){const s=collectIncomeSourceV28();if(!s)return;if(editingIncomeIndexV28>=0){db.incomeSources[editingIncomeIndexV28]=s;editingIncomeIndexV28=-1}else db.incomeSources.push(s);srcName.value='';save();render();incomeTypeChanged();setText('addIncomeBtn',L('Simpan Sumber Pendapatan','Save Income Source'))};
+function editIncomeV28(i){
+  const s=db.incomeSources[i];if(!s)return;editingIncomeIndexV28=i;incomeSetupBackdrop.classList.remove('hidden');incomeSetupPanel.classList.remove('hidden');srcName.value=s.name||'';srcType.value=s.type||'fixed';incomeTypeChanged();
+  if(s.type==='fixed'){fAmount.value=s.amount||'';fDay.value=s.day||''}
+  if(s.type==='multiple'){
+    const p=s.payments||[];if(p[0]){mDay1.value=p[0].day||'';mAmt1.value=p[0].amount||''}if(p[1]){mDay2.value=p[1].day||'';mAmt2.value=p[1].amount||''}if(p[2]){mDay3.value=p[2].day||'';mAmt3.value=p[2].amount||''}
+    advanceEnabled.value=s.advanceEnabled?'yes':'no';advanceFieldsChanged();if(s.advanceEnabled){advDay.value=s.advanceDay||'';advMax.value=s.advanceMax||''}
+  }
+  if(s.type==='daily'){dAvg.value=s.avg||'';dWork.value=s.workDays||''}
+  if(s.type==='weekly'){wAmount.value=s.amount||'';wDay.value=String(s.weekday??1)}
+  if(s.type==='irregular'){const e=(s.expected||[])[0]||{};irrAmount.value=e.amount||'';irrDate.value=e.date||''}
+  if(s.type==='salary_advance'){saAmount.value=s.amount||'';saDay.value=s.day||'';saDeductDay.value=s.deductDay||'';saNote.value=s.note||''}
+  if(s.type==='oneoff'){oAmount.value=s.amount||'';oDate.value=s.date||''}
+  setText('addIncomeBtn',L('Simpan Perubahan','Save Changes'));
+}
+function deleteIncomeV28(i){if(confirm(L('Padam sumber pendapatan ini?','Delete this income source?'))){db.incomeSources.splice(i,1);if(editingIncomeIndexV28===i)editingIncomeIndexV28=-1;save();render()}}
+const v28CloseIncomeBase=closeIncomeSetup;
+closeIncomeSetup=function(){editingIncomeIndexV28=-1;setText('addIncomeBtn',L('Simpan Sumber Pendapatan','Save Income Source'));v28CloseIncomeBase()};
+function renderIncomeSourcesV28(){
+  if(!document.getElementById('incomeSources'))return;
+  incomeSources.innerHTML=db.incomeSources.map((s,i)=>`<div class="item"><span><b>💵 ${s.name}</b><br><span class="small">${incomeSummary(s)}</span></span><span><button class="secondary v18TinyBtn" onclick="editIncomeV28(${i})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteIncomeV28(${i})">${L('Padam','Delete')}</button></span></div>`).join('')||`<p class="small">${t('noIncomeSources')}</p>`;
+}
+
+/* ---------- COMMITMENTS ---------- */
+const v28OpenCommitBase=openCommitSheet;
+openCommitSheet=function(){editingCommitIndexV28=-1;v28OpenCommitBase();setText('commitAddTitle',L('Tambah Komitmen','Add Commitment'));setText('commitSaveBtn',L('Tambah Komitmen','Add Commitment'))};
+function buildCommitItemV28(oldPaid={}){
+  const t=cmType.value,freq=cmFrequency.value,n=(document.getElementById('cmName')?.value||'').trim(),a=+(document.getElementById('cmAmt')?.value||0);if(!n||a<=0){alert(tr('fillNameAmount'));return null}
+  const selectedMonths=[...document.querySelectorAll('.cmMonthCheck:checked')].map(x=>x.value);
+  const item={type:t,frequency:freq,name:n,amt:a,due:+(document.getElementById('cmDue')?.value||0)||null,months:+(document.getElementById('cmMonths')?.value||0)||null,start:document.getElementById('cmStart')?.value||null,date:document.getElementById('cmDate')?.value||null,selectedMonths,outstanding:+(document.getElementById('cmOutstanding')?.value||0)||null,savingCategory:(document.getElementById('cmSavingCategory')?.value||''),owner:(document.getElementById('commitOwner')?.value||'nini'),paidMonths:oldPaid||{}};
+  if(freq==='onetime'&&!item.date){alert(L('Pilih tarikh bayaran.','Choose the payment date.'));return null}
+  if(freq==='fixed_months'&&(!item.start||!item.months)){alert(L('Isi tarikh mula dan berapa bulan.','Enter the start date and number of months.'));return null}
+  if(freq==='selected_months'&&!selectedMonths.length){alert(L('Pilih sekurang-kurangnya satu bulan.','Choose at least one month.'));return null}
+  return item;
+}
+addCommit=function(){const old=editingCommitIndexV28>=0?db.commit[editingCommitIndexV28]:null,item=buildCommitItemV28(old?.paidMonths||{});if(!item)return;if(editingCommitIndexV28>=0)db.commit[editingCommitIndexV28]=item;else db.commit.push(item);editingCommitIndexV28=-1;save();closeCommitSheet();render()};
+function editCommitV28(i){
+  const c=db.commit[i];if(!c)return;editingCommitIndexV28=i;document.getElementById('commitSheetBackdrop')?.classList.remove('hidden');document.getElementById('commitSheet')?.classList.remove('hidden');cmType.value=categoryGroup(c);if(![...cmType.options].some(o=>o.value===cmType.value))cmType.value=c.type||'Other';cmFrequency.value=commitmentFrequency(c);commitOwner.value=ownerOf(c);commitTypeChanged();
+  if(cmName)cmName.value=c.name||'';if(cmAmt)cmAmt.value=c.amt||'';if(document.getElementById('cmDue'))cmDue.value=c.due||'';if(document.getElementById('cmMonths'))cmMonths.value=c.months||'';if(document.getElementById('cmStart'))cmStart.value=c.start||'';if(document.getElementById('cmDate'))cmDate.value=c.date||'';if(document.getElementById('cmOutstanding'))cmOutstanding.value=c.outstanding||'';if(document.getElementById('cmSavingCategory'))cmSavingCategory.value=c.savingCategory||'other';
+  document.querySelectorAll('.cmMonthCheck').forEach(x=>x.checked=(c.selectedMonths||[]).includes(x.value));setText('commitAddTitle',L('Edit Komitmen','Edit Commitment'));setText('commitSaveBtn',L('Simpan Perubahan','Save Changes'));
+}
+function deleteCommitV28(i){if(confirm(L('Padam komitmen ini?','Delete this commitment?'))){db.commit.splice(i,1);save();render()}}
+function enhanceCommitActionsV28(){
+  document.querySelectorAll('#cmList .item').forEach(row=>{const paidBtn=[...row.querySelectorAll('button')].find(b=>(b.getAttribute('onclick')||'').startsWith('togglePaid('));if(!paidBtn)return;const m=(paidBtn.getAttribute('onclick')||'').match(/togglePaid\((\d+)/);if(!m)return;const idx=+m[1],right=paidBtn.parentElement;if(!right||right.querySelector('.v28CommitEdit'))return;right.insertAdjacentHTML('beforeend',`<br><button class="secondary v18TinyBtn v28CommitEdit" onclick="editCommitV28(${idx})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteCommitV28(${idx})">${L('Padam','Delete')}</button>`)});
+}
+
+/* ---------- MONEY LIST WITH EDIT/DELETE ---------- */
+renderV18Money=function(){
+  const now=new Date(),mk=monthKey(now);const txs=(db.tx||[]).filter(x=>String(x.date||'').slice(0,7)===mk&&v18OwnerMatch(x,moneyOwnerFilter));
+  const moneyIn=txs.filter(x=>x.type==='income').reduce((z,x)=>z+(+x.amt||0),0),moneyOut=txs.filter(x=>x.type==='spend').reduce((z,x)=>z+(+x.amt||0),0);
+  setText('moneyMonthIn',rm(moneyIn));setText('moneyMonthOut',rm(moneyOut));setText('moneyMonthNet',rm(moneyIn-moneyOut));setText('moneyMonthInLabel',L('DUIT MASUK','MONEY IN'));setText('moneyMonthOutLabel',L('DUIT KELUAR','MONEY OUT'));setText('moneyMonthNetLabel',L('BERSIH','NET'));setText('moneyTransferAction',L('↔ Pindahan','↔ Transfer'));setText('settingsTitle',L('Tetapan & Data','Settings & Data'));
+  const next=nextIncomeEvent();setText('incomeNextSummary',next?`${L('Seterusnya','Next')}: ${next.date.toLocaleDateString(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short'})} • ${rm(next.amount)}`:L('Belum ada jadual pendapatan.','No income schedule yet.'));
+  const regular=(db.tx||[]).map((x,i)=>({kind:'tx',date:x.date||'',seq:i,idx:i,data:x})).filter(o=>moneyOwnerFilter==='all'||ownerOf(o.data)===moneyOwnerFilter);
+  const transfers=(db.houseTransfers||[]).map((x,i)=>({kind:'transfer',date:x.date||'',seq:100000+i,idx:i,data:x})).filter(o=>moneyOwnerFilter==='all'||o.data.from===moneyOwnerFilter||(o.data.to||'nini')===moneyOwnerFilter);
+  const rows=[...regular,...transfers].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||b.seq-a.seq).slice(0,12);
+  if(document.getElementById('txList'))txList.innerHTML=rows.map(o=>{
+    if(o.kind==='transfer'){const x=o.data,to=x.to||'nini';return `<div class="item"><div class="txLeft"><div class="txIcon">↔</div><span><b>${L('Pindahan','Transfer')} • ${v18OwnerLabel(x.from)} → ${v18OwnerLabel(to)}</b><br><span class="small">${x.date||'-'}${x.note?' • '+x.note:''}</span></span></div><span style="text-align:right"><b>${rm(x.amount)}</b><br><button class="secondary v18TinyBtn" onclick="editTransferV28(${o.idx})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteTransferV28(${o.idx})">${L('Padam','Delete')}</button></span></div>`}
+    const x=o.data,incoming=x.type==='income',cat=x.category?txCategoryName(x.type,x.category):(incoming?L('Wang Masuk','Money In'):L('Perbelanjaan','Spending')),editable=!x.fundEntryId&&!x.projectTxId;
+    return `<div class="item"><div class="txLeft"><div class="txIcon">${incoming?'＋':'−'}</div><span><b>${x.name||cat}</b><br><span class="small">${cat} • ${x.date||'-'} <span class="ownerBadgeMini">${v18OwnerLabel(ownerOf(x))}</span></span></span></div><span style="text-align:right"><b class="txAmount ${incoming?'income':'spend'}">${incoming?'+':'−'}${rm(x.amt)}</b>${editable?`<br><button class="secondary v18TinyBtn" onclick="editTxV28(${o.idx})">${L('Edit','Edit')}</button> <button class="danger v18TinyBtn" onclick="deleteTxV28(${o.idx})">${L('Padam','Delete')}</button>`:''}</span></div>`;
+  }).join('')||`<p class="small">${t('noTransactions')}</p>`;
+};
+
+/* Make post-render edit controls persistent */
+const v28PrevRender=render;
+render=function(){v28PrevRender();renderIncomeSourcesV28();enhanceCommitActionsV28()};
+
+render();
+
 </script>
 </body>
 </html>
