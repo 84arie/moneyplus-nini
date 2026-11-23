@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate BNPL REAL Linked Commitment 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Grouped By Provider 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -608,7 +608,7 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 </div>
 
 <div class="commitSummary">
-  <div class="metric"><div class="label" id="commitTotalLabel">TOTAL BULAN INI</div><div class="value" id="commitTotalThisMonth">RM0</div><div class="small" id="commitTotalBreakdown" style="margin-top:4px"></div></div>
+  <div class="metric"><div class="label" id="commitTotalLabel">TOTAL BULAN INI</div><div class="value" id="commitTotalThisMonth">RM0</div></div>
   <div class="metric"><div class="label" id="commitPaidLabel">DAH BAYAR</div><div class="value" id="commitPaidThisMonth">RM0</div></div>
   <div class="metric"><div class="label" id="commitUnpaidLabel">BELUM BAYAR</div><div class="value" id="commitUnpaidThisMonth">RM0</div></div>
 </div>
@@ -1274,10 +1274,15 @@ function syncBnplAutoCommitments(){
       ? new Date(p.nextDue+'T00:00:00').getDate()
       : (+p.due||null);
 
-    // Ongoing means an existing live plan: start counting from current month.
-    // New BNPL follows the start date entered by the user.
+    // Ongoing BNPL must start from the month of its NEXT PAYMENT.
+    // Example: next payment 31/12 => commitment starts in December, not current month.
+    let ongoingStart=currentMonthStart;
+    if(p.mode==='ongoing' && p.nextDue){
+      const nd=new Date(p.nextDue+'T00:00:00');
+      ongoingStart=nd.getFullYear()+'-'+String(nd.getMonth()+1).padStart(2,'0')+'-01';
+    }
     const start=(p.mode==='ongoing')
-      ? currentMonthStart
+      ? ongoingStart
       : (p.start||currentMonthStart);
 
     const months=(p.mode==='ongoing')
@@ -1589,34 +1594,34 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
  renderCommitDashboard(commitViewDate);
  const commitN=commitViewDate;
  const cmFilterEl=document.getElementById('cmFilter'),cmListEl=document.getElementById('cmList');if(cmFilterEl)cmFilterEl.value=filter;
- let list=db.commit.map((c,i)=>({...c,i})).filter(c=>ownerMatches(c,commitOwnerFilter)&&commitAppliesInMonth(c,commitN)&&(filter==='Semua'||categoryGroup(c)===filter));
- let manualHtml=list.map(c=>{
-   if(c.autoBnplId){
-     const bi=bnplIndexByAutoId(c.autoBnplId),p=bi>=0?db.bnpl[bi]:null;
-     if(!p)return '';
-     const paid=bnplPaidThisMonth(p,commitN);
-     const due=bnplDueDateInMonth(p,commitN);
-     const dueTxt=due?due.toLocaleDateString(lang==='bm'?'ms-MY':'en-MY',{day:'numeric',month:'short'}):'-';
-     return `<div class="item ${paid?'paid':''}">
-       <span>
-         <b class="nm">🛍️ ${p.provider||'BNPL'} — ${p.name||''}</b><br>
-         <span class="small">${L('BNPL (Auto)','BNPL (Auto)')} • ${L('Due','Due')} ${dueTxt}
-         <span class="ownerBadgeMini">${ownerLabel(ownerOf(p))}</span></span>
-       </span>
-       <span style="text-align:right">
-         <b>${rm(bnplInstallment(p))}</b><br>
-         <button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="toggleBnplPaid(${bi},'${monthKey(commitN)}')">
-           ${paid?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}
-         </button><br>
-         <button class="secondary v18TinyBtn" style="margin-top:4px" onclick="show('bnpl');setTimeout(()=>editBNPL(${bi}),0)">${L('Edit BNPL','Edit BNPL')}</button>
-         <button class="danger v18TinyBtn" style="margin-top:4px" onclick="deleteBNPL(${bi})">${L('Padam','Delete')}</button>
-       </span>
-     </div>`;
-   }
+
+ const manualList=db.commit.map((c,i)=>({...c,i}))
+   .filter(c=>!c.autoBnplId&&ownerMatches(c,commitOwnerFilter)&&commitAppliesInMonth(c,commitN)&&filter!=='BNPL_AUTO'&&(filter==='Semua'||categoryGroup(c)===filter));
+
+ const manualHtml=manualList.map(c=>{
    let paid=paidThisMonth(c,commitN);
    return `<div class="item ${paid?'paid':''}"><span><b class="nm">${icon(c.type)} ${c.name}</b><br><span class="small">${categoryLabel(c.type)} • ${frequencyLabel(c)} <span class="ownerBadgeMini">${ownerLabel(ownerOf(c))}</span>${c.due?' • '+tr('dueShort')+' '+c.due+(lang==='bm'?'hb':''):''}${c.date?' • '+c.date:''}</span></span><span style="text-align:right"><b>${rm(c.amt)}</b><br><button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="togglePaid(${c.i},'${monthKey(commitN)}')">${paid?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}</button></span></div>`
  }).join('');
- if(cmListEl)cmListEl.innerHTML=manualHtml||`<p class="small">${t('noRecords')}</p>`;
+
+ const activeBnpl=db.bnpl.filter(p=>ownerMatches(p,commitOwnerFilter)&&bnplActiveInMonth(p,commitN));
+ const bnplGroups={};
+ activeBnpl.forEach(p=>{
+   const provider=(p.provider||'BNPL').trim();
+   const key=provider.toUpperCase();
+   if(!bnplGroups[key])bnplGroups[key]={provider,total:0};
+   bnplGroups[key].total+=bnplInstallment(p);
+ });
+
+ const bnplHtml=Object.values(bnplGroups)
+   .sort((a,b)=>a.provider.localeCompare(b.provider))
+   .map(g=>`<div class="item">
+     <span><b class="nm">🛍️ BNPL - ${String(g.provider).toUpperCase()}</b></span>
+     <span style="text-align:right"><b>${rm(g.total)}</b></span>
+   </div>`).join('');
+
+ if(cmListEl){
+   cmListEl.innerHTML=(filter==='BNPL_AUTO'?bnplHtml:(manualHtml+bnplHtml))||`<p class="small">${t('noRecords')}</p>`;
+ }
  if(document.getElementById('savingProtectedTotal')){
    const savings=db.commit.map((c,i)=>({...c,i})).filter(c=>c.type==='Savings Reserve');
    const totalSavings=savings.reduce((s,c)=>s+(+c.amt||0),0);
@@ -1901,7 +1906,6 @@ function renderCommitDashboard(n=commitViewDate){
  setText('commitPaidLabel',L('DAH BAYAR','PAID'));setText('commitUnpaidLabel',L('BELUM BAYAR','UNPAID'));
  setText('commitForecastTitle',L('Komitmen 6 Bulan dari ','6-Month Commitments from ')+commitMonthShort(n));
  setText('commitTotalThisMonth',rm(total));
- setText('commitTotalBreakdown',L('Komitmen ','Commitments ')+rm(breakdown.manual)+' + BNPL '+rm(breakdown.bnpl));
  setText('commitPaidThisMonth',rm(paid));setText('commitUnpaidThisMonth',rm(unpaid));
  const ownerTxt=commitOwnerFilter==='all'?L('Semua','All'):ownerLabel(commitOwnerFilter);setText('commitForecastOwner',ownerTxt);
  const months=Array.from({length:6},(_,i)=>{let d=new Date(n.getFullYear(),n.getMonth()+i,1);return {d,total:commitmentTotalForMonth(d,commitOwnerFilter,false)}});
