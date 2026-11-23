@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate BNPL Grouped By Provider 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Grouped Provider Paid Toggle 2026-11-23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -1603,21 +1603,32 @@ planForecast.innerHTML=note+rows;openingBalance.value=db.openingBalance||'';txLi
    return `<div class="item ${paid?'paid':''}"><span><b class="nm">${icon(c.type)} ${c.name}</b><br><span class="small">${categoryLabel(c.type)} • ${frequencyLabel(c)} <span class="ownerBadgeMini">${ownerLabel(ownerOf(c))}</span>${c.due?' • '+tr('dueShort')+' '+c.due+(lang==='bm'?'hb':''):''}${c.date?' • '+c.date:''}</span></span><span style="text-align:right"><b>${rm(c.amt)}</b><br><button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="togglePaid(${c.i},'${monthKey(commitN)}')">${paid?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}</button></span></div>`
  }).join('');
 
- const activeBnpl=db.bnpl.filter(p=>ownerMatches(p,commitOwnerFilter)&&bnplActiveInMonth(p,commitN));
+ const activeBnpl=db.bnpl.map((p,i)=>({p,i})).filter(x=>ownerMatches(x.p,commitOwnerFilter)&&bnplActiveInMonth(x.p,commitN));
  const bnplGroups={};
- activeBnpl.forEach(p=>{
+ activeBnpl.forEach(({p,i})=>{
    const provider=(p.provider||'BNPL').trim();
    const key=provider.toUpperCase();
-   if(!bnplGroups[key])bnplGroups[key]={provider,total:0};
+   if(!bnplGroups[key])bnplGroups[key]={provider,total:0,indexes:[]};
    bnplGroups[key].total+=bnplInstallment(p);
+   bnplGroups[key].indexes.push(i);
  });
 
  const bnplHtml=Object.values(bnplGroups)
    .sort((a,b)=>a.provider.localeCompare(b.provider))
-   .map(g=>`<div class="item">
-     <span><b class="nm">🛍️ BNPL - ${String(g.provider).toUpperCase()}</b></span>
-     <span style="text-align:right"><b>${rm(g.total)}</b></span>
-   </div>`).join('');
+   .map(g=>{
+     const mk=monthKey(commitN);
+     const allPaid=g.indexes.length>0&&g.indexes.every(i=>bnplPaidThisMonth(db.bnpl[i],commitN));
+     const idxs=encodeURIComponent(JSON.stringify(g.indexes));
+     return `<div class="item ${allPaid?'paid':''}">
+       <span><b class="nm">🛍️ BNPL - ${String(g.provider).toUpperCase()}</b></span>
+       <span style="text-align:right">
+         <b>${rm(g.total)}</b><br>
+         <button style="min-height:32px;padding:5px 8px;font-size:10px" onclick="toggleBnplProviderPaid(decodeURIComponent('${idxs}'),'${mk}')">
+           ${allPaid?('✓ '+L('Dah Bayar','Paid')+' • '+commitMonthShort(commitN)):(L('Tanda Bayar','Mark Paid')+' • '+commitMonthShort(commitN))}
+         </button>
+       </span>
+     </div>`;
+   }).join('');
 
  if(cmListEl){
    cmListEl.innerHTML=(filter==='BNPL_AUTO'?bnplHtml:(manualHtml+bnplHtml))||`<p class="small">${t('noRecords')}</p>`;
@@ -1863,6 +1874,21 @@ function deleteBNPL(i){mpConfirm(tr('deleteBnplConfirm'),()=>{db.bnpl.splice(i,1
 function nextMonthChoices(){
  const n=new Date(); return Array.from({length:12},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return {key:monthKey(d),label:new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short',year:'numeric'}).format(d)}});
 }
+
+function toggleBnplProviderPaid(encodedIndexes,key){
+  let indexes=[];
+  try{indexes=JSON.parse(encodedIndexes||'[]')}catch(e){return}
+  if(!indexes.length)return;
+  const allPaid=indexes.every(i=>db.bnpl[i]&&db.bnpl[i].paidMonths&&db.bnpl[i].paidMonths[key]);
+  indexes.forEach(i=>{
+    const p=db.bnpl[i];if(!p)return;
+    p.paidMonths=p.paidMonths||{};
+    if(allPaid)delete p.paidMonths[key];
+    else p.paidMonths[key]=true;
+  });
+  save();render();
+}
+
 function commitNamePlaceholder(t){return '';}
 function commitTypeChanged(){
  const t=cmType.value,freq=cmFrequency.value;
