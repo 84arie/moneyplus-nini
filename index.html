@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<!-- Money+ AutoUpdate BNPL Grouped Provider Paid Toggle 2026-11-23 -->
+<!-- Money+ AutoUpdate BNPL Month Filter + Purchase Total 2026-11-24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Money+ V20 Project Tracker</title>
@@ -535,8 +535,16 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
 <section id="bnpl" class="page hidden">
   <h2 id="bnplPageTitle">BNPL</h2>
 
+  <div class="card" style="padding:12px 14px">
+    <label id="bnplMonthFilterLabel">Pilih Bulan</label>
+    <div class="grid2" style="align-items:end">
+      <input id="bnplMonthFilter" type="month" onchange="setBnplMonthFilter(this.value)" style="margin-bottom:0">
+      <button class="secondary" id="bnplMonthCurrentBtn" onclick="resetBnplMonthFilter()" style="margin-bottom:0">Bulan Semasa</button>
+    </div>
+  </div>
+
   <div class="card hero">
-    <div class="small" id="bnplHeroLabel">JUMLAH BNPL BULAN INI</div>
+    <div class="small" id="bnplHeroLabel">JUMLAH BNPL BULAN DIPILIH</div>
     <div class="big" id="bnplThisMonth">RM0</div>
     <div class="small" id="bnplCount">0 pelan aktif</div>
   </div>
@@ -547,6 +555,18 @@ body{max-width:480px!important;margin:0 auto!important;color:var(--ink)!importan
     <button onclick="setBnplOwnerFilter('faizal',this)">👨🏻‍💼 Faizal</button>
     <button onclick="setBnplOwnerFilter('joint',this)">🏠 Bersama</button>
   </div>
+
+  <div class="grid2" style="margin-top:12px">
+    <div class="metric">
+      <div class="label" id="bnplPurchaseTotalLabel">TOTAL PEMBELIAN BNPL</div>
+      <div class="value" id="bnplPurchaseTotal">RM0</div>
+    </div>
+    <div class="metric">
+      <div class="label" id="bnplPurchaseCountLabel">JUMLAH PEMBELIAN</div>
+      <div class="value" id="bnplPurchaseCount">0</div>
+    </div>
+  </div>
+  <div class="small" id="bnplPurchaseHint" style="margin:6px 2px 12px">Harga pembelian asal • semua rekod BNPL</div>
 
   <div class="card">
     <div class="sectionTitle"><b id="bnplForecastTitle">BNPL 6 Bulan</b><span class="small" id="bnplForecastOwner"></span></div>
@@ -2158,6 +2178,30 @@ txDate.value=new Date().toISOString().slice(0,10);if(document.getElementById('ho
 /* Money+ V18 UI overrides: preserve V17 data/calculation engine */
 let moneyOwnerFilter='all';
 let bnplOwnerFilter='all';
+let bnplViewDate=new Date();
+bnplViewDate=new Date(bnplViewDate.getFullYear(),bnplViewDate.getMonth(),1);
+
+function bnplPurchaseAmount(p){
+  if((p.mode||'new')==='ongoing') return +p.orderAmount||+p.totalPayable||bnplPlanTotal(p)||0;
+  return +p.total||+p.orderAmount||+p.totalPayable||bnplPlanTotal(p)||0;
+}
+function bnplMonthInputValue(d=bnplViewDate){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+function setBnplMonthFilter(v){
+  if(!v)return;
+  const m=/^(\d{4})-(\d{2})$/.exec(v);
+  if(!m)return;
+  bnplViewDate=new Date(+m[1],(+m[2])-1,1);
+  renderV18BNPL();
+  if(typeof renderBNPLForecastV24==='function')renderBNPLForecastV24();
+}
+function resetBnplMonthFilter(){
+  const n=new Date();
+  bnplViewDate=new Date(n.getFullYear(),n.getMonth(),1);
+  renderV18BNPL();
+  if(typeof renderBNPLForecastV24==='function')renderBNPLForecastV24();
+}
 
 function v18OwnerLabel(v){return v==='faizal'?'Faizal':v==='joint'?L('Bersama','Joint'):'Nini'}
 function v18OwnerMatch(x,f){return f==='all'||ownerOf(x)===f}
@@ -2240,20 +2284,47 @@ function renderV18Money(){
 }
 
 function renderV18BNPL(){
-  const n=new Date();
+  const n=bnplViewDate;
   const filtered=(db.bnpl||[]).map((p,i)=>({...p,i})).filter(p=>v18OwnerMatch(p,bnplOwnerFilter));
   const active=filtered.filter(p=>bnplActiveInMonth(p,n));
+  const monthLabel=commitMonthLabel(n);
+
+  const monthInput=document.getElementById('bnplMonthFilter');
+  if(monthInput)monthInput.value=bnplMonthInputValue(n);
+
   setText('bnplThisMonth',rm(active.reduce((z,p)=>z+bnplInstallment(p),0)));
   setText('bnplCount',active.length+' '+t('activePlans'));
-  setText('bnplHeroLabel',L('JUMLAH BNPL BULAN INI','TOTAL BNPL THIS MONTH'));
-  setText('activeBnplTitle',L('BNPL Aktif','Active BNPL'));
-  setText('bnplListMeta',bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter));
+  setText('bnplHeroLabel',L('JUMLAH BNPL ','TOTAL BNPL ')+monthLabel.toUpperCase());
+  setText('activeBnplTitle',L('BNPL ','BNPL ')+monthLabel);
+  setText('bnplListMeta',(bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter)));
+  setText('bnplMonthFilterLabel',L('Pilih Bulan','Choose Month'));
+  setText('bnplMonthCurrentBtn',L('Bulan Semasa','Current Month'));
 
-  if(document.getElementById('bnplList'))bnplList.innerHTML=filtered.map(p=>{
-    const rem=bnplRemaining(p),inst=bnplInstallment(p),activeNow=bnplActiveInMonth(p,n),paid=activeNow&&bnplPaidThisMonth(p,n);
-    const total=bnplPlanTotal(p);
-    return `<div class="item ${paid?'paid':''}"><span style="flex:1"><b>${p.provider} — ${p.name}</b><br><span class="small">${v18OwnerLabel(ownerOf(p))} • ${rm(inst)}/${L('bulan','month')} • ${rem} ${L('baki','remaining')}</span><div class="v18StatusRow">${activeNow?`<span class="pill ${paid?'ok':'warn'}">${paid?'✓ '+L('Dah Bayar','Paid'):L('Belum Bayar','Unpaid')} • ${commitMonthShort(n)}</span>`:`<span class="pill">${L('Tidak aktif bulan ini','Not active this month')}</span>`}</div></span><span style="text-align:right"><b>${rm(total)}</b><br>${activeNow?`<button class="v18TinyBtn" onclick="toggleBnplPaid(${p.i},'${monthKey(n)}')">${paid?L('Undo','Undo'):L('Tanda Bayar','Mark Paid')}</button>`:''}<br><button class="secondary v18TinyBtn" onclick="editBNPL(${p.i})">Edit</button> <button class="danger v18TinyBtn" onclick="deleteBNPL(${p.i})">${L('Padam','Delete')}</button></span></div>`;
-  }).join('')||`<p class="small">${t('noBNPL')}</p>`;
+  const purchaseTotal=filtered.reduce((z,p)=>z+bnplPurchaseAmount(p),0);
+  setText('bnplPurchaseTotal',rm(purchaseTotal));
+  setText('bnplPurchaseCount',String(filtered.length));
+  setText('bnplPurchaseTotalLabel',L('TOTAL PEMBELIAN BNPL','TOTAL BNPL PURCHASES'));
+  setText('bnplPurchaseCountLabel',L('JUMLAH PEMBELIAN','NUMBER OF PURCHASES'));
+  setText('bnplPurchaseHint',L('Harga pembelian asal • semua rekod BNPL','Original purchase price • all BNPL records'));
+
+  if(document.getElementById('bnplList'))bnplList.innerHTML=active.map(p=>{
+    const inst=bnplInstallment(p),paid=bnplPaidThisMonth(p,n),total=bnplPlanTotal(p);
+    return `<div class="item ${paid?'paid':''}">
+      <span style="flex:1">
+        <b>${p.provider} — ${p.name}</b><br>
+        <span class="small">${v18OwnerLabel(ownerOf(p))} • ${rm(inst)}/${L('bulan','month')}</span>
+        <div class="v18StatusRow">
+          <span class="pill ${paid?'ok':'warn'}">${paid?'✓ '+L('Dah Bayar','Paid'):L('Belum Bayar','Unpaid')} • ${commitMonthShort(n)}</span>
+        </div>
+      </span>
+      <span style="text-align:right">
+        <b>${rm(total)}</b><br>
+        <button class="v18TinyBtn" onclick="toggleBnplPaid(${p.i},'${monthKey(n)}')">${paid?L('Undo','Undo'):L('Tanda Bayar','Mark Paid')}</button><br>
+        <button class="secondary v18TinyBtn" onclick="editBNPL(${p.i})">Edit</button>
+        <button class="danger v18TinyBtn" onclick="deleteBNPL(${p.i})">${L('Padam','Delete')}</button>
+      </span>
+    </div>`;
+  }).join('')||`<p class="small">${L('Tiada BNPL aktif untuk bulan ini.','No active BNPL for this month.')}</p>`;
 }
 
 function renderV18Labels(){
@@ -2481,9 +2552,9 @@ function renderSpendTrackerV24(){
 
 function bnplTotalForMonthV24(d,owner='all'){return (db.bnpl||[]).filter(p=>(owner==='all'||ownerOf(p)===owner)&&bnplActiveInMonth(p,d)).reduce((s,p)=>s+bnplInstallment(p),0)}
 function renderBNPLForecastV24(){
-  const n=new Date(),months=Array.from({length:6},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return{d,total:bnplTotalForMonthV24(d,bnplOwnerFilter)}});
+  const n=bnplViewDate,months=Array.from({length:6},(_,i)=>{const d=new Date(n.getFullYear(),n.getMonth()+i,1);return{d,total:bnplTotalForMonthV24(d,bnplOwnerFilter)}});
   const el=document.getElementById('bnplForecast6');if(el)el.innerHTML=months.map(x=>`<div class="commitForecastCell"><b>${new Intl.DateTimeFormat(lang==='bm'?'ms-MY':'en-MY',{month:'short'}).format(x.d)}</b><strong>${rm(x.total)}</strong></div>`).join('');
-  setText('bnplForecastOwner',bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter));
+  setText('bnplForecastOwner',(bnplOwnerFilter==='all'?L('Semua','All'):v18OwnerLabel(bnplOwnerFilter))+' • '+commitMonthShort(n));
 }
 
 // Better affordability simulation: new instalments accumulate across future months.
@@ -2504,7 +2575,7 @@ const v24RenderLabels=renderV18Labels;renderV18Labels=function(){
   v24RenderLabels(); setText('planPageTitle',L('Dana','Funds')); setText('navPlan',L('Dana','Funds'));
   setText('fundTabFund',L('Dana Bersama','Joint Funds'));setText('fundTabSaving',L('Simpanan','Savings'));
   setText('addFundBtn',L('+ Dana Baru','+ New Fund'));setText('addSavingV24Btn',L('+ Simpanan Baru','+ New Savings'));
-  setText('spendTrackerTitle',L('Belanja Bulan Ini','This Month Spending'));setText('bnplForecastTitle',L('BNPL 6 Bulan','6-Month BNPL'));setText('bnplCanAddTitle',L('Boleh Ambil BNPL Lagi?','Can I Add More BNPL?'));
+  setText('spendTrackerTitle',L('Belanja Bulan Ini','This Month Spending'));setText('bnplForecastTitle',L('BNPL 6 Bulan dari Bulan Dipilih','6-Month BNPL from Selected Month'));setText('bnplCanAddTitle',L('Boleh Ambil BNPL Lagi?','Can I Add More BNPL?'));
   const labels=lang==='bm'?['Utama','Duit','BNPL','Komitmen','Dana']:['Home','Money','BNPL','Commitments','Funds'];const icons=['🏠','💸','🛍️','✓','💰'];document.querySelectorAll('.nav button').forEach((b,i)=>{if(labels[i])b.innerHTML=icons[i]+'<br><span>'+labels[i]+'</span>'});
 };
 
